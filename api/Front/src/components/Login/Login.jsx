@@ -15,61 +15,69 @@ const validationSchema = Yup.object({
     .matches(/[0-9]/, 'La contraseña debe contener al menos un número')
     .matches(/[!@#$%^&*(),.?":{}|<>]/, 'La contraseña debe contener al menos un carácter especial')
     .required('La contraseña es obligatoria'),
+});
 
-})
-
-const Login = () =>{
+const Login = () => {
     const [submit, setSubmit] = useState(false);
-
-    const navigate = useNavigate()
-    const handleSubmit = () => setSubmit(true)
-
+    const navigate = useNavigate();
+    const handleSubmit = () => setSubmit(true);
 
     return (
-        <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg ">
-            <div className=" w-full justify-center flex p-5">
-            <h2 className="text-xl font-bold">Iniciar Sesion</h2>
+        <div className="min-h-screen flex flex-col justify-center items-center bg-blue-50">
+            <div className="max-w-md w-full  ">
+                <div className="text-center mb-6">
+                    <h2 className="text-2xl font-bold">Iniciar sesión</h2>
+                </div>
+                <Formik
+                    initialValues={{ email: '', password: '' }}
+                    validationSchema={validationSchema}
+                    onSubmit={(values) => {
+                        if (submit) {
+                            console.log(values);
+                        }
+                    }}
+                >
+                    <Form className="space-y-6">
+                        <div>
+                            <Field 
+                                name="email" 
+                                type="email" 
+                                placeholder='Email'
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                            />
+                            <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
+                        </div>
+                        <div>
+                            <Field 
+                                name="password" 
+                                type="password" 
+                                placeholder='Contraseña'
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                            />
+                            <ErrorMessage name="password" component="div" className="text-red-600 text-sm mt-1" />
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <button
+                                type="submit"
+                                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                onClick={handleSubmit}
+                            >
+                                Ingresar
+                            </button>
+                        </div>
+                    </Form>
+                </Formik>
+                <div className="mt-6 text-center">
+                    <p className="text-sm text-gray-600">
+                        ¿Olvidaste tu contraseña? <a href="#" className="text-blue-600 hover:text-blue-500">Genera una nueva</a>
+                    </p>
+                    <p className="mt-2 text-sm text-gray-600">
+                        ¿Todavía no tienes una cuenta? <a href="#" className="text-blue-600 hover:text-blue-500">¡Regístrate ahora!</a>
+                    </p>
+                </div>
             </div>
-
-            <Formik 
-                initialValues={{
-                    email: '',
-                    password: '',
-                }}
-                validationSchema={validationSchema}
-                onSubmit={(values) => {
-                    if(submit){
-                      console.log(values);
-                      navigate('/')
-                    } else return 
-                  }}
-            >
-                <Form className="w-full">
-                    <div>
-                    <label>Correo electrónico</label>
-                    <Field name="email" type="email" className="w-full p-2 border rounded-md" />
-                    <ErrorMessage name="email" component="div" className="text-red-600 text-sm" />
-                    </div>
-                    <div>
-                    <label>Contraseña</label>
-                    <Field name="password" type="password" className="w-full p-2 border rounded-md"  />
-                    <ErrorMessage name="password" component="div" className="text-red-600 text-sm" />
-                    </div>
-                    <div className="justify-center flex pt-10">
-                    <button
-                        type="submit"
-                        className="px-4 py-2 bg-purple-600 text-white rounded"
-                        onClick={handleSubmit}
-                        >
-                        Enviar
-                    </button>                        
-                    </div>
-
-                </Form>
-
-            </Formik>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

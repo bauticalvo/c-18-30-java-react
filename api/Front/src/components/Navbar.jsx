@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className="bg-[#FDFDFD] h-[100px] md:px-10 lg:px-20 flex justify-between items-center shadow-md">
       <div className="flex items-center">
         <Link to='/'>
-          <img src="/logo.saludonline.png" className='h-[50px] md:h-[60px] lg:h-[100px] w-auto' alt="Logo" />
+          <img src="/logo.saludonline.png" className='h-[50px] md:h-[60px] lg:h-[100px] w-auto text-black' alt="Logo" />
         </Link>
       </div>
       <div className="flex items-center">
