@@ -1,20 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 const Home = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-white via-slate-300 to-slate-500">
-      <div className="bg-white p-6 sm:p-8 md:p-10 lg:p-12 rounded-lg shadow-lg text-center w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">¡Bienvenidos!</h1>
-        <p className="text-gray-600 mb-8 text-base sm:text-lg md:text-xl">
-          Por favor, inicie sesión para continuar.
-        </p>
-        <Link to="/ProfesionalRegister">
-          <button className="px-4 sm:px-6 py-2 sm:py-3 bg-green-500 text-white font-semibold rounded-full shadow-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-opacity-50 transition duration-300">
-            LOGIN
-          </button>
-        </Link>
+    <div >
+      <main className="flex  items-center justify-center py-20 bg-custom-blue ">
+      <div className="flex flex-col justify-center items-left font-sans  w-[30%] p-12  ">
+          <h1 className="text-3xl text-black mb-4 w-[80%] p-2 ">
+            Busca, encuentra y agenda tu consulta con los mejores especialistas
+          </h1>
+          <p className=" text-black mb-4 w-[80%] flex justify-center text-left ">
+            Agenda una cita con los especialistas desde la comodidad de tu hogar
+          </p>
+          <button className="bg-blue-500 text-white w-[25%] px-6 py-2 rounded-[30px] mb-12 justify-center flex">
+            Conocenos
+          </button>    
+
+        </div>
+
+      <div className="bg-white p-12 rounded-[53px] shadow-custom-shadow-strong flex flex-col items-center">
+            <div className="flex ">
+              <SearchBar />
+            </div>
+            <div className="flex space-x-8  mt-4">
+              <div className="flex flex-col items-center bg-custom-gray w-full h-[200px] rounded-[10px] border border-border-gray-custom shadow-custom-shadow px-8 py-4">
+                <img src="/virtual-home.png" alt="Virtual" className="w-36 h-36  mt-8" />
+                <span className='absolute text-[#666666]  mt-1'>Virtual</span>
+              </div>
+              <div className="flex flex-col items-center bg-custom-gray w-full  h-[200px] rounded-[10px] border border-border-gray-custom shadow-custom-shadow p-8 py-4">
+                <img src="presencial-home.png" alt="Presencial" className="w-36 h-36 mt-8" />
+                <span className='absolute text-[#666666] mt-1'>Presencial</span>
+              </div>
+            </div>
       </div>
+      </main>
     </div>
   );
 };

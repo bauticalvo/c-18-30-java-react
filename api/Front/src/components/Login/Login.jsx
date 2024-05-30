@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
-import { email } from "./Utils/emails";
+import { email } from "../Utils/emails";
 
 const validationSchema = Yup.object({
     email: Yup.string().email('Email inválido').required('Ingrese un email')
