@@ -15,7 +15,11 @@ public class PatientController {
     @PostMapping("/")
     public ResponseEntity<Patient> registerPatient (@RequestBody Patient patient, @RequestParam Integer id_user){
         if (patient != null) {
-            return ResponseEntity.ok(patientService.registerPatient(patient, id_user));
+            Patient newPatient = patientService.registerPatient(patient, id_user);
+            if (newPatient != null)
+                return ResponseEntity.ok(newPatient);
+            else
+                return ResponseEntity.notFound().build();
         }
         return ResponseEntity.badRequest().build();
     }

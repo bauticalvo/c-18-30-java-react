@@ -11,7 +11,12 @@ public class PatientService {
     PatientRepository patientRepository;
 
     public Patient registerPatient (Patient patient, Integer id_user){
-        return this.patientRepository.save(patient);
+        Patient patient_db = patientRepository.findByPatientId(id_user);
+        if(patient_db != null) {
+            patient.setId_user(id_user);
+            return this.patientRepository.save(patient);
+        }
+        return null;
     }
 
 }
