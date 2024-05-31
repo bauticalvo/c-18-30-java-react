@@ -25,4 +25,7 @@ public class Doctor {
 
     @JoinColumn
     private int id_consultation_room;
+
+    @JoinColumn
+    private int id_user;
 }

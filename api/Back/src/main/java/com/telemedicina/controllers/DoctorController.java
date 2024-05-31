@@ -4,10 +4,28 @@
  */
 package com.telemedicina.controllers;
 
-/**
- *
- * @author Omar
- */
+import com.telemedicina.entitys.Doctor;
+import com.telemedicina.services.DoctorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping ("/doctor")
 public class DoctorController {
-    
+    @Autowired
+    DoctorService doctorService;
+
+    @PostMapping ("/")
+    public ResponseEntity<Doctor> registerDoctor (@RequestBody Doctor doctor, @RequestParam Integer id_user){
+        if (doctor != null){
+            Doctor newDoctor = doctorService.registerDoctor (doctor, id_user);
+            if (newDoctor!= null)
+                return ResponseEntity.ok(newDoctor);
+            else
+                return ResponseEntity.notFound().build();
+
+        }
+        return ResponseEntity.badRequest().build();
+    }
 }
