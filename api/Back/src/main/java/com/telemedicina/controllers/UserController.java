@@ -1,0 +1,27 @@
+package com.telemedicina.controllers;
+
+import com.telemedicina.entitys.Patient;
+import com.telemedicina.entitys.User;
+import com.telemedicina.repositorys.PatientRepository;
+import com.telemedicina.repositorys.UserRepository;
+import com.telemedicina.services.PatientService;
+import com.telemedicina.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping ("/user")
+public class UserController {
+    @Autowired
+    UserService userService;
+
+    @PostMapping ("/")
+    public ResponseEntity<User> registerUser (@RequestBody User user){
+        if (user != null) {
+            return ResponseEntity.ok(userService.registerUser(user));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+}
+
