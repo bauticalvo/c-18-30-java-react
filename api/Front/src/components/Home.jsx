@@ -4,9 +4,9 @@ import SearchBar from './SearchBar';
 
 const Home = () => {
   return (
-    <div >
-      <div className="flex  items-center justify-center py-5 bg-custom-blue  lg:h-[400px] ">
-      <div className="flex flex-col justify-center items-left font-sans  w-[30%] h-[40%] p-12  ">
+    <div>
+      <div className="flex  space-y-6 items-center justify-center py-10 bg-custom-blue  lg:h-[400px] ">
+         <div className="flex flex-col justify-center items-left font-sans  w-[30%] mx-10 h-[40%] p-10  ">
           <h1 className="xxl:text-4xl lg:text-2xl text-black mb-4 w-[80%] p-2 ">
             Busca, encuentra y agenda tu consulta con los mejores especialistas
           </h1>
@@ -19,7 +19,7 @@ const Home = () => {
 
         </div>
 
-      <div className="bg-white p-12 rounded-[53px] shadow-custom-shadow-strong flex flex-col items-center">
+      <div className="bg-white p-8 my-4 rounded-[53px]  mx-10 shadow-custom-shadow-strong flex flex-col items-center">
             <div className="flex ">
               <SearchBar />
             </div>
