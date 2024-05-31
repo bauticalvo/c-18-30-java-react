@@ -6,7 +6,8 @@ import ProRegister from './components/ProRegister/ProRegister'
 import Profile from './components/Profile'
 import Navbar from './components/Navbar'
 import UserRegister from './components/UserRegister/UserRegister'
-import Login from './components/Login'
+import Login from './components/Login/Login'
+import ProfesionalLogin from './components/Login/ProfesionalLogin'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/UserRegister' element={<UserRegister />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/profesionalLogin' element={<ProfesionalLogin />} />
         </Routes>
       </div>
 
