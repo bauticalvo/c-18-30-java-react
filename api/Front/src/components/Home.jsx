@@ -1,77 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 const Home = () => {
-    const [specialty, setSpecialty] = useState('');
-    const [city, setCity] = useState('');
-    const [specialties, setSpecialties] = useState([]);
-    const [cities, setCities] = useState([]);
-    const navigate = useNavigate();
+  return (
+    <div >
+      <main className="flex  items-center justify-center py-20 bg-custom-blue ">
+      <div className="flex flex-col justify-center items-left font-sans  w-[30%] p-12  ">
+          <h1 className="text-3xl text-black mb-4 w-[80%] p-2 ">
+            Busca, encuentra y agenda tu consulta con los mejores especialistas
+          </h1>
+          <p className=" text-black mb-4 w-[80%] flex justify-center text-left ">
+            Agenda una cita con los especialistas desde la comodidad de tu hogar
+          </p>
+          <button className="bg-blue-500 text-white w-[25%] px-6 py-2 rounded-[30px] mb-12 justify-center flex">
+            Conocenos
+          </button>    
 
-    useEffect(() => {
-        fetch('/doctors.json')
-            .then(response => response.json())
-            .then(data => {
-                const uniqueSpecialties = [...new Set(data.map(doctor => doctor.specialty))];
-                const uniqueCities = [...new Set(data.map(doctor => doctor.city))];
-                setSpecialties(uniqueSpecialties);
-                setCities(uniqueCities);
-            })
-            .catch(error => console.error('Error fetching doctors:', error));
-    }, []);
+        </div>
 
-    const handleSearch = () => {
-        navigate(`/doctors?specialty=${specialty}&city=${city}`);
-    };
-
-    
-
-    return (
-      <div>
-          <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-              <Link to="/" className="flex items-center flex-shrink-0 text-white mr-6">
-                  <img
-                      src="/caduceo.png"
-                      alt="Doctor"
-                      style={{ width: '4rem', height: '4rem' }}
-                  />
-                  <span className="font-semibold text-xl tracking-tight">Doctor Che</span>
-              </Link>
-          </nav>
-          <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-              <div className="mb-8">
-                  <h1 className="text-4xl font-bold mb-4">Encuentra el mejor especialista</h1>
-                  <div className="flex space-x-4">
-                      <select
-                          value={specialty}
-                          onChange={e => setSpecialty(e.target.value)}
-                          className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-                      >
-                          <option value="">Selecciona una especialidad</option>
-                          {specialties.map((spec, index) => (
-                              <option key={index} value={spec}>{spec}</option>
-                          ))}
-                      </select>
-                      <select
-                          value={city}
-                          onChange={e => setCity(e.target.value)}
-                          className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
-                      >
-                          <option value="">Selecciona una ciudad</option>
-                          {cities.map((city, index) => (
-                              <option key={index} value={city}>{city}</option>
-                          ))}
-                      </select>
-                      <button
-                          onClick={handleSearch}
-                          className="border p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                          Search
-                      </button>
-                  </div>
+      <div className="bg-white p-12 rounded-[53px] shadow-custom-shadow-strong flex flex-col items-center">
+            <div className="flex ">
+              <SearchBar />
+            </div>
+            <div className="flex space-x-8  mt-4">
+              <div className="flex flex-col items-center bg-custom-gray w-full h-[200px] rounded-[10px] border border-border-gray-custom shadow-custom-shadow px-8 py-4">
+                <img src="/virtual-home.png" alt="Virtual" className="w-36 h-36  mt-8" />
+                <span className='absolute text-[#666666]  mt-1'>Virtual</span>
               </div>
-          </div>
+              <div className="flex flex-col items-center bg-custom-gray w-full  h-[200px] rounded-[10px] border border-border-gray-custom shadow-custom-shadow p-8 py-4">
+                <img src="presencial-home.png" alt="Presencial" className="w-36 h-36 mt-8" />
+                <span className='absolute text-[#666666] mt-1'>Presencial</span>
+              </div>
+            </div>
       </div>
+      </main>
+    </div>
   );
 };
 

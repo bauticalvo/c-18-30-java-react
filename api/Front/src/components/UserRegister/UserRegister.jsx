@@ -128,11 +128,13 @@ const UserRegister = () => {
     
 
   return (
-    <div>
-        <div>
+    <div> 
+      <p className='flex justify-center mt-6 font-bold text-2xl font-sans2'>Crea tu cuenta</p>
+        <div className='  flex  justify-center items-center'>
             <StepIndicator step={step} setStep={setStep} />
+
         </div>
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className=" mx-32 p-6 bg-white">
       <Formik
         initialValues={{
           nombre: '',
@@ -208,7 +210,7 @@ const UserRegister = () => {
           <Form className="space-y-4">
             {step === 1 &&  <UserInfo setFieldValue={setFieldValue} />}
             {step === 2 &&  <MedicalHistory setFieldValue={setFieldValue} values={values} />}
-            <div className="flex justify-between">
+            <div className={`flex ${step === 1 ? 'justify-end' : 'justify-between'}`}>
               {step > 1 && (
                 <button
                   type="button"
@@ -221,10 +223,10 @@ const UserRegister = () => {
               {step < 2 ? (
                 <button
                   type="button"
-                  className="px-4 py-2 bg-purple-600 text-white rounded"
+                  className="px-4 py-2 bg-[#407BFF] rounded-[4px] text-white "
                   onClick={handleNext}
                 >
-                  Siguiente
+                  Continuar
                 </button>
               ) : (
                 <button
