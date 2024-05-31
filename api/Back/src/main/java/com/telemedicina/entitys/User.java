@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import org.antlr.v4.runtime.misc.NotNull;
 
 
 @Entity
@@ -15,9 +16,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_user;
+
+    @NotNull
     private String name;
+    @NotNull
     private String lastname;
+    @NotNull
     private int DNI;
+
+
     private String mail;
     private Date birthdate;
     private String gender;
