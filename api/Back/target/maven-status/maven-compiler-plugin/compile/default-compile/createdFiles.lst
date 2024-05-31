@@ -1,0 +1,12 @@
+com\telemedicina\entitys\Province.class
+com\telemedicina\entitys\Patient.class
+com\telemedicina\repositorys\CountryRepository.class
+com\telemedicina\entitys\Deparment.class
+com\telemedicina\entitys\Doctor.class
+com\telemedicina\entitys\ConsultatingRoom.class
+com\telemedicina\entitys\MedicalConsultation.class
+com\telemedicina\repositorys\UserRepository.class
+com\telemedicina\entitys\SocialWork.class
+com\telemedicina\repositorys\ProvinceRepository.class
+com\telemedicina\repositorys\DeparmentRepository.class
+com\telemedicina\entitys\Country.class
