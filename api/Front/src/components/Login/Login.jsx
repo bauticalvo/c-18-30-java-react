@@ -23,10 +23,10 @@ const Login = () => {
     const handleSubmit = () => setSubmit(true);
 
     return (
-        <div className="min-h-screen flex flex-col justify-center items-center bg-blue-50">
-            <div className="max-w-md w-full  ">
-                <div className="text-center mb-6">
-                    <h2 className="text-2xl font-bold">Iniciar sesión</h2>
+        <div className="h-full w-full flex p-32 justify-center items-center ">
+            <div className=" w-2/3 h-2/3 p-32 border  border-[#407BFF33] border-opacity-20 shadow-login-div rounded-[40px]  ">
+                <div className="text-center mb-14 font-sans">
+                    <h2 className=" text-4xl font-semibold">Iniciar sesión</h2>
                 </div>
                 <Formik
                     initialValues={{ email: '', password: '' }}
@@ -37,29 +37,30 @@ const Login = () => {
                         }
                     }}
                 >
-                    <Form className="space-y-6">
-                        <div>
+                    <Form className="space-y-6 flex flex-col items-center ">
+                        <div className="flex items-center justify-normal w-4/6">
                             <Field 
                                 name="email" 
                                 type="email" 
                                 placeholder='Email'
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className=" w-full  px-6 py-6 border border-gray-300 rounded-[40px] shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
                             />
                             <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
                         </div>
-                        <div>
+                        <div className="flex items-center justify-normal w-4/6">
                             <Field 
                                 name="password" 
                                 type="password" 
                                 placeholder='Contraseña'
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className=" w-full  px-6 py-6  border border-gray-300 rounded-[40px]  shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+
                             />
                             <ErrorMessage name="password" component="div" className="text-red-600 text-sm mt-1" />
                         </div>
-                        <div className="flex items-center justify-between">
+                        <div className="flex w-4/6  items-end justify-end">
                             <button
                                 type="submit"
-                                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                className="w-1/3 px-3 py-2  border border-transparent rounded-[45px] shadow-sm font-medium text-white bg-blue-40 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 onClick={handleSubmit}
                             >
                                 Ingresar
@@ -67,12 +68,12 @@ const Login = () => {
                         </div>
                     </Form>
                 </Formik>
-                <div className="mt-6 text-center">
-                    <p className="text-sm text-gray-600">
-                        ¿Olvidaste tu contraseña? <a href="#" className="text-blue-600 hover:text-blue-500">Genera una nueva</a>
+                <div className="mt-10 text-center">
+                    <p className="text-sm text-black font-sans2 ">
+                        ¿Olvidaste tu contraseña? <a href="#" className="text-blue-40 hover:text-blue-500 font-sans2">Genera una nueva</a>
                     </p>
-                    <p className="mt-2 text-sm text-gray-600">
-                        ¿Todavía no tienes una cuenta? <a href="#" className="text-blue-600 hover:text-blue-500">¡Regístrate ahora!</a>
+                    <p className="mt-2 text-sm text-black font-sans2">
+                        ¿Todavía no tienes una cuenta? <a href="/UserRegister" className="text-blue-40 hover:text-blue-500 font-sans2">¡Regístrate ahora!</a>
                     </p>
                 </div>
             </div>

@@ -43,7 +43,7 @@ const validationSchema = Yup.object({
   consentimiento: Yup.boolean().oneOf([true], 'Debe aceptar los términos y condiciones'),
   enfermedadesCronicas: Yup.array().of(Yup.string()),
   otrasEnfermedades: Yup.string(),
-  cirugiasAnteriores: Yup.string().test('cirugiasAnteriores-required', 'Indique la cirugía', function(value) {
+  cirugiasAnteriores: Yup.string().test('cirugiasAnteriores-required', 'Indique la cirugía realizada', function(value) {
     const { cirugias } = this.parent;
     if (cirugias === 'si') {
       return !!value;
