@@ -16,10 +16,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    PatientService patientService;
-
-
     @PostMapping ("/")
     public ResponseEntity<User> registerUser (@RequestBody User user){
         if (user != null) {
@@ -27,14 +23,5 @@ public class UserController {
         }
         return ResponseEntity.badRequest().build();
     }
-
-    @PostMapping ("/")
-    public ResponseEntity<Patient> registerPatient (@RequestBody Patient patient, @RequestParam Integer id_user){
-        if (patient != null) {
-            return ResponseEntity.ok(patientService.registerPatient(patient, id_user));
-        }
-        return ResponseEntity.badRequest().build();
-    }
-
 }
 
