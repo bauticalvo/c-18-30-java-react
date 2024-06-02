@@ -24,7 +24,7 @@ const SignupSchema = Yup.object().shape({
   sexo: Yup.string().required('Elija una opcion'),
   localidad: Yup.string().required('Seleccione una localidad'),
   pais: Yup.string().required('Ingrese un pais '),
-  estado: Yup.string().required('Ingrese un Estado/Provincia/Región '),
+  provincia: Yup.string().required('Ingrese un Estado/Provincia/Región '),
   codigoPostal: Yup.string().required('Ingrese el codigo postal '),
   domicilio: Yup.string().required('Ingrese el domicilio '),
   dni: Yup.string().required('Ingrese el DNI')
@@ -189,11 +189,14 @@ const ProRegister = () => {
 
   return (
     <div>
-      <div>
-      <StepIndicator step={step} setStep={setStep} />
-      </div>
+
+        <p className='flex justify-center mt-6 font-bold text-2xl font-sans2'>Crea tu cuenta</p>
+        <div className='  flex  justify-center items-center'>
+            <StepIndicator step={step} setStep={setStep} />
+
+        </div>
   
-    <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className=" mx-32 p-6 bg-white">
       <Formik
         initialValues={{
           nombre: '',
@@ -204,7 +207,7 @@ const ProRegister = () => {
           sexo: '',
           localidad: '',
           pais: '',
-          estado: '', 
+          provincia: '', 
           codigoPostal: '',
           domicilio: '',
           dni: '',
@@ -255,11 +258,11 @@ const ProRegister = () => {
             {step === 1 && <PersonalInfo  setFieldValue={setFieldValue} />}
             {step === 2 && <ProfesionalInfo  setFieldValue={setFieldValue} />}
             {step === 3 && <MedicConsultInfo  setFieldValue={setFieldValue} />}
-            <div className="flex justify-between">
+            <div className={`flex ${step === 1 ? 'justify-end' : 'justify-between'}`}>
               {step > 1 && (
                 <button
                   type="button"
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded"
+                  className="px-10 py-2 bg-white text-blue-40 rounded"
                   onClick={handlePrevious}
                 >
                   Anterior
@@ -268,15 +271,15 @@ const ProRegister = () => {
               {step < 3 ? (
                 <button
                   type="button"
-                  className="px-4 py-2 bg-purple-600 text-white rounded"
+                  className="px-4 py-2 bg-[#407BFF] rounded-[4px] text-white"
                   onClick={handleNext}
                 >
-                  Siguiente
+                  Continuar
                 </button>
               ) : (
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-purple-600 text-white rounded"
+                  className="px-10 py-2 bg-[#407BFF] rounded-[4px] text-white "
                   onClick={handleSubmit}
                 >
                   Enviar

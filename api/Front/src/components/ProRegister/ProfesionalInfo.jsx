@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { Field, ErrorMessage, useFormikContext } from 'formik';
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import { FaPlus } from "react-icons/fa6";
+import { FiPlusCircle } from "react-icons/fi";
+import { FileInputField } from '../Utils/FileInputField';
 
 
 const ProfesionalInfo =({ setFieldValue }) => {
 
   const { values } = useFormikContext();
   const [experiencias, setExperiencias] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFocusedFinal, setIsFocusedFinal] = useState(false);
+
 
   const addExperience = () => {
     if (experiencias.length < 3) {
@@ -33,10 +37,10 @@ const ProfesionalInfo =({ setFieldValue }) => {
 
     return (
     <>
-    <h1 className="text-2xl font-bold mb-6 text-purple-600">Datos Profesionales</h1>
+    <h1 className="text-xl font-sans2  text-black">Perfil profesional</h1>
     <div className="flex space-x-4">
         <div className="w-1/2">
-            <Field as="select" className="w-full px-3 py-2 border rounded" name="especialidad">
+            <Field as="select" className="w-full p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field" name="especialidad">
             <option value="">Especializacion</option>
             <option value="Medico Clinico">Medico Clinico</option>
             <option value="Psicologo">Psicologo</option>
@@ -46,25 +50,20 @@ const ProfesionalInfo =({ setFieldValue }) => {
             <ErrorMessage className="text-red-500 text-sm" name="especialidad" component="div" />
         </div>
         <div className="w-1/2">
-        <Field className="w-full px-3 py-2 border rounded" name="numeroMatricula" placeholder='Número de Matricula' />
+        <Field className="w-full p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field" name="numeroMatricula" placeholder='Número de Matricula' />
         <ErrorMessage className="text-red-500 text-sm" name="numeroMatricula" component="div" />
         </div>
 
     </div> 
   <div>
-        <label className="block text-black font-medium">Certificacion Profesional</label>
-        <input
-            name="certificado"
-            type="file"
-            className="w-full px-3 py-2 border rounded"
-            onChange={(event) => {
-            setFieldValue("certificado", event.currentTarget.files[0]);
-            }}
-        />
-        <ErrorMessage className="text-red-500 text-sm" name="certificado" component="div" />
+      <div className="mb-4">
+            <Field name="certificado" component={FileInputField} />
+            <ErrorMessage name="certificado" component="div" className="text-red-600 text-sm" />
+      </div>
     </div>
-    <div>
-      <Field as="select" className="w-full px-3 py-2 border rounded" name="experiencia">
+    <div className='flex w-full space-x-4'>
+      <div className='w-1/2 '>
+      <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="experiencia">
         <option value="">Años de experiencia</option>
         <option value="1-2">1 a 2 años</option>
         <option value="3-5">3 a 5 años</option>
@@ -72,35 +71,41 @@ const ProfesionalInfo =({ setFieldValue }) => {
         <option value="mas">Mas</option>
       </Field>
       <ErrorMessage className="text-red-500 text-sm" name="experiencia" component="div" />
+      </div>
+      <div className='w-1/2 '>
+          <Field className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="especialidadType" placeholder='Habilidades especiales o intereses' />
+        <ErrorMessage className="text-red-500 text-sm" name="especialidadType" component="div" />
+      </div>
+  
     </div>
-    
-    <div>
-      <Field as="select" className="w-full px-3 py-2 border rounded" name="universidad">
+    <h1 className="text-xl font-sans2  text-black">Estudios</h1>
+    <div className='flex w-full space-x-4'> 
+      <div className='w-1/2 '>
+      <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="universidad">
         <option value="">Universidad</option>
         <option value="Universidad de Cuyo">Universidad de Cuyo</option>
         <option value="Universidad de Mexico">Universidad de Mexico</option>
         <option value="Universidad de Buenos Aires">Universidad de Buenos Aires</option>
       </Field>
       <ErrorMessage className="text-red-500 text-sm" name="universidad" component="div" />
-
-      <Field className="w-full px-3 py-2 border rounded mt-5" name="egreso" placeholder='Año de egreso' />
+      </div>
+      <div className='w-1/2 '>
+      <Field className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="egreso" placeholder='Año de egreso' />
         <ErrorMessage className="text-red-500 text-sm" name="egreso" component="div" />
+      </div>
     </div>
-    <div>
-    <Field className="w-full px-3 py-2 border rounded" name="especialidadType" placeholder='Tipo de especialidad' />
-        <ErrorMessage className="text-red-500 text-sm" name="especialidadType" component="div" />
-    </div>
-  
+
     <div>
       <div className='flex justify-between'>
-    <h1 className="text-2xl font-bold mb-6 text-purple-600">Experiencia Laboral</h1>
+    <h1 className="text-xl font-sans2  text-black">Experiencia Laboral</h1>
+
     {experiencias.length < 3 && (
         <button
           type="button"
-          className="px-4 py-2  text-black rounded"
+          className="px-4 py-2 flex items-center justify-center  text-black rounded"
           onClick={addExperience}
         >
-         <FaPlus />
+        Añadir más <FiPlusCircle className='ml-2' />
         </button>
       )}
       </div>
@@ -121,54 +126,60 @@ const ProfesionalInfo =({ setFieldValue }) => {
         </div>
       )}
       {experiencias.map((experiencia, index) => !experiencia.closed && (
-        <div key={index} className="mb-6 border p-4 rounded">
+        <div key={index} className="mb-6  p-4 ">
+          <div className='flex w-full space-x-4 '>
           <Field
-            className="w-full px-3 py-2 border rounded"
+            className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
+            name={`experiencias[${index}].lugar`}
+            placeholder="Empresa / Organización "
+            value={experiencia.lugar}
+            onChange={(e) => handleExperienceChange(index, 'lugar', e.target.value)}
+          />
+          <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].lugar`} component="div" />
+          <Field
+            className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
             name={`experiencias[${index}].cargo`}
             placeholder="Cargo"
             value={experiencia.cargo}
             onChange={(e) => handleExperienceChange(index, 'cargo', e.target.value)}
           />
           <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].cargo`} component="div" />
-
-          <Field
-            className="w-full px-3 py-2 border rounded mt-5"
-            name={`experiencias[${index}].lugar`}
-            placeholder="Lugar"
-            value={experiencia.lugar}
-            onChange={(e) => handleExperienceChange(index, 'lugar', e.target.value)}
-          />
-          <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].lugar`} component="div" />
-
-          <div className="flex mt-5">
-            <div className="w-1/2 pr-2">
+          </div>
+          <div className="flex mt-5 w-full space-x-4">
+            <div className="w-1/2 pr-2 relative">
               <Field
-                className="w-full px-3 py-2 border rounded"
+                className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
                 type="date"
                 name={`experiencias[${index}].Fechainicio`}
-                placeholder="Fecha de inicio"
                 value={experiencia.Fechainicio}
                 onChange={(e) => handleExperienceChange(index, 'Fechainicio', e.target.value)}
+          
               />
-              <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].Fechainicio`} component="div" />
+
             </div>
-            <div className="w-1/2 pl-2">
+            <div className="w-1/2 pl-2 relative">
               <Field
-                className="w-full px-3 py-2 border rounded"
+                className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
                 type="date"
                 name={`experiencias[${index}].FechaFinal`}
                 placeholder="Fecha de finalización"
                 value={experiencia.FechaFinal}
                 onChange={(e) => handleExperienceChange(index, 'FechaFinal', e.target.value)}
+
                 disabled={experiencia.actualmente === 'Si'}
               />
+         
               <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].FechaFinal`} component="div" />
             </div>
-          </div>
+              <div className='mt-4'>
+              <ErrorMessage className="text-red-500 text-sm m-4" name={`experiencias[${index}].Fechainicio`} component="div" />
 
-          <label className="block text-gray-700 mt-5">Actualmente trabajo aquí</label>
+
+              </div>
+            <div className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'>
+          <label className="block text-gray-700 ">Actualmente trabajo aquí</label>
           <div className="flex">
-            <label className="flex items-center ml-3">
+            <label className="flex items-center ">
               <Field
                 type="radio"
                 name={`experiencias[${index}].actualmente`}
@@ -191,7 +202,11 @@ const ProfesionalInfo =({ setFieldValue }) => {
               No
             </label>
           </div>
-
+          </div>
+          </div>
+        <div className='flex flex-col items-center w-full '>
+  
+          <div >
           <button
             type="button"
             className="mt-4 px-4 py-2 bg-red-600 text-white rounded"
@@ -205,7 +220,10 @@ const ProfesionalInfo =({ setFieldValue }) => {
             onClick={(e) => handleExperienceChange(index, 'closed', true)}
           >
             Guardar Experiencia
-          </button>
+          </button>       
+          </div>
+        </div>
+
         </div>
       ))}
 
