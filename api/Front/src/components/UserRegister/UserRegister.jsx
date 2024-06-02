@@ -40,7 +40,6 @@ const validationSchema = Yup.object({
   confirmarPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
     .required('Confirme la contraseña'),
-  consentimiento: Yup.boolean().oneOf([true], 'Debe aceptar los términos y condiciones'),
   enfermedadesCronicas: Yup.array().of(Yup.string()),
   otrasEnfermedades: Yup.string(),
   cirugiasAnteriores: Yup.string().test('cirugiasAnteriores-required', 'Indique la cirugía realizada', function(value) {

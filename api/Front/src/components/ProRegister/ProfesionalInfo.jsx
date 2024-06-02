@@ -10,6 +10,9 @@ const ProfesionalInfo =({ setFieldValue }) => {
 
   const { values } = useFormikContext();
   const [experiencias, setExperiencias] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFocusedFinal, setIsFocusedFinal] = useState(false);
+
 
   const addExperience = () => {
     if (experiencias.length < 3) {
@@ -128,7 +131,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
           <Field
             className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
             name={`experiencias[${index}].lugar`}
-            placeholder="Lugar"
+            placeholder="Empresa / Organización "
             value={experiencia.lugar}
             onChange={(e) => handleExperienceChange(index, 'lugar', e.target.value)}
           />
@@ -143,18 +146,18 @@ const ProfesionalInfo =({ setFieldValue }) => {
           <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].cargo`} component="div" />
           </div>
           <div className="flex mt-5 w-full space-x-4">
-            <div className="w-1/2 pr-2">
+            <div className="w-1/2 pr-2 relative">
               <Field
                 className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
                 type="date"
                 name={`experiencias[${index}].Fechainicio`}
-                placeholder="Fecha de inicio"
                 value={experiencia.Fechainicio}
                 onChange={(e) => handleExperienceChange(index, 'Fechainicio', e.target.value)}
+          
               />
-              <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].Fechainicio`} component="div" />
+
             </div>
-            <div className="w-1/2 pl-2">
+            <div className="w-1/2 pl-2 relative">
               <Field
                 className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
                 type="date"
@@ -162,14 +165,21 @@ const ProfesionalInfo =({ setFieldValue }) => {
                 placeholder="Fecha de finalización"
                 value={experiencia.FechaFinal}
                 onChange={(e) => handleExperienceChange(index, 'FechaFinal', e.target.value)}
+
                 disabled={experiencia.actualmente === 'Si'}
               />
+         
               <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].FechaFinal`} component="div" />
             </div>
+              <div className='mt-4'>
+              <ErrorMessage className="text-red-500 text-sm m-4" name={`experiencias[${index}].Fechainicio`} component="div" />
+
+
+              </div>
             <div className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'>
-          <label className="block text-gray-700 mt-5">Actualmente trabajo aquí</label>
+          <label className="block text-gray-700 ">Actualmente trabajo aquí</label>
           <div className="flex">
-            <label className="flex items-center ml-3">
+            <label className="flex items-center ">
               <Field
                 type="radio"
                 name={`experiencias[${index}].actualmente`}
@@ -194,7 +204,9 @@ const ProfesionalInfo =({ setFieldValue }) => {
           </div>
           </div>
           </div>
-
+        <div className='flex flex-col items-center w-full '>
+  
+          <div >
           <button
             type="button"
             className="mt-4 px-4 py-2 bg-red-600 text-white rounded"
@@ -208,7 +220,10 @@ const ProfesionalInfo =({ setFieldValue }) => {
             onClick={(e) => handleExperienceChange(index, 'closed', true)}
           >
             Guardar Experiencia
-          </button>
+          </button>       
+          </div>
+        </div>
+
         </div>
       ))}
 
