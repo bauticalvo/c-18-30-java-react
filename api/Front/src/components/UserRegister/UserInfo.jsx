@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Field, ErrorMessage, useFormikContext } from "formik";
 import axios from "axios";
 import { GoPlus } from "react-icons/go";
+import { IoEyeOffOutline } from "react-icons/io5";
+import { IoEyeOutline } from "react-icons/io5";
 
 const UserInfo = ({setFieldValue}) =>{
 
@@ -11,6 +13,7 @@ const UserInfo = ({setFieldValue}) =>{
   const [state, setState] = useState('')
   const [status, setStatus] = useState(false)
   const {  values } = useFormikContext();
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleCountryChange = (e) => {
     const { value } = e.target;
@@ -50,6 +53,10 @@ useEffect(() => {
   const toLowerFunction = (name) =>{
     const aux = name.slice(1).toLowerCase()
     return name[0] + aux
+  }
+
+  const handleShowPassword = ()=>{
+    showPassword ? setShowPassword(false) : setShowPassword(true)
   }
 
 return(
@@ -93,8 +100,8 @@ return(
         <ErrorMessage name="dni" component="div" className="text-red-600 text-sm" />
       </div>
       <div className="w-1/3">
-        <Field name="fechaNacimiento" type="date" placeholder='Fecha de nacimiento' className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field"  />
-        <ErrorMessage name="fechaNacimiento" component="div" className="text-red-600 text-sm" />
+        <Field name="nacimiento" type="date" placeholder='Fecha de nacimiento' className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field"  />
+        <ErrorMessage name="nacimiento" component="div" className="text-red-600 text-sm" />
       </div>
       </div>
 
@@ -199,11 +206,25 @@ return(
       </div>
     <div className="flex  space-x-4 ">   
       <div className="w-1/2">
-        <Field name="password" type="password" className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" placeholder='Contraseña' />
+        <div className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field">
+        <Field name="password" type={showPassword ? 'text' : 'password'}  placeholder='Contraseña' />
+        <div className=" h-[25px] w-[25px] "  onClick={handleShowPassword}>
+        {
+            !showPassword ? (<IoEyeOffOutline className=" h-full w-full "/> ) : (<IoEyeOutline className=" h-full w-full " />)
+        }
+        </div>
+        </div>
         <ErrorMessage name="password" component="div" className="text-red-600 text-sm" />
       </div>
       <div className="w-1/2">
-        <Field name="confirmarPassword" type="password" className="w-full  p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" placeholder='Confirmación de contraseña' />
+        <div className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" >
+        <Field name="confirmarPassword" type={showPassword ? 'text' : 'password'} placeholder='Confirmación de contraseña'  />
+        <div className=" h-[25px] w-[25px]"  onClick={handleShowPassword}>
+        {
+            !showPassword ? (<IoEyeOffOutline className=" h-full w-full "  /> ) : (<IoEyeOutline className=" h-full w-full "/>)
+        }          
+        </div>
+        </div>
         <ErrorMessage name="confirmarPassword" component="div" className="text-red-600 text-sm" />
       </div>
     </div>

@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
     return !email.includes(value);
   }),
   dni: Yup.string().required('Ingrese el DNI'),
-  fechaNacimiento: Yup.date().required('Ingrese una fecha de nacimiento'),
+  nacimiento: Yup.date().required('Ingrese una fecha de nacimiento'),
   sexo: Yup.string().required('Seleccione un sexo'),
   domicilio: Yup.string().required('Ingrese el domicilio'),
   codigoPostal: Yup.string().required('Ingrese el código postal'),
@@ -143,7 +143,7 @@ const UserRegister = () => {
           numeroCelular: '',
           email: '',
           dni: '',
-          fechaNacimiento: '',
+          nacimiento: '',
           sexo: '',
           domicilio: '',
           codigoPostal: '',
@@ -213,29 +213,29 @@ const UserRegister = () => {
             <div className={`flex ${step === 1 ? 'justify-end' : 'justify-between'}`}>
               {step > 1 && (
                 <button
-                  type="button"
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded"
-                  onClick={handlePrevious}
-                >
-                  Anterior
-                </button>
+                type="button"
+                className="px-10 py-2 bg-white text-blue-40 rounded"
+                onClick={handlePrevious}
+              >
+                Anterior
+              </button>
               )}
               {step < 2 ? (
                 <button
-                  type="button"
-                  className="px-4 py-2 bg-[#407BFF] rounded-[4px] text-white "
-                  onClick={handleNext}
-                >
-                  Continuar
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-purple-600 text-white rounded"
-                  onClick={handleSubmit}
-                >
-                  Enviar
-                </button>
+                    type="button"
+                    className="px-4 py-2 bg-[#407BFF] rounded-[4px] text-white"
+                    onClick={handleNext}
+                  >
+                    Continuar
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="px-10 py-2 bg-[#407BFF] rounded-[4px] text-white "
+                    onClick={handleSubmit}
+                  >
+                    Enviar
+              </button>
               )}
             </div>
           </Form>
