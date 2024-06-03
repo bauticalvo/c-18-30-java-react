@@ -79,100 +79,84 @@ const SignupSchema = Yup.object().shape({
     ).max(3, 'Solo se pueden añadir hasta 3 experiencias laborales'),
     
     //MedicConsult
-    tipoConsulta: Yup.string().required('Selecciona un tipo de consulta').strict(),
-    costoConsultaVirtual: Yup.number()
-    .typeError('Debe ser un número')
-    .test('is-required-virtual', 'Este campo es obligatorio', function(value) {
-      const tipoConsulta = this.parent.tipoConsulta;
-      return tipoConsulta === 'virtual' || tipoConsulta === 'ambas' ? !!value : true;
-    }),
-    days: 
+    consult:  Yup.array().of(
       Yup.object().shape({
-        lunes: Yup.object().shape({
-          inicio: Yup.string().required('La hora de inicio es obligatorio'),
-          final: Yup.string().required('La hora final es obligatorio'),
+        
+        tipoConsulta: Yup.string().required('Selecciona un tipo de consulta').strict(),
+        costoConsultaVirtual: Yup.number()
+        .typeError('Debe ser un número')
+        .test('is-required-virtual', 'Este campo es obligatorio', function(value) {
+          const tipoConsulta = this.parent.tipoConsulta;
+          return tipoConsulta === 'virtual' || tipoConsulta === 'ambas' ? !!value : true;
         }),
-        martes: Yup.object().shape({
-          inicio: Yup.string().required('La hora de inicio es obligatorio'),
-          final: Yup.string().required('La hora final es obligatorio'),
+        days: Yup.array().of(Yup.string()).min(1, 'Selecciona al menos un dia de la semana'),
+        startHour: Yup.string().required('Selecciona la hora de inicio'),
+        finishHour: Yup.string().required('Selecciona la hora final'),
+        
+      costoConsultaPresencial: Yup.number()
+        .typeError('Debe ser un número')
+        .test('is-required-presencial', 'Este campo es obligatorio ', function(value) {
+          const tipoConsulta = this.parent.tipoConsulta;
+          return tipoConsulta === 'presencial' || tipoConsulta === 'ambas' ? !!value : true;
         }),
-        miercoles: Yup.object().shape({
-          inicio: Yup.string().required('La hora de inicio es obligatorio'),
-          final: Yup.string().required('La hora final es obligatorio'),
-        }),
-        jueves: Yup.object().shape({
-          inicio: Yup.string().required('La hora de inicio es obligatorio'),
-          final: Yup.string().required('La hora final es obligatorio'),
-        }),
-        viernes: Yup.object().shape({
-          inicio: Yup.string().required('La hora de inicio es obligatorio'),
-          final: Yup.string().required('La hora final es obligatorio'),
-        }),
-       
+      
+      consultaDuracion: Yup.string().required('Selecciona la duración de la consulta'),
+      tipoPacientes: Yup.array().of(Yup.string()).min(1, 'Selecciona al menos un tipo de paciente'),
+      metodoCobro: Yup.array()
+      .of(Yup.string())
+      .test('metodo-cobro-required', 'Selecciona al menos un método de cobro', function (value) {
+        return value && value.length > 0;
+      }),
+      obraSocial: Yup.array().test('obra-social-required', 'Selecciona al menos una obra social válida', function(value) {
+        const metodoCobro = this.parent.metodoCobro;
+        const isObraSocialSelected = metodoCobro && metodoCobro.includes('obraSocial');
+        const obraSocialValue = this.parent.obraSocial;
+      
+        if (isObraSocialSelected && Array.isArray(obraSocialValue)) {
+          // Verifica si al menos uno de los elementos del array obraSocialValue está incluido en obrasArray
+          const containsValidOption = obraSocialValue.some(option => obrasArray.includes(option));
+          return containsValidOption;
+        }
+        return true; // No es necesario validar si no está seleccionada la obra social
       }),
     
-  costoConsultaPresencial: Yup.number()
-    .typeError('Debe ser un número')
-    .test('is-required-presencial', 'Este campo es obligatorio ', function(value) {
-      const tipoConsulta = this.parent.tipoConsulta;
-      return tipoConsulta === 'presencial' || tipoConsulta === 'ambas' ? !!value : true;
-    }),
-  
-  consultaDuracion: Yup.string().required('Selecciona la duración de la consulta'),
-  tipoPacientes: Yup.array().of(Yup.string()).min(1, 'Selecciona al menos un tipo de paciente'),
-  metodoCobro: Yup.array()
-  .of(Yup.string())
-  .test('metodo-cobro-required', 'Selecciona al menos un método de cobro', function (value) {
-    return value && value.length > 0;
-  }),
-  obraSocial: Yup.array().test('obra-social-required', 'Selecciona al menos una obra social válida', function(value) {
-    const metodoCobro = this.parent.metodoCobro;
-    const isObraSocialSelected = metodoCobro && metodoCobro.includes('obraSocial');
-    const obraSocialValue = this.parent.obraSocial;
-  
-    if (isObraSocialSelected && Array.isArray(obraSocialValue)) {
-      // Verifica si al menos uno de los elementos del array obraSocialValue está incluido en obrasArray
-      const containsValidOption = obraSocialValue.some(option => obrasArray.includes(option));
-      return containsValidOption;
-    }
-    return true; // No es necesario validar si no está seleccionada la obra social
-  }),
-
-    numeroCuenta: Yup.string().test('numero-cuenta-required', 'Ingresa el número de cuenta', function(value) {
-      const metodoCobro = this.parent.metodoCobro;
-      if (metodoCobro && metodoCobro.includes('transferencia')) {
-        return !!value;
-      }
-      return true; 
-    })
-    .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
-  nombreTitular: Yup.string().test('nombre-titular-required', 'Ingresa el nombre del titular de la cuenta', function(value) {
-      const metodoCobro = this.parent.metodoCobro;
-      if (metodoCobro && metodoCobro.includes('transferencia')) {
-        return !!value;
-      }
-      return true; 
-    }),
-  cvuAlias: Yup.string().test('cvu-alias-required', 'Ingresa el CVU o alias', function(value) {
-      const metodoCobro = this.parent.metodoCobro;
-      if (metodoCobro && metodoCobro.includes('transferencia')) {
-        return !!value;
-      }
-      return true; 
-    })
-    .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
-  efectivo: Yup.array().test('efectivo-required', 'Selecciona al menos una forma de pago válida', function(value) {
-    const metodoCobro = this.parent.metodoCobro;
-    const isefectivoSelected = metodoCobro && metodoCobro.includes('efectivo');
-    const efectivoValue = this.parent.efectivo;
-  
-    if (isefectivoSelected && Array.isArray(efectivoValue)) {
-      // Verifica si al menos uno de los elementos del array obraSocialValue está incluido en obrasArray
-      const containsValidOption = efectivoValue.some(option => ['Pago Facil', 'Rapipago'].includes(option));
-      return containsValidOption;
-    }
-    return true; // No es necesario validar si no está seleccionada la obra social
-  }),
+        numeroCuenta: Yup.string().test('numero-cuenta-required', 'Ingresa el número de cuenta', function(value) {
+          const metodoCobro = this.parent.metodoCobro;
+          if (metodoCobro && metodoCobro.includes('transferencia')) {
+            return !!value;
+          }
+          return true; 
+        })
+        .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
+      nombreTitular: Yup.string().test('nombre-titular-required', 'Ingresa el nombre del titular de la cuenta', function(value) {
+          const metodoCobro = this.parent.metodoCobro;
+          if (metodoCobro && metodoCobro.includes('transferencia')) {
+            return !!value;
+          }
+          return true; 
+        }),
+      cvuAlias: Yup.string().test('cvu-alias-required', 'Ingresa el CVU o alias', function(value) {
+          const metodoCobro = this.parent.metodoCobro;
+          if (metodoCobro && metodoCobro.includes('transferencia')) {
+            return !!value;
+          }
+          return true; 
+        })
+        .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
+      efectivo: Yup.array().test('efectivo-required', 'Selecciona al menos una forma de pago válida', function(value) {
+        const metodoCobro = this.parent.metodoCobro;
+        const isefectivoSelected = metodoCobro && metodoCobro.includes('efectivo');
+        const efectivoValue = this.parent.efectivo;
+      
+        if (isefectivoSelected && Array.isArray(efectivoValue)) {
+          // Verifica si al menos uno de los elementos del array obraSocialValue está incluido en obrasArray
+          const containsValidOption = efectivoValue.some(option => ['Pago Facil', 'Rapipago'].includes(option));
+          return containsValidOption;
+        }
+        return true; // No es necesario validar si no está seleccionada la obra social
+      }),
+      })
+    ).max(10),
   
   consentimiento: Yup.boolean().oneOf([true], 'Debe aceptar los términos y condiciones'),
 });
@@ -229,7 +213,9 @@ const ProRegister = () => {
           //FechaFinal: '',
           //actualmente: '',
           tipoConsulta: '',
-          days: {},
+          days: [],
+          startHour: '',
+          finishHour: '',
           costoConsultaVirtual: '',
           costoConsultaPresencial: '',
           consultaDuracion: '',
@@ -240,6 +226,7 @@ const ProRegister = () => {
           nombreTitular: '',
           cvuAlias: '',
           efectivo: [],
+          consult:[],
           consentimiento: false,
 
         }}
@@ -253,7 +240,7 @@ const ProRegister = () => {
         } else return
         }}
       >
-        {({ setFieldValue }) => (
+        {({ setFieldValue, values }) => (
           <Form className="space-y-4">
             {step === 1 && <PersonalInfo  setFieldValue={setFieldValue} />}
             {step === 2 && <ProfesionalInfo  setFieldValue={setFieldValue} />}
@@ -276,14 +263,20 @@ const ProRegister = () => {
                 >
                   Continuar
                 </button>
-              ) : (
-                <button
+              ) : (<>                <button
                   type="submit"
                   className="px-10 py-2 bg-[#407BFF] rounded-[4px] text-white "
                   onClick={handleSubmit}
                 >
                   Enviar
                 </button>
+                                  <button
+                                  type="button"
+                                  className="px-10 py-2 bg-[#407BFF] rounded-[4px] text-white "
+                                  onClick={()=> console.log(values)}
+                                >
+                                  mandar
+                            </button></>
               )}
             </div>
           </Form>

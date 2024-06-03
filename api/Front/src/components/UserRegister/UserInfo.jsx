@@ -142,11 +142,11 @@ return(
       </div>
       <div  className="flex" >
         <div className="w-1/3 ">
-          <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" name="estado">
+          <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" name="provincia">
             <option value="">Provincia</option>
             <option value={state}>{toLowerFunction(state)}</option>
           </Field>
-          <ErrorMessage className="text-red-500 text-sm" name="estado" component="div" />
+          <ErrorMessage className="text-red-500 text-sm" name="provincia" component="div" />
         </div>
         <div className="w-1/3 mx-4">
           <Field as="select" name="localidad" className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" >
@@ -204,30 +204,31 @@ return(
         </div>
       </div>
       </div>
-    <div className="flex  space-x-4 ">   
-      <div className="w-1/2">
-        <div className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field">
-        <Field name="password" type={showPassword ? 'text' : 'password'}  placeholder='Contraseña' />
-        <div className=" h-[25px] w-[25px] "  onClick={handleShowPassword}>
+      <div className="flex  space-x-4 ">   
+      <div className="w-1/2 relative">
+        <div >
+        <Field name="password" type={showPassword ? 'text' : 'password'}  placeholder='Contraseña' className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" />
+        <button className=" h-[25px] w-[25px] absolute top-2 right-2 " type='button'  onClick={handleShowPassword}>
         {
             !showPassword ? (<IoEyeOffOutline className=" h-full w-full "/> ) : (<IoEyeOutline className=" h-full w-full " />)
         }
-        </div>
+        </button>
         </div>
         <ErrorMessage name="password" component="div" className="text-red-600 text-sm" />
       </div>
-      <div className="w-1/2">
-        <div className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" >
-        <Field name="confirmarPassword" type={showPassword ? 'text' : 'password'} placeholder='Confirmación de contraseña'  />
-        <div className=" h-[25px] w-[25px]"  onClick={handleShowPassword}>
+      <div className="w-1/2 relative">
+        <div  >
+        <Field name="confirmarPassword" type={showPassword ? 'text' : 'password'} placeholder='Confirmación de contraseña'className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field"  />
+        <button className=" h-[25px] w-[25px] absolute top-2 right-2" type='button'  onClick={handleShowPassword}>
         {
             !showPassword ? (<IoEyeOffOutline className=" h-full w-full "  /> ) : (<IoEyeOutline className=" h-full w-full "/>)
         }          
-        </div>
+        </button>
         </div>
         <ErrorMessage name="confirmarPassword" component="div" className="text-red-600 text-sm" />
       </div>
     </div>
+    
 
 
 

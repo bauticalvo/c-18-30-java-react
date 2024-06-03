@@ -12,7 +12,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
   const [experiencias, setExperiencias] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
   const [isFocusedFinal, setIsFocusedFinal] = useState(false);
-
+  const [actually, setActually] = useState(false)
 
   const addExperience = () => {
     if (experiencias.length < 3) {
@@ -35,16 +35,25 @@ const ProfesionalInfo =({ setFieldValue }) => {
     setFieldValue('experiencias', updatedExperiences);
   };
 
+  const handleActually = (index)=> {
+    if(!actually){
+      setActually(true)
+      handleExperienceChange(index, 'actualmente', 'Si')
+    } else {
+      setActually(false)
+      handleExperienceChange(index, 'actualmente', 'No')
+    }
+  }
     return (
     <>
     <h1 className="text-xl font-sans2  text-black">Perfil profesional</h1>
     <div className="flex space-x-4">
         <div className="w-1/2">
-            <Field as="select" className="w-full p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field" name="especialidad">
-            <option value="">Especializacion</option>
-            <option value="Medico Clinico">Medico Clinico</option>
-            <option value="Psicologo">Psicologo</option>
-            <option value="Nutricionista">Nutricionista</option>
+            <Field as="select" className="w-full p-2 border border-[#D9D9D9]   rounded-[34px] shadow-register-field text-gray-400" name="especialidad">
+            <option  className='text-black'  value="">Especializacion</option>
+            <option  className='text-black' value="Medico Clinico">Medico Clinico</option>
+            <option  className='text-black' value="Psicologo">Psicologo</option>
+            <option  className='text-black' value="Nutricionista">Nutricionista</option>
 
             </Field>
             <ErrorMessage className="text-red-500 text-sm" name="especialidad" component="div" />
@@ -64,11 +73,11 @@ const ProfesionalInfo =({ setFieldValue }) => {
     <div className='flex w-full space-x-4'>
       <div className='w-1/2 '>
       <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="experiencia">
-        <option value="">Años de experiencia</option>
-        <option value="1-2">1 a 2 años</option>
-        <option value="3-5">3 a 5 años</option>
-        <option value="6-10">6 a 10 años</option>
-        <option value="mas">Mas</option>
+        <option  className='text-black' value="">Años de experiencia</option>
+        <option  className='text-black' value="1-2">1 a 2 años</option>
+        <option  className='text-black' value="3-5">3 a 5 años</option>
+        <option  className='text-black' value="6-10">6 a 10 años</option>
+        <option  className='text-black' value="mas">Mas</option>
       </Field>
       <ErrorMessage className="text-red-500 text-sm" name="experiencia" component="div" />
       </div>
@@ -82,10 +91,10 @@ const ProfesionalInfo =({ setFieldValue }) => {
     <div className='flex w-full space-x-4'> 
       <div className='w-1/2 '>
       <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="universidad">
-        <option value="">Universidad</option>
-        <option value="Universidad de Cuyo">Universidad de Cuyo</option>
-        <option value="Universidad de Mexico">Universidad de Mexico</option>
-        <option value="Universidad de Buenos Aires">Universidad de Buenos Aires</option>
+        <option  className='text-black' value="">Universidad</option>
+        <option  className='text-black' value="Universidad de Cuyo">Universidad de Cuyo</option>
+        <option  className='text-black' value="Universidad de Mexico">Universidad de Mexico</option>
+        <option  className='text-black' value="Universidad de Buenos Aires">Universidad de Buenos Aires</option>
       </Field>
       <ErrorMessage className="text-red-500 text-sm" name="universidad" component="div" />
       </div>
@@ -97,7 +106,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
 
     <div>
       <div className='flex justify-between'>
-    <h1 className="text-xl font-sans2  text-black">Experiencia Laboral</h1>
+    <h1 className="text-xl font-sans2 mb-3  text-black">Experiencia Laboral</h1>
 
     {experiencias.length < 3 && (
         <button
@@ -109,17 +118,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
         </button>
       )}
       </div>
-      {experiencias.map((experiencia,index) => experiencia.closed && (
-        <div key={index} className="mb-6 border p-4 rounded flex justify-between items-center">
-          <p>{experiencia.cargo}</p>
-          <div className='flex'>
-            <button className='px-4 py-2 mx-1 bg-indigo-700 text-white rounded' type='button' onClick={(e) => handleExperienceChange(index, 'closed', false)}>
-              <MdEdit /></button>
-            <button type="button" className="px-4 py-2 mx-1 bg-red-600 text-white rounded" onClick={() => handleExperienceRemove(index)}>
-              <MdDelete /></button>
-          </div>
-        </div>
-      ))}
+
       {experiencias.length < 1 && (
         <div className='h-[100px] bg-white'>
 
@@ -155,6 +154,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
                 onChange={(e) => handleExperienceChange(index, 'Fechainicio', e.target.value)}
           
               />
+              <ErrorMessage className="text-red-500 text-sm m-4" name={`experiencias[${index}].Fechainicio`} component="div" />
 
             </div>
             <div className="w-1/2 pl-2 relative">
@@ -171,39 +171,14 @@ const ProfesionalInfo =({ setFieldValue }) => {
          
               <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].FechaFinal`} component="div" />
             </div>
-              <div className='mt-4'>
-              <ErrorMessage className="text-red-500 text-sm m-4" name={`experiencias[${index}].Fechainicio`} component="div" />
+       
+            <div className='w-full h-1/2 p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex justify-center  shadow-register-field text-gray-400'>
+                <button type='button' onClick={()=> handleActually(index)} className={`${actually ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `}></button>
+                <label className=" w-full text-gray-700 ">Actualmente trabajo aquí</label>
 
+          </div>
+          </div>
 
-              </div>
-            <div className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'>
-          <label className="block text-gray-700 ">Actualmente trabajo aquí</label>
-          <div className="flex">
-            <label className="flex items-center ">
-              <Field
-                type="radio"
-                name={`experiencias[${index}].actualmente`}
-                value="Si"
-                checked={experiencia.actualmente === 'Si'}
-                onChange={(e) => handleExperienceChange(index, 'actualmente', 'Si')}
-                className="mr-2"
-              />
-              Si
-            </label>
-            <label className="flex items-center ml-3">
-              <Field
-                type="radio"
-                name={`experiencias[${index}].actualmente`}
-                value="No"
-                checked={experiencia.actualmente === 'No'}
-                onChange={(e) => handleExperienceChange(index, 'actualmente', 'No')}
-                className="mr-2"
-              />
-              No
-            </label>
-          </div>
-          </div>
-          </div>
         <div className='flex flex-col items-center w-full '>
   
           <div >
@@ -224,6 +199,32 @@ const ProfesionalInfo =({ setFieldValue }) => {
           </div>
         </div>
 
+        </div>
+      ))}
+            {experiencias.map((experiencia,index) => experiencia.closed && (
+        <div key={index} className="mb-6 border p-4 rounded-[14px] flex justify-between items-center bg-[rgba(64,123,255,0.07)] space-x-4 ">
+          <div className='w-1/4 bg-[rgba(64,123,255,0.08)] rounded-[54px] p-4 flex items-center justify-around'>  
+          <p>Empresa</p>
+          <p>{experiencia.lugar}</p>
+          </div>
+          <div className='w-1/4 bg-[rgba(64,123,255,0.08)] rounded-[54px] p-4 flex items-center justify-around'>  
+          <p>Cargo</p>
+          <p>{experiencia.cargo}</p>
+          </div>
+          <div className='w-1/4 bg-[rgba(64,123,255,0.08)] rounded-[54px] p-4 flex items-center justify-around'>  
+          <p>Fecha de inicio</p>
+          <p>{experiencia.Fechainicio}</p>
+          </div>
+          <div className='w-1/4 bg-[rgba(64,123,255,0.08)] rounded-[54px] p-4 flex items-center justify-around'>  
+          <p>Fecha Final</p>
+          <p>{experiencia.actualmente === 'No' ? experiencia.FechaFinal  : 'Trabajo actual' }</p>
+          </div>
+          <div className='flex flex-col space-y-2'>
+            <button className='px-4 py-2 mx-1 bg-blue-40 text-white rounded'  type='button' onClick={(e) => handleExperienceChange(index, 'closed', false)}>
+              <MdEdit /></button>
+            <button type="button" className="px-4 py-2 mx-1 bg-red-600 text-white rounded" onClick={() => handleExperienceRemove(index)}>
+              <MdDelete /></button>
+          </div>
         </div>
       ))}
 
