@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Entity
@@ -18,7 +19,7 @@ public class MedicalConsultation {
     private int id_medical_consultation;
     private boolean mode;
     private int time;
-    private Date hour;
+    private ZonedDateTime hour;
 
     @JoinColumn
     private int id_patient;

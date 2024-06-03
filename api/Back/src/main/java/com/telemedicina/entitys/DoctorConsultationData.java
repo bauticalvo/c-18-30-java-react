@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,9 +20,10 @@ public class DoctorConsultationData {
     private int id_consultation_data;
     private String days;
     private double cost;
+    private boolean mode;
     private int duration;
-    private Date since;
-    private Date until;
+    private ZonedDateTime since;
+    private ZonedDateTime until;
     private String pay_method;
     private String especiality;
 
