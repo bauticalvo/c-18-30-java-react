@@ -16,12 +16,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping ("/")
-    public ResponseEntity<User> registerUser (@RequestBody User user){
-        if (user != null) {
-            return ResponseEntity.ok(userService.registerUser(user));
-        }
-        return ResponseEntity.badRequest().build();
-    }
+
 }
 
