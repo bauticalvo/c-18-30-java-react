@@ -1,4 +1,4 @@
-package com.telemedicina.controllers;
+package com.telemedicina.controllers.api;
 
 import com.telemedicina.entitys.Patient;
 import com.telemedicina.entitys.User;
