@@ -173,10 +173,10 @@ useEffect(() => {
           </div>
 
       <div className="flex  space-x-4 ">   
-      <div className="w-1/2">
-        <div className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field">
-        <Field name="password" type={showPassword ? 'text' : 'password'}  placeholder='Contraseña' />
-        <div className=" h-[25px] w-[25px] "  onClick={handleShowPassword}>
+      <div className="w-1/2 relative">
+        <div >
+        <Field name="password" type={showPassword ? 'text' : 'password'}  placeholder='Contraseña' className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" />
+        <div className=" h-[25px] w-[25px] absolute top-2 right-2 "  onClick={handleShowPassword}>
         {
             !showPassword ? (<IoEyeOffOutline className=" h-full w-full "/> ) : (<IoEyeOutline className=" h-full w-full " />)
         }
@@ -184,10 +184,10 @@ useEffect(() => {
         </div>
         <ErrorMessage name="password" component="div" className="text-red-600 text-sm" />
       </div>
-      <div className="w-1/2">
-        <div className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" >
-        <Field name="confirmarPassword" type={showPassword ? 'text' : 'password'} placeholder='Confirmación de contraseña'  />
-        <div className=" h-[25px] w-[25px]"  onClick={handleShowPassword}>
+      <div className="w-1/2 relative">
+        <div  >
+        <Field name="confirmarPassword" type={showPassword ? 'text' : 'password'} placeholder='Confirmación de contraseña'className="w-full flex items-center justify-between p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field"  />
+        <div className=" h-[25px] w-[25px] absolute top-2 right-2"  onClick={handleShowPassword}>
         {
             !showPassword ? (<IoEyeOffOutline className=" h-full w-full "  /> ) : (<IoEyeOutline className=" h-full w-full "/>)
         }          

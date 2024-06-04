@@ -62,7 +62,7 @@ const MedicalHistory = ({values, setFieldValue }) => {
       <div className="flex items-start justify-center space-x-4  w-[70%]">
         <div className='w-1/2  '>
           <div className='p-2 flex items-center space-x-4 border border-[#D9D9D9]  rounded-[34px] shadow-register-field'>
-          <button className={`${active1 ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `} onClick={() => handleActive(1)}></button>
+          <button type='button' className={`${active1 ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `} onClick={() => handleActive(1)}></button>
           <p className="block text-gray-700 font-sans2">¿Enfermedades crónicas?    </p>
           </div>
           {active1 && (
@@ -117,7 +117,7 @@ const MedicalHistory = ({values, setFieldValue }) => {
 
       <div className='w-1/2'>
       <div className='p-2 flex space-x-4 border items-center  border-[#D9D9D9]  rounded-[34px] shadow-register-field'>
-      <button className={`${active2 ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `} onClick={() => handleActive(2)}></button>
+      <button type='button' className={`${active2 ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `} onClick={() => handleActive(2)}></button>
       <p className="block text-gray-700 font-sans2">Antecedentes médicos familiares</p>
       </div>
       {
@@ -156,7 +156,7 @@ const MedicalHistory = ({values, setFieldValue }) => {
 
       <div className='w-1/2'>
           <div className='p-2 flex items-center space-x-4 border border-[#D9D9D9]  rounded-[34px] shadow-register-field'>
-          <button className={`${active3 ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `} onClick={() => handleActive(3)}></button>
+          <button type='button' className={`${active3 ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `} onClick={() => handleActive(3)}></button>
           <p className="block text-gray-700 font-sans2">¿Alergias?    </p>
           </div>
           {
@@ -246,7 +246,7 @@ const MedicalHistory = ({values, setFieldValue }) => {
       </div>
       <div className='w-1/2'>
           <div className='p-2 flex items-center space-x-4 mb-4 border border-[#D9D9D9]  rounded-[34px] shadow-register-field'>
-            <button className={`${active4 ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `} onClick={() => handleActive(4)}></button>
+            <button type='button' className={`${active4 ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `} onClick={() => handleActive(4)}></button>
             <p className="block text-gray-700 font-sans2">¿Tomas medicamento?   </p>
           </div>
           {
