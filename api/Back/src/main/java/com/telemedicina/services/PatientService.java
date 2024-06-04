@@ -1,6 +1,5 @@
 package com.telemedicina.services;
 
-import com.telemedicina.entitys.Patient;
 import com.telemedicina.repositorys.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
