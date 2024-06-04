@@ -62,8 +62,7 @@ useEffect(() => {
 
   
   return (  
-  <>
-    <h1 className="text-2xl font-bold mb-6 text-purple-600">Datos Personales</h1>
+  <div className='h-90vh'>
     <div className="flex space-x-4">
         <div className="w-1/3">
           <Field name="nombre" className="w-full p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field" placeholder='Nombre' />
@@ -197,7 +196,7 @@ useEffect(() => {
         <ErrorMessage name="confirmarPassword" component="div" className="text-red-600 text-sm" />
       </div>
     </div>
-  </>
+  </div>
 )}
 
 export default PersonalInfo;

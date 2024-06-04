@@ -33,7 +33,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
   };
 
     return (
-    <>
+    <div className=' h-90vh'>
     <h1 className="text-xl font-sans2  text-black">Perfil profesional</h1>
     <div className="flex space-x-4">
         <div className="w-1/2">
@@ -214,7 +214,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
 
 
     </div>
-    </>
+    </div>
 )
 }
 export default ProfesionalInfo;

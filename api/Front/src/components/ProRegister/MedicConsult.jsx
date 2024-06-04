@@ -29,7 +29,7 @@ const MedicConsultInfo = ({ setFieldValue }) => {
 
 
   return (
-    <>
+    <div className='h-90vh'>
       <h1 className="text-2xl font-bold mb-6 text-purple-600">Consultas Médicas</h1>
       
        <div className="mb-4">
@@ -213,7 +213,7 @@ const MedicConsultInfo = ({ setFieldValue }) => {
         <label className="text-gray-700">Acepto los términos y condiciones y doy mi consentimiento para el tratamiento virtual y el manejo de mis datos.</label>
         <ErrorMessage name="consentimiento" component="div" className="text-red-600 text-sm" />
       </div>
-    </>
+    </div>
   );
 };
 
