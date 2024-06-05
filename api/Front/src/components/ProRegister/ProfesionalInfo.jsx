@@ -46,7 +46,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
   }
     return (
     <div className=' h-90vh'>
-    <h1 className="text-xl font-sans2  text-black">Perfil profesional</h1>
+    <h1 className="text-xl font-sans2 mb-4  text-black border-b-2 border-b-[rgba(64,123,255,0.4)]">Perfil profesional</h1>
     <div className="flex space-x-4">
         <div className="w-1/2">
             <Field as="select" className="w-full p-2 border border-[#D9D9D9]   rounded-[34px] shadow-register-field text-gray-400" name="especialidad">
@@ -87,7 +87,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
       </div>
   
     </div>
-    <h1 className="text-xl font-sans2  text-black">Estudios</h1>
+    <h1 className="text-xl font-sans2 my-4  border-b-2 border-b-[rgba(64,123,255,0.4)] text-black">Estudios</h1>
     <div className='flex w-full space-x-4'> 
       <div className='w-1/2 '>
       <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="universidad">
@@ -106,7 +106,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
 
     <div>
       <div className='flex justify-between'>
-    <h1 className="text-xl font-sans2 mb-3  text-black">Experiencia Laboral</h1>
+    <h1 className="text-xl font-sans2 my-4  border-b-2 border-b-[rgba(64,123,255,0.4)] text-black">Experiencia Laboral</h1>
 
     {experiencias.length < 3 && (
         <button

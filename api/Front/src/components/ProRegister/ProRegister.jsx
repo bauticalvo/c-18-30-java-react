@@ -172,7 +172,7 @@ const ProRegister = () => {
   
 
   return (
-    <div>
+    <div > 
 
         <p className='flex justify-center mt-6 font-bold text-2xl font-sans2'>Crea tu cuenta</p>
         <div className='  flex  justify-center items-center'>

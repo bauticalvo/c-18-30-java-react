@@ -82,54 +82,79 @@ const MedicConsultInfo = ({ setFieldValue }) => {
 
 
   return (
-    <div className='h-90vh'>
-      <h1 className="text-2xl font-bold mb-6 text-purple-600">Consultas Médicas</h1>
-      
-       <div className="mb-4">
-        <label className="block text-gray-700 mb-2">Costo de la consulta</label>
-        
-        <div className="flex space-x-4 mb-2">
-          <label className="flex items-center">
-            <Field type="radio" name="tipoConsulta" value="virtual" />
-            <span className="ml-2">Consulta virtual</span>
-          </label>
-          <label className="flex items-center">
-            <Field type="radio" name="tipoConsulta" value="presencial" />
-            <span className="ml-2">Consulta presencial</span>
-          </label>
-          <label className="flex items-center">
-            <Field type="radio" name="tipoConsulta" value="ambas" />
-            <span className="ml-2">Ambas</span>
-          </label>
+    <>
+    
+       <div className="mb-4 ">
+        <div className='w-full flex space-x-4 relative items-start justify-start '>
+          {
+            !active1 && (
+             <button type='button' className='w-1/2 relative items-center justify-center' onClick={() =>handleActive(1)}>
+              <label className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'>Tipo de consulta</label>
+              <IoIosArrowDown className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px] ' />
+            </button >
+            )
+          }
+
+        {active1 && (
+                  <div className='flex w-1/2 flex-col space-y-2 '>
+                  <div>
+                  <button type='button' className='w-full relative items-center justify-center' onClick={() =>handleActive(1)}>
+                    <label className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'>Tipo de consulta</label>
+                    <IoIosArrowUp className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px] ' />
+                  </button >
+                  </div >
+                  <div  className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'>
+                  <label className="flex items-center">
+                    <Field type="radio" name="tipoConsulta" value="virtual"  />
+                    <span className="ml-2 text-black">Consulta virtual</span>
+                  </label>
+                  <label className="flex items-center">
+                    <Field type="radio" name="tipoConsulta" value="presencial" />
+                    <span className="ml-2 text-black">Consulta presencial</span>
+                  </label>
+                </div>
+                  </div>
+        )}
+        <div className='w-1/2 flex relative flex-col '>
+          {
+            !active2 && (
+             <button type='button' className='w-full relative items-center justify-center' onClick={() =>handleActive(2)}>
+              <label className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'>Costo de consulta</label>
+              <IoIosArrowDown className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px] ' />
+            </button >
+            )
+          }
+          {active2 && (
+              <button type='button' className='w-full relative items-center justify-center' onClick={() =>handleActive(2)}>
+                <label className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'>Costo de consulta</label>
+                <IoIosArrowUp className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px] ' />
+              </button >
+          )}
+          { active2 && values.tipoConsulta === 'virtual' && (
+            <div className="mt-2">
+              <Field  className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field' name="costoConsultaVirtual" placeholder="Costo de la consulta virtual" />
+              <ErrorMessage className="text-red-500 text-sm" name="costoConsultaVirtual" component="div" />
+            </div>
+          )}
+  
+          { active2 && values.tipoConsulta === 'presencial' && (
+            <div className="mt-2">
+              <Field  className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field' name="costoConsultaPresencial" placeholder="Costo de la consulta presencial" />
+              <ErrorMessage className="text-red-500 text-sm" name="costoConsultaPresencial" component="div" />
+            </div>
+          )}
+  
+          { active2 && values.tipoConsulta === '' && (
+            <div className="mt-2">
+              <ErrorMessage className="text-red-500 text-sm" name="tipoConsulta" component="div" />
+            </div>
+          )  }
         </div>
 
-        {values.tipoConsulta === 'virtual' && (
-          <div className="mt-2">
-            <Field className="w-full px-3 py-2 border rounded" name="costoConsultaVirtual" placeholder="Costo de la consulta virtual" />
-            <ErrorMessage className="text-red-500 text-sm" name="costoConsultaVirtual" component="div" />
-          </div>
-        )}
 
-        {values.tipoConsulta === 'presencial' && (
-          <div className="mt-2">
-            <Field className="w-full px-3 py-2 border rounded" name="costoConsultaPresencial" placeholder="Costo de la consulta presencial" />
-            <ErrorMessage className="text-red-500 text-sm" name="costoConsultaPresencial" component="div" />
-          </div>
-        )}
+        </div>
 
-        {values.tipoConsulta === 'ambas' && (
-          <div className="mt-2">
-            <Field className="w-full px-3 py-2 border rounded" name="costoConsultaVirtual" placeholder="Costo de la consulta virtual" />
-            <ErrorMessage className="text-red-500 text-sm" name="costoConsultaVirtual" component="div" />
-            <Field className="w-full px-3 py-2 border rounded mt-2" name="costoConsultaPresencial" placeholder="Costo de la consulta presencial" />
-            <ErrorMessage className="text-red-500 text-sm" name="costoConsultaPresencial" component="div" />
-          </div>
-        )}
-        {values.tipoConsulta === '' && (
-          <div className="mt-2">
-            <ErrorMessage className="text-red-500 text-sm" name="tipoConsulta" component="div" />
-          </div>
-        )}
+
       </div>
       <div className='w-full flex space-x-4 items-start justify-start'>
       <div className="mb-4 w-1/2 space-x-4 flex items-center justify-center flex-col ">
@@ -336,7 +361,7 @@ const MedicConsultInfo = ({ setFieldValue }) => {
         <label className="text-gray-700">Acepto los términos y condiciones y doy mi consentimiento para el tratamiento virtual y el manejo de mis datos.</label>
         <ErrorMessage name="consentimiento" component="div" className="text-red-600 text-sm" />
       </div>
-    </div>
+    </>
   );
 };
 
