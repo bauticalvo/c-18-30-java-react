@@ -19,18 +19,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
     @Autowired
-    DoctorRepository doctorRepository;
+    private DoctorRepository doctorRepository;
 
     @Autowired
-    PatientRepository patientRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private JwtService jwtService;
+    @Autowired
+    private JwtService jwtService; // Asegúrate de que JwtService esté correctamente inyectado aquí
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
-    private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
     public AuthResponse registerUser (User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
