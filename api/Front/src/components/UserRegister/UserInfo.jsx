@@ -4,34 +4,32 @@ import axios from "axios";
 import { GoPlus } from "react-icons/go";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const UserInfo = ({setFieldValue}) =>{
 
   const [places, setPlaces] = useState([])
   const [postCode, setPostCode] = useState('')
-  const [country, setCountry] = useState('')
   const [state, setState] = useState('')
   const [status, setStatus] = useState(false)
   const {  values } = useFormikContext();
   const [showPassword, setShowPassword] = useState(false)
+  const [activeS, setActiveS] = useState(false);
+  const [bornDate, setBornDate] = useState(false);
 
-  const handleCountryChange = (e) => {
-    const { value } = e.target;
-    setFieldValue('pais', value);
-    setCountry(value)
-    setStatus(true)
-  };
+
 
   const handlePostCodeChange = (e) => {
     const { value } = e.target;
     setFieldValue('codigoPostal', value);
     setPostCode(value)
   };
+
 useEffect(() => {
-  if (postCode.length >= 4 && country ) {
+  if (postCode.length >= 4   ) {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://api.zippopotam.us/${country}/${postCode}`);
+        const response = await axios.get(`https://api.zippopotam.us/AR/${postCode}`);
         setPlaces(response.data.places);
         setState(response.data.places[0].state);
         setStatus(false)
@@ -48,7 +46,7 @@ useEffect(() => {
 
     return () => clearTimeout(debounceFetch); // Cleanup the debounce
   }
-}, [postCode, country]);
+}, [postCode]);
 
   const toLowerFunction = (name) =>{
     const aux = name.slice(1).toLowerCase()
@@ -58,10 +56,16 @@ useEffect(() => {
   const handleShowPassword = ()=>{
     showPassword ? setShowPassword(false) : setShowPassword(true)
   }
+  const handleActive = () => {
+    setActiveS(!activeS);
+  };
+  const handleBornDate = () => {
+    setBornDate(!bornDate);
+  };
 
 return(
   <>
-    <h1 className="font-sans2">Datos de contacto</h1>
+    <h1 className="font-sans2  my-4  border-b-2 border-b-[rgba(64,123,255,0.4)] text-black ">Datos de contacto</h1>
       <div className="flex space-x-4">
         <div className="w-1/3">
           <Field name="nombre" className="w-full p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field" placeholder='Nombre' />
@@ -77,7 +81,8 @@ return(
       </div>
         </div>
       <div className="flex space-x-4">
-        <div className="w-[11%]">
+      <div className="w-1/3 flex space-x-4">
+        <div className="w-1/6">
           <label className="block text-gray-700"></label>
           <Field as="select" name="codigoPais" className="w-[100%] p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field  " >
             <option value="">+</option>
@@ -90,47 +95,80 @@ return(
           </Field>
           <ErrorMessage name="codigoPais" component="div" className="text-red-600 text-sm" />
         </div>
-        <div className="w-[21%]">
+        <div className="w-5/6">
           <Field name="numeroCelular"  className="w-full  p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field"  placeholder='Número de Celular'/>
           <ErrorMessage name="numeroCelular" component="div" className="text-red-600 text-sm" />
         </div>
-        
+        </div>
         <div className="w-1/3 mx-4">
         <Field name="dni" className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" placeholder='Número de DNI' />
         <ErrorMessage name="dni" component="div" className="text-red-600 text-sm" />
       </div>
       <div className="w-1/3">
-        <Field name="nacimiento" type="date" placeholder='Fecha de nacimiento' className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field"  />
-        <ErrorMessage name="nacimiento" component="div" className="text-red-600 text-sm" />
+      {
+        !bornDate && (
+          <button type='button' onClick={handleBornDate} className='w-full relative flex justify-start items-start '>
+            <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex  shadow-register-field text-gray-400">Fecha de nacimiento</label>
+            <IoIosArrowDown className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
+          </button>
+        )
+      }
+      {
+        bornDate && (
+          <div className="space-y-2">
+          <button type='button' onClick={handleBornDate} className='w-full relative flex justify-start items-start'>
+            <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex  shadow-register-field text-gray-400">Fecha de nacimiento</label>
+            <IoIosArrowDown className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
+          </button>
+          <div>
+            <Field name="nacimiento" type="date"  className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field"  />
+            <ErrorMessage name="nacimiento" component="div" className="text-red-600 text-sm" />            
+          </div>
+
+          </div>
+        )
+      }
+
       </div>
       </div>
 
-      <h1 className="font-sans2">Datos de Localización</h1>
+      <h1 className="font-sans2  my-4  border-b-2 border-b-[rgba(64,123,255,0.4)] text-black">Datos de Localización</h1>
 
       <div className="flex">
-      <div className="w-1/3">
-        <label className="block text-gray-700">Sexo</label>
-        <div className="flex space-x-4 ">
-          <label>
-            <Field type="radio" name="sexo" value="masculino" className="mr-2" />
-            Masculino
-          </label>
-          <label>
-            <Field type="radio" name="sexo" value="femenino" className="mr-2" />
-            Femenino
-          </label>
-          <label>
-            <Field type="radio" name="sexo" value="otro" className="mr-2" />
-            Otro
-          </label>
-        </div>
-        <ErrorMessage name="sexo" component="div" className="text-red-600 text-sm" />
-      </div>
+      <div className="w-1/3 relative">
+            {!activeS ? (
+              <button type='button' onClick={handleActive} className='w-full relative'>
+                <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex items-start justify-start shadow-register-field text-gray-400">Sexo</label>
+                <IoIosArrowDown className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
+              </button>
+            ) : (
+              <div className="space-y-2">
+                <button type='button' onClick={handleActive} className='w-full relative'>
+                  <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex items-start justify-start shadow-register-field text-gray-400">Sexo</label>
+                  <IoIosArrowUp className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
+                </button>
+                <div className='w-full p-2 border space-x-4 border-[#D9D9D9] rounded-[34px] flex items-center justify-center shadow-register-field text-gray-400'>
+                  <label>
+                    <Field type="radio" name="sexo" value="masculino" className="mr-2" />
+                    Masculino
+                  </label>
+                  <label>
+                    <Field type="radio" name="sexo" value="femenino" className="mr-2" />
+                    Femenino
+                  </label>
+                  <label>
+                    <Field type="radio" name="sexo" value="otro" className="mr-2" />
+                    Otro
+                  </label>
+                </div>
+              </div>
+            )}
+            <ErrorMessage name="sexo" component="div" className="text-red-600 text-sm" />
+          </div>
       <div className="w-1/3 mx-4">
-        <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" name="pais" onChange={handleCountryChange}> 
+        <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field text-gray-400" name="pais" > 
           <option value="">País</option>
-          <option value="MX">México</option>
-          <option value="AR">Argentina</option>
+          <option className=" text-black" value="AR">Argentina</option>
         </Field>
         <ErrorMessage className="text-red-500 text-sm" name="pais" component="div" />
       </div>
@@ -142,19 +180,20 @@ return(
       </div>
       <div  className="flex" >
         <div className="w-1/3 ">
-          <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" name="provincia">
+          <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field text-gray-400" name="provincia">
             <option value="">Provincia</option>
-            <option value={state}>{toLowerFunction(state)}</option>
+            <option className=" text-black" value={state}>{toLowerFunction(state)}</option>
           </Field>
           <ErrorMessage className="text-red-500 text-sm" name="provincia" component="div" />
         </div>
         <div className="w-1/3 mx-4">
-          <Field as="select" name="localidad" className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" >
+          <Field as="select" name="localidad" className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field text-gray-400" >
             <option value="">Localidad</option>
             {places.map((place,index) => (
               <option
               key={index}
               value={place["place name"]}
+              className=" text-black"
               >
                 {toLowerFunction(place["place name"])}
               </option>
@@ -168,11 +207,11 @@ return(
           </div>
       </div>
 
-      <h1 className="font-sans2">Datos del cuerpo humano</h1>
+      <h1 className="font-sans2  my-4  border-b-2 border-b-[rgba(64,123,255,0.4)] text-black">Datos del cuerpo humano</h1>
  
 
       <div className="flex space-x-4">
-        <div className="w-1/3 flex">
+        <div className="w-1/3 flex space-x-4">
         <div className="w-1/2">
           <Field name="altura" type='number' className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field" placeholder='Altura' />
           <ErrorMessage name="altura" component="div" className="text-red-600 text-sm" />
@@ -185,20 +224,20 @@ return(
 
       <div className="flex space-x-4 w-2/3">
         <div className="w-1/2 ">
-          <Field as="select" name="grupoSanguineo" className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field">
+          <Field as="select" name="grupoSanguineo" className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field text-gray-400">
             <option value="">Grupo Sanguíneo</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="AB">AB</option>
-            <option value="O">O</option>
+            <option  className=" text-black" value="A">A</option>
+            <option  className=" text-black" value="B">B</option>
+            <option  className=" text-black" value="AB">AB</option>
+            <option  className=" text-black" value="O">O</option>
           </Field>
           <ErrorMessage name="grupoSanguineo" component="div" className="text-red-600 text-sm" />
         </div>
         <div className="w-1/2">
-          <Field as="select" name="factor" className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field">
+          <Field as="select" name="factor" className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field text-gray-400">
             <option value="">Factor</option>
-            <option value="positivo">Positivo</option>
-            <option value="negativo">Negativo</option>
+            <option className=" text-black" value="positivo">Positivo</option>
+            <option className=" text-black" value="negativo">Negativo</option>
           </Field>
           <ErrorMessage name="factor" component="div" className="text-red-600 text-sm" />
         </div>

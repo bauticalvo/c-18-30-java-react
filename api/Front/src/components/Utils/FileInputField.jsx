@@ -18,7 +18,7 @@ export const FileInputField = ({ field, form }) => {
     };
   
     return (
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center">
         {
             field.name === 'fotoPerfil' &&(
                 <button
@@ -35,7 +35,7 @@ export const FileInputField = ({ field, form }) => {
              field.name === 'certificado' &&  (<button
                 type="button"
                 onClick={handleClick}
-                className='w-1/2 p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'  
+                className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'  
 
               >
                 <IoCloudUploadOutline className="h-[20px] w-[20px]" /> 

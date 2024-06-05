@@ -14,6 +14,7 @@ const PersonalInfo = ({ setFieldValue }) => {
   const { values } = useFormikContext();
   const [showPassword, setShowPassword] = useState(false);
   const [activeS, setActiveS] = useState(false);
+  const [bornDate, setBornDate] = useState(false);
 
   const handleCountryChange = (e) => {
     const { value } = e.target;
@@ -62,6 +63,9 @@ const PersonalInfo = ({ setFieldValue }) => {
   const handleActive = () => {
     setActiveS(!activeS);
   };
+  const handleBornDate = () => {
+    setBornDate(!bornDate);
+  };
 
   return (
     <div className=''>
@@ -83,7 +87,7 @@ const PersonalInfo = ({ setFieldValue }) => {
 
         <div className="flex space-x-4">
           <div className="w-1/3 flex space-x-4">
-            <div className="w-1/3">
+            <div className="w-1/6">
               <label className="block text-gray-700"></label>
               <Field as="select" name="codigoPais" className="w-full p-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field">
                 <option value="">+</option>
@@ -96,7 +100,7 @@ const PersonalInfo = ({ setFieldValue }) => {
               </Field>
               <ErrorMessage name="codigoPais" component="div" className="text-red-600 text-sm" />
             </div>
-            <div className="w-2/3">
+            <div className="w-5/6">
               <Field name="numeroCelular" className="w-full p-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" placeholder='Número de Celular' />
               <ErrorMessage name="numeroCelular" component="div" className="text-red-600 text-sm" />
             </div>
@@ -107,25 +111,47 @@ const PersonalInfo = ({ setFieldValue }) => {
             <ErrorMessage name="dni" component="div" className="text-red-600 text-sm" />
           </div>
           <div className="w-1/3">
-            <Field name="fechaNacimiento" type="date" className="w-full p-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" placeholder='Fecha de nacimiento' />
-            <ErrorMessage name="fechaNacimiento" component="div" className="text-red-600 text-sm" />
+      {
+        !bornDate && (
+          <button type='button' onClick={handleBornDate} className='w-full relative flex justify-start items-start '>
+            <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex  shadow-register-field text-gray-400">Fecha de nacimiento</label>
+            <IoIosArrowDown className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
+          </button>
+        )
+      }
+      {
+        bornDate && (
+          <div className="space-y-2">
+          <button type='button' onClick={handleBornDate} className='w-full relative flex justify-start items-start'>
+            <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex  shadow-register-field text-gray-400">Fecha de nacimiento</label>
+            <IoIosArrowDown className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
+          </button>
+          <div>
+            <Field name="nacimiento" type="date"  className="w-full p-2 border border-[#D9D9D9] rounded-[34px]  shadow-register-field"  />
+            <ErrorMessage name="nacimiento" component="div" className="text-red-600 text-sm" />            
           </div>
+
+          </div>
+        )
+      }
+
+      </div>
         </div>
 
         <div className="flex space-x-4">
           <div className="w-1/3 relative">
             {!activeS ? (
               <button type='button' onClick={handleActive} className='w-full relative'>
-                <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex items-center justify-center shadow-register-field text-gray-400">Sexo</label>
+                <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex items-start justify-start shadow-register-field text-gray-400">Sexo</label>
                 <IoIosArrowDown className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
               </button>
             ) : (
-              <div>
+              <div className='space-y-2'>
                 <button type='button' onClick={handleActive} className='w-full relative'>
-                  <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex items-center justify-center shadow-register-field text-gray-400">Sexo</label>
+                  <label className="w-full p-2 border border-[#D9D9D9] rounded-[34px] flex items-start justify-start shadow-register-field text-gray-400">Sexo</label>
                   <IoIosArrowUp className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
                 </button>
-                <div className='w-full p-2 border border-[#D9D9D9] rounded-[34px] flex items-center justify-center shadow-register-field text-gray-400'>
+                <div className='w-full p-2 border space-x-4 border-[#D9D9D9] rounded-[34px] flex items-center justify-center shadow-register-field text-gray-400'>
                   <label>
                     <Field type="radio" name="sexo" value="masculino" className="mr-2" />
                     Masculino
@@ -144,10 +170,10 @@ const PersonalInfo = ({ setFieldValue }) => {
             <ErrorMessage name="sexo" component="div" className="text-red-600 text-sm" />
           </div>
           <div className="w-1/3">
-            <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" name="pais" onChange={handleCountryChange}>
-              <option value="">País</option>
-              <option value="MX">México</option>
-              <option value="AR">Argentina</option>
+            <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field text-gray-400" name="pais" onChange={handleCountryChange}>
+              <option  value="">País</option>
+              <option className='text-black' value="MX">México</option>
+              <option className='text-black' value="AR">Argentina</option>
             </Field>
             <ErrorMessage className="text-red-500 text-sm" name="pais" component="div" />
           </div>
@@ -159,17 +185,17 @@ const PersonalInfo = ({ setFieldValue }) => {
 
         <div className="flex space-x-4">
           <div className="w-1/3">
-            <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" name="provincia">
+            <Field as="select" className="w-full px-3 py-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field text-gray-400" name="provincia">
               <option value="">Provincia</option>
-              <option value={state}>{toLowerFunction(state)}</option>
+              <option className='text-black' value={state}>{toLowerFunction(state)}</option>
             </Field>
             <ErrorMessage className="text-red-500 text-sm" name="provincia" component="div" />
           </div>
           <div className="w-1/3">
-            <Field as="select" name="localidad" className="w-full p-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field">
+            <Field as="select" name="localidad" className="w-full p-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field text-gray-400">
               <option value="">Localidad</option>
               {places.map((place, index) => (
-                <option key={index} value={place["place name"]}>
+                <option key={index } className='text-black' value={place["place name"]}>
                   {toLowerFunction(place["place name"])}
                 </option>
               ))}

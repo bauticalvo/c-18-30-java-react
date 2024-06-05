@@ -67,27 +67,27 @@ const MedicalHistory = ({values, setFieldValue }) => {
           </div>
           {active1 && (
             <div>
-        <div className='flex space-x-2 items-center justify-evenly  w-[100%]' > 
-        <label className=" p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field w-1/8 mt-4">
+        <div className="flex items-center space-x-4  p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field w-1/8 mt-4" > 
+        <label className="   w-1/8">
           <Field type="checkbox" name="enfermedadesCronicas" value="Diabetes" className="mr-2" disabled={values.enfermedadesCronicas.includes('ninguna')} />
           Diabetes
         </label>
-        <label className=" p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field w-1/8 mt-4">
+        <label className="   w-1/8">
           <Field type="checkbox" name="enfermedadesCronicas" value="Hipertensión" className="mr-2" disabled={values.enfermedadesCronicas.includes('ninguna')} />
           Hipertensión
         </label>
-        <label className=" p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field w-1/8 mt-4">
+        <label className="   w-1/8">
           <Field type="checkbox" name="enfermedadesCronicas" value="Asma" className="mr-2" disabled={values.enfermedadesCronicas.includes('ninguna')} />
           Asma
         </label>
-        <label className=" p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field w-1/8 mt-4">
+        <label className="   w-1/8">
           <Field type="checkbox" name="enfermedadesCronicas" value="ninguna" className="mr-2"  onClick={handleChronicDiseases} />
             Ninguna
         </label>        
   
         </div> 
           <div className='w-full flex items-center justify-center'>
-            <Field name="otrasEnfermedades" className="w-1/2 p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field mt-4"  placeholder='Otras'/>
+            <Field name="otrasEnfermedades" className="w-full p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field mt-4"  placeholder='Otras'/>
             <ErrorMessage name="otrasEnfermedades" component="div" className="text-red-600 text-sm" />
           </div>
               <div className="flex flex-col items-center  space-x-4 p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field w-1/8 mt-4">
