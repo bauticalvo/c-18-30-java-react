@@ -4,7 +4,8 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { FiPlusCircle } from "react-icons/fi";
 import { FileInputField } from '../Utils/FileInputField';
-
+import universidades from '../Utils/Universidades'
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const ProfesionalInfo =({ setFieldValue }) => {
 
@@ -13,6 +14,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFocusedFinal, setIsFocusedFinal] = useState(false);
   const [actually, setActually] = useState(false)
+  const [active, setActive ] = useState(false)
 
   const addExperience = () => {
     if (experiencias.length < 3) {
@@ -44,10 +46,16 @@ const ProfesionalInfo =({ setFieldValue }) => {
       handleExperienceChange(index, 'actualmente', 'No')
     }
   }
+
+  const handleActive = () => {
+    setActive(!active);
+  };
     return (
-    <>
-    <h1 className="text-xl font-sans2  text-black">Perfil profesional</h1>
-    <div className="flex space-x-4">
+    <div className=' h-90vh'>
+    <h1 className="text-xl font-sans2 mb-4  text-black border-b-2 border-b-[rgba(64,123,255,0.4)]">Perfil profesional</h1>
+    <div className="flex flex-col space-y-4 m-4">
+      <div className='w-full flex space-x-4'>
+
         <div className="w-1/2">
             <Field as="select" className="w-full p-2 border border-[#D9D9D9]   rounded-[34px] shadow-register-field text-gray-400" name="especialidad">
             <option  className='text-black'  value="">Especializacion</option>
@@ -62,15 +70,15 @@ const ProfesionalInfo =({ setFieldValue }) => {
         <Field className="w-full p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field" name="numeroMatricula" placeholder='Número de Matricula' />
         <ErrorMessage className="text-red-500 text-sm" name="numeroMatricula" component="div" />
         </div>
+      </div>
 
-    </div> 
-  <div>
-      <div className="mb-4">
+    
+        <div className="mb-4 w-1/2 space-x-4">
             <Field name="certificado" component={FileInputField} />
             <ErrorMessage name="certificado" component="div" className="text-red-600 text-sm" />
       </div>
-    </div>
-    <div className='flex w-full space-x-4'>
+    </div> 
+    <div className='flex w-full space-x-4 m-4'>
       <div className='w-1/2 '>
       <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="experiencia">
         <option  className='text-black' value="">Años de experiencia</option>
@@ -87,17 +95,17 @@ const ProfesionalInfo =({ setFieldValue }) => {
       </div>
   
     </div>
-    <h1 className="text-xl font-sans2  text-black">Estudios</h1>
+    <h1 className="text-xl font-sans2 my-4  border-b-2 border-b-[rgba(64,123,255,0.4)] text-black">Estudios</h1>
     <div className='flex w-full space-x-4'> 
-      <div className='w-1/2 '>
-      <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="universidad">
-        <option  className='text-black' value="">Universidad</option>
-        <option  className='text-black' value="Universidad de Cuyo">Universidad de Cuyo</option>
-        <option  className='text-black' value="Universidad de Mexico">Universidad de Mexico</option>
-        <option  className='text-black' value="Universidad de Buenos Aires">Universidad de Buenos Aires</option>
-      </Field>
-      <ErrorMessage className="text-red-500 text-sm" name="universidad" component="div" />
-      </div>
+    <div className='w-1/2 '>
+            <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center shadow-register-field text-gray-400' name="universidad">
+                <option className='text-black' value="">Universidad</option>
+                {universidades.map((universidad, index) => (
+                    <option key={index} className='text-black' value={universidad.nombre}>{universidad.nombre}</option>
+                ))}
+            </Field>
+            <ErrorMessage className="text-red-500 text-sm" name="universidad" component="div" />
+        </div>
       <div className='w-1/2 '>
       <Field className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="egreso" placeholder='Año de egreso' />
         <ErrorMessage className="text-red-500 text-sm" name="egreso" component="div" />
@@ -106,7 +114,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
 
     <div>
       <div className='flex justify-between'>
-    <h1 className="text-xl font-sans2 mb-3  text-black">Experiencia Laboral</h1>
+    <h1 className="text-xl font-sans2 my-4  border-b-2 border-b-[rgba(64,123,255,0.4)] text-black">Experiencia Laboral</h1>
 
     {experiencias.length < 3 && (
         <button
@@ -145,38 +153,82 @@ const ProfesionalInfo =({ setFieldValue }) => {
           <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].cargo`} component="div" />
           </div>
           <div className="flex mt-5 w-full space-x-4">
-            <div className="w-1/2 pr-2 relative">
-              <Field
-                className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
-                type="date"
-                name={`experiencias[${index}].Fechainicio`}
-                value={experiencia.Fechainicio}
-                onChange={(e) => handleExperienceChange(index, 'Fechainicio', e.target.value)}
-          
-              />
-              <ErrorMessage className="text-red-500 text-sm m-4" name={`experiencias[${index}].Fechainicio`} component="div" />
+            {
+              !active && (
+                <div className='w-full flex space-x-4'>
+                    <button type='button' onClick={handleActive} className='w-full relative items-start justify-between'>
+                      <div className="w-full space-x-4 p-2 border border-[#D9D9D9] rounded-[34px] flex  shadow-register-field text-gray-400">
+                      <label >Tiempo</label>
+                      <label >Desde</label>
+                      <label > {'   /    '}   </label>
+                      <label >Hasta</label>
 
-            </div>
-            <div className="w-1/2 pl-2 relative">
-              <Field
-                className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
-                type="date"
-                name={`experiencias[${index}].FechaFinal`}
-                placeholder="Fecha de finalización"
-                value={experiencia.FechaFinal}
-                onChange={(e) => handleExperienceChange(index, 'FechaFinal', e.target.value)}
+                      </div>
+                      <IoIosArrowDown className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
+                    </button>
+                  <div className='w-full  p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex justify-center  shadow-register-field text-gray-400'>
+                      <button type='button' onClick={()=> handleActually(index)} className={`${actually ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `}></button>
+                      <label className=" w-full text-gray-700 ">Actualmente trabajo aquí</label>
+                  </div>
 
-                disabled={experiencia.actualmente === 'Si'}
-              />
-         
-              <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].FechaFinal`} component="div" />
-            </div>
+                    </div>
+              )
+            }
+            {
+              active && (
+                <div className='w-full flex space-x-4'>
+                  <div className='w-1/2 space-y-2'>
+                    <button type='button' onClick={handleActive} className='w-full relative items-start justify-between'>
+                      <div className="w-full space-x-4 p-2 border border-[#D9D9D9] rounded-[34px] flex  shadow-register-field text-gray-400">
+                      <label >Tiempo</label>
+                      <label >Desde</label>
+                      <label > {'   /    '}   </label>
+                      <label >Hasta</label>
+
+                      </div>
+                      <IoIosArrowUp className='absolute right-2 top-1/3 text-gray-400 w-[13px] h-[15px]' />
+                    </button>
+                <div className='flex space-x-4'>
+                  <div className="w-1/2  relative">
+                    <Field
+                      className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
+                      type="date"
+                      name={`experiencias[${index}].Fechainicio`}
+                      value={experiencia.Fechainicio}
+                      onChange={(e) => handleExperienceChange(index, 'Fechainicio', e.target.value)}
+                
+                    />
+                    <ErrorMessage className="text-red-500 text-sm m-4" name={`experiencias[${index}].Fechainicio`} component="div" />
+
+                  </div>
+                  <div className="w-1/2 relative">
+                    <Field
+                      className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'
+                      type="date"
+                      name={`experiencias[${index}].FechaFinal`}
+                      placeholder="Fecha de finalización"
+                      value={experiencia.FechaFinal}
+                      onChange={(e) => handleExperienceChange(index, 'FechaFinal', e.target.value)}
+
+                      disabled={experiencia.actualmente === 'Si'}
+                    />
+              
+                    <ErrorMessage className="text-red-500 text-sm" name={`experiencias[${index}].FechaFinal`} component="div" />
+                  </div>
+                  </div>
+                  </div>
+
+                  <div className='w-1/2 h-1/2 p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex justify-center  shadow-register-field text-gray-400'>
+                        <button type='button' onClick={()=> handleActually(index)} className={`${actually ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `}></button>
+                        <label className=" w-full text-gray-700 ">Actualmente trabajo aquí</label>
+                  </div>
+                </div>
+              )
+            }
+
+
        
-            <div className='w-full h-1/2 p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex justify-center  shadow-register-field text-gray-400'>
-                <button type='button' onClick={()=> handleActually(index)} className={`${actually ? 'bg-blue-40' : 'bg-white'}  border border-black border-opacity-50   rounded-[50%] w-[25px] h-[25px] ml-4 `}></button>
-                <label className=" w-full text-gray-700 ">Actualmente trabajo aquí</label>
 
-          </div>
           </div>
 
         <div className='flex flex-col items-center w-full '>
@@ -204,19 +256,19 @@ const ProfesionalInfo =({ setFieldValue }) => {
             {experiencias.map((experiencia,index) => experiencia.closed && (
         <div key={index} className="mb-6 border p-4 rounded-[14px] flex justify-between items-center bg-[rgba(64,123,255,0.07)] space-x-4 ">
           <div className='w-1/4 bg-[rgba(64,123,255,0.08)] rounded-[54px] p-4 flex items-center justify-around'>  
-          <p>Empresa</p>
+          <p className='text-gray-400'>Empresa</p>
           <p>{experiencia.lugar}</p>
           </div>
           <div className='w-1/4 bg-[rgba(64,123,255,0.08)] rounded-[54px] p-4 flex items-center justify-around'>  
-          <p>Cargo</p>
+          <p className='text-gray-400'>Cargo</p>
           <p>{experiencia.cargo}</p>
           </div>
           <div className='w-1/4 bg-[rgba(64,123,255,0.08)] rounded-[54px] p-4 flex items-center justify-around'>  
-          <p>Fecha de inicio</p>
+          <p className='text-gray-400'>Fecha de inicio</p>
           <p>{experiencia.Fechainicio}</p>
           </div>
           <div className='w-1/4 bg-[rgba(64,123,255,0.08)] rounded-[54px] p-4 flex items-center justify-around'>  
-          <p>Fecha Final</p>
+          <p className='text-gray-400'>Fecha Final</p>
           <p>{experiencia.actualmente === 'No' ? experiencia.FechaFinal  : 'Trabajo actual' }</p>
           </div>
           <div className='flex flex-col space-y-2'>
@@ -230,7 +282,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
 
 
     </div>
-    </>
+    </div>
 )
 }
 export default ProfesionalInfo;
