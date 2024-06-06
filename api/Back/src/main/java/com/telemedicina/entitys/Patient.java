@@ -27,8 +27,5 @@ public class Patient {
     private String chronic_diseases;
 
     @JoinColumn
-    private int id_social_work;
-
-    @JoinColumn
     private int id_user;
 }
