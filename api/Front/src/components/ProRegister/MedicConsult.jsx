@@ -153,6 +153,8 @@ const MedicConsultInfo = ({ setFieldValue }) => {
                     <span className="ml-2 text-black">Consulta presencial</span>
                   </label>
                 </div>
+              <ErrorMessage className="text-red-500 text-sm" name={`consults[${index}].tipoConsulta`} component="div" />
+
                   </div>
         )}
         <div className='w-1/2 flex relative flex-col '>
@@ -174,7 +176,7 @@ const MedicConsultInfo = ({ setFieldValue }) => {
             <div className="mt-2">
               <Field  className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field'
                name={`consult[${index}].costoConsultaVirtual`} value={consult.costoConsultaVirtual} onChange={(e) => handleConsultChange(index, 'costoConsultaVirtual', e.target.value)} placeholder="Costo de la consulta virtual" />
-              <ErrorMessage className="text-red-500 text-sm" name="costoConsultaVirtual" component="div" />
+              <ErrorMessage className="text-red-500 text-sm" name={`consult[${index}].costoConsultaVirtual`} component="div" />
             </div>
           )}
   
@@ -182,13 +184,13 @@ const MedicConsultInfo = ({ setFieldValue }) => {
             <div className="mt-2">
               <Field  className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field'
                 name={`consult[${index}].costoConsultaPresencial`} value={consult.costoConsultaPresencial} onChange={(e) => handleConsultChange(index, 'costoConsultaPresencial', e.target.value)}  placeholder="Costo de la consulta presencial" />
-              <ErrorMessage className="text-red-500 text-sm" name="costoConsultaPresencial" component="div" />
+              <ErrorMessage className="text-red-500 text-sm" name={`consult[${index}].costoConsultaPresencial`} component="div" />
             </div>
           )}
   
           { active2 && consult.tipoConsulta === '' && (
             <div className="mt-2">
-              <ErrorMessage className="text-red-500 text-sm" name="tipoConsulta" component="div" />
+              <ErrorMessage className="text-red-500 text-sm" name={`consults[${index}].tipoConsulta`} component="div" />
             </div>
           )  }
         </div>
@@ -346,7 +348,7 @@ const MedicConsultInfo = ({ setFieldValue }) => {
                     </div>
                   </div>
                 )}
-                    <ErrorMessage className="text-red-500 text-sm" name="obraSocial" component="div" />
+                    <ErrorMessage className="text-red-500 text-sm" name={`consults[${index}].obraSocial`} component="div" />
 
               </div>
               <div className="mb-2  ml-3">
@@ -357,11 +359,11 @@ const MedicConsultInfo = ({ setFieldValue }) => {
                 {consult.metodoCobro && consult.metodoCobro.includes('transferencia') && (
                   <>
                     <Field className="w-full px-3 py-2 border rounded mt-2" name={`consult[${index}].numeroCuenta`} onChange={(e) => handleConsultChange(index, 'numeroCuenta', e.target.value)} placeholder="Número de cuenta" />
-                    <ErrorMessage className="text-red-500 text-sm" name="numeroCuenta" component="div" />
+                    <ErrorMessage className="text-red-500 text-sm" name={`consults[${index}].numeroCuenta`} component="div" />
                     <Field className="w-full px-3 py-2 border rounded mt-2" name={`consult[${index}].nombreTitular`} onChange={(e) => handleConsultChange(index, 'nombreTitular', e.target.value)} placeholder="Nombre del titular de la cuenta" />
-                    <ErrorMessage className="text-red-500 text-sm" name="nombreTitular" component="div" />
+                    <ErrorMessage className="text-red-500 text-sm" name={`consults[${index}].nombreTitular`} component="div" />
                     <Field className="w-full px-3 py-2 border rounded mt-2" name={`consult[${index}].cvuAlias`} onChange={(e) => handleConsultChange(index, 'cvuAlias', e.target.value)} placeholder="CVU o alias" />
-                    <ErrorMessage className="text-red-500 text-sm" name="cvuAlias" component="div" />
+                    <ErrorMessage className="text-red-500 text-sm" name={`consults[${index}].cvuAlias`} component="div" />
                   </>
                 )}
               </div>
@@ -394,7 +396,7 @@ const MedicConsultInfo = ({ setFieldValue }) => {
             </div>
           )
         }
-        <ErrorMessage className="text-red-500 text-sm" name="metodoCobro" component="div" />
+        <ErrorMessage className="text-red-500 text-sm" name={`consult[${index}].metodoCobro`} component="div" />
       </div>
       </div>
       <div className='space-x-4 w-full flex  justify-end'>

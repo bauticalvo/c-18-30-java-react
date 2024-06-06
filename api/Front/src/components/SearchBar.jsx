@@ -37,11 +37,11 @@ const SearchBar = () => {
             <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
         </button>
     </div>
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center border p-2 rounded-[40px]">
         <select
             value={specialty}
             onChange={e => setSpecialty(e.target.value)}
-            className="border p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className=" p-2 rounded-l-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
             <option value="">Selecciona una especialidad</option>
             {specialties.map((spec, index) => (
@@ -51,7 +51,7 @@ const SearchBar = () => {
         <select
             value={city}
             onChange={e => setCity(e.target.value)}
-            className="border p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className=" p-2 rounded-r-[40px]  focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
             <option value="">Selecciona una ciudad</option>
             {cities.map((city, index) => (
@@ -60,9 +60,9 @@ const SearchBar = () => {
         </select>
         <button
             onClick={handleSearch}
-            className="border p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border p-2 bg-green-sec text-black rounded-[50%] hover:bg-[#abc545]  focus:outline-none focus:ring-2 focus:ring-[#abc545]"
         >
-            Buscar
+            <IoSearch/>
         </button>
     </div>
 </nav>

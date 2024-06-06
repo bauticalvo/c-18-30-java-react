@@ -68,7 +68,7 @@ const SignupSchema = Yup.object().shape({
             return actualmente === 'No' ? value != null : true;
           })
           .test('is-after-start-date', 'La fecha de finalización debe ser posterior a la fecha de inicio', function(value) {
-            const { Fechainicio, actualmente } = this.parent;
+            const { Fechainicio, actualmente } = this.parent; 
             if (actualmente === 'Si') {
               return true;
             }

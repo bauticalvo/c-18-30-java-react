@@ -203,7 +203,7 @@ const PersonalInfo = ({ setFieldValue }) => {
             <ErrorMessage name="localidad" component="div" className="text-red-600 text-sm" />
           </div>
           <div className="w-1/3">
-            <Field name="domicilio" className="w-full p-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" placeholder='Domicilio' />
+            <Field name="domicilio" className="w-full p-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" placeholder='Domicilio del consultorio' />
             <ErrorMessage name="domicilio" component="div" className="text-red-600 text-sm" />
           </div>
         </div>
