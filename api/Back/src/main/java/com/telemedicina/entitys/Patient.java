@@ -25,6 +25,8 @@ public class Patient {
     private int factor;
     private String alergic;
     private String chronic_diseases;
+    private String medicines;
+    private String familyHistoryOfDiseases;
 
     @JoinColumn
     private int id_user;
