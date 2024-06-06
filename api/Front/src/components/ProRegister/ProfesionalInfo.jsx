@@ -231,19 +231,13 @@ const ProfesionalInfo =({ setFieldValue }) => {
 
           </div>
 
-        <div className='flex flex-col items-center w-full '>
+        <div className='flex flex-col items-end w-full  '>
   
           <div >
+
           <button
             type="button"
-            className="mt-4 px-4 py-2 bg-red-600 text-white rounded"
-            onClick={() => handleExperienceRemove(index)}
-          >
-            Eliminar Experiencia
-          </button>
-          <button
-            type="button"
-            className="mt-4 ml-4 px-4 py-2 bg-blue-400 text-white rounded"
+            className="mt-4 ml-4 px-4 py-2 bg-gray-300 text-white rounded-[30px]"
             onClick={(e) => handleExperienceChange(index, 'closed', true)}
           >
             Guardar Experiencia

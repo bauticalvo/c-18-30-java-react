@@ -19,7 +19,8 @@ export default {
         'custom-gray': 'rgba(217, 217, 217, 0.17)',
         'border-gray-custom': 'rgba(223, 223, 223, 0.5)',
         'black-60': 'rgba(0, 0, 0, 0.6)',
-        'blue-40': '#407BFF'
+        'blue-40': '#407BFF',
+        'green-sec': 'rgba(221, 252, 92, 1)'
       },
       boxShadow: {
         'custom-shadow': '4px 5px 5.2px 0px #00000014',

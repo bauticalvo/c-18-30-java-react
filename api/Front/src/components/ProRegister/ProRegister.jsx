@@ -79,7 +79,7 @@ const SignupSchema = Yup.object().shape({
     ).max(3, 'Solo se pueden añadir hasta 3 experiencias laborales'),
     
     //MedicConsult
-    consult:  Yup.array().of(
+    consults:  Yup.array().of(
       Yup.object().shape({
         
         tipoConsulta: Yup.string().required('Selecciona un tipo de consulta').strict(),
@@ -207,26 +207,7 @@ const ProRegister = () => {
           egreso: '',
           especialidadType: '',
           experiencias: [],
-          //cargo: '',
-         // lugar: '',
-          //Fechainicio: '',
-          //FechaFinal: '',
-          //actualmente: '',
-          tipoConsulta: '',
-          days: [],
-          startHour: '',
-          finishHour: '',
-          costoConsultaVirtual: '',
-          costoConsultaPresencial: '',
-          consultaDuracion: '',
-          tipoPacientes: [],
-          metodoCobro: [],
-          obraSocial: [],
-          numeroCuenta: '',
-          nombreTitular: '',
-          cvuAlias: '',
-          efectivo: [],
-          consult:[],
+          consults:[],
           consentimiento: false,
 
         }}
@@ -258,25 +239,19 @@ const ProRegister = () => {
               {step < 3 ? (
                 <button
                   type="button"
-                  className="px-4 py-2 bg-[#407BFF] rounded-[4px] text-white"
+                  className="px-4 py-2 bg-[#407BFF] rounded-[30px] text-white"
                   onClick={handleNext}
                 >
                   Continuar
                 </button>
               ) : (<>                <button
                   type="submit"
-                  className="px-10 py-2 bg-[#407BFF] rounded-[4px] text-white "
+                  className="px-10 py-2 bg-[#407BFF] rounded-[30px] text-white "
                   onClick={handleSubmit}
                 >
                   Enviar
                 </button>
-                                  <button
-                                  type="button"
-                                  className="px-10 py-2 bg-[#407BFF] rounded-[4px] text-white "
-                                  onClick={()=> console.log(values)}
-                                >
-                                  mandar
-                            </button></>
+ </>
               )}
             </div>
           </Form>

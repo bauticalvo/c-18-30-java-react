@@ -30,13 +30,13 @@ const Step = ({ number, active, setStep }) => {
   const isUserRegister = location.pathname === '/UserRegister';
   return (
     <div>
-    <div className={`relative  border  rounded-[4px] mx-48  w-12 h-12 flex justify-center items-center text-2xl font-bold ${active ? 'bg-blue-40 border border-black text-white' : 'bg-[#CFD2DC] border-[#CFD2DC] text-white'}`}>
+    <div className={`relative  border  rounded-[4px] mx-48  w-12 h-12 flex justify-center items-center text-2xl font-bold ${active ? 'bg-green-sec text-black border border-black ' : 'bg-[#CFD2DC] border-[#CFD2DC] text-white'}`}>
       <button onClick={() => setStep(number)} className="w-full h-full flex justify-center items-center focus:outline-none">
         {number}
       </button>
 
-      { number > 1 && isProfessionalRegister &&  <span className={`absolute right-full top-1/2 transform  w-96 h-1 ${active  ? 'bg-blue-40 ' : 'bg-[#CFD2DC]'}`}></span>}
-      {number < 2 &&isUserRegister && <span className={`absolute left-full top-1/2 transform  -translate-y-1/2 w-96 h-1 ${active ? 'bg-[#CFD2DC]' : 'bg-blue-40'}`}></span>}
+      { number > 1 && isProfessionalRegister &&  <span className={`absolute right-full top-1/2 transform  w-96 h-1 ${active  ? 'bg-green-sec text-black ' : 'bg-[#CFD2DC]'}`}></span>}
+      {number < 2 &&isUserRegister && <span className={`absolute left-full top-1/2 transform  -translate-y-1/2 w-96 h-1 ${active ? 'bg-[#CFD2DC]' : 'bg-green-sec text-black'}`}></span>}
     </div>
     <div className='flex justify-around'>
     {number === 1 &&isUserRegister &&   <h1 className={`text-xl font-normal font-sans2 ${active ? 'text-black' : 'text-black-60'} `}>Datos Personales</h1>}
