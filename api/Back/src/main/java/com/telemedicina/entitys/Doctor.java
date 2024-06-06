@@ -32,8 +32,5 @@ public class Doctor {
     private byte[] profilePicture; //picture
 
     @JoinColumn
-    private int id_social_work;
-
-    @JoinColumn
     private int id_user;
 }
