@@ -6,8 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,25 +31,19 @@ public class User implements UserDetails {
     private String lastname;
     @NotNull
     private int DNI;
-
     private String mail;
     private Date birthdate;
     private String gender;
+
     private String username;
     private String password;
-    private int phone;
 
-    @ManyToOne
-    @JoinColumn(name = "id_country", referencedColumnName = "id_country")
-    private Country country;
+    private String phone;
+    private String area_code;
 
-    @ManyToOne
-    @JoinColumn(name = "id_province", referencedColumnName = "id_province")
-    private Province province;
-
-    @ManyToOne
-    @JoinColumn(name = "id_deparment", referencedColumnName = "id_deparment")
-    private Deparment deparment;
+    private String countryName;
+    private String provinceName;
+    private String location;
 
     @Override
     public boolean isAccountNonExpired() {

@@ -31,6 +31,4 @@ public class Patient {
 
     @JoinColumn
     private int id_user;
-
-
 }

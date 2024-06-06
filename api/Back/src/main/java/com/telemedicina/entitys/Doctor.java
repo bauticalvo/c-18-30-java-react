@@ -18,18 +18,21 @@ public class Doctor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_doctor;
     private int tuition;
-    private String certification;
+    @Lob
+    @Column (columnDefinition = "BLOB")
+    private byte[] certification; //picture
     private int year_experience;
     private String specialty;
     private String university;
-    private Date dateOfEntry;
     private Date dateOfGraduation;
+    private String officeAddress;
+    private String officeProvince;
+    @Lob
+    @Column (columnDefinition = "BLOB")
+    private byte[] profilePicture; //picture
 
     @JoinColumn
     private int id_social_work;
-
-    @JoinColumn
-    private int id_consultation_room;
 
     @JoinColumn
     private int id_user;

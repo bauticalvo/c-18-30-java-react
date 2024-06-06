@@ -18,6 +18,7 @@ public class DoctorConsultationData {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id_consultation_data;
+
     private String days;
     private double cost;
     private boolean mode;
@@ -26,6 +27,9 @@ public class DoctorConsultationData {
     private ZonedDateTime until;
     private String pay_method;
     private String especiality;
+    private String socialWork;
+    private TransferData transferData;
+    private String cash;
 
     @JoinColumn
     private int id_doctor;
