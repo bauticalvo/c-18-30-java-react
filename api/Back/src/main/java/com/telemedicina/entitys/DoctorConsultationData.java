@@ -9,14 +9,15 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Entity
-@Table (name = "doctor_consultation_data")
+@Table(name = "doctor_consultation_data")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 
 public class DoctorConsultationData {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_consultation_data;
 
     private String days;
@@ -28,9 +29,10 @@ public class DoctorConsultationData {
     private String pay_method;
     private String especiality;
     private String socialWork;
-    private TransferData transferData;
     private String cash;
-
+    private String accountNumber;
+    private String accountName;
+    private String CVU;
     @JoinColumn
     private int id_doctor;
 }
