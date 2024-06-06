@@ -44,21 +44,13 @@ public class AuthService {
     }
 
     public Patient registerPatient (Patient patient, Integer id_user){
-        Patient patient_db = patientRepository.findByIdPatient(id_user);
-        if(patient_db != null) {
-            patient.setId_user(id_user);
-            return patientRepository.save(patient);
-        }
-        return null;
+        patient.setId_user(id_user);
+        return patientRepository.save(patient);
     }
 
-    public Doctor registerDoctor (Doctor doctor, Integer id_user){
-        Doctor doctor_db = doctorRepository.findById_doctor(id_user);
-        if (doctor_db != null){
-            doctor_db.setId_user(id_user);
-            return doctorRepository.save(doctor);
-        }
-        return null;
+    public Doctor registerDoctor(Doctor doctor, Integer id_user) {
+        doctor.setId_user(id_user);
+        return doctorRepository.save(doctor);
     }
 
     public AuthResponse loginUser (LoginRequest loginRequest){

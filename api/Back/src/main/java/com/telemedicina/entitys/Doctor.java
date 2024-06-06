@@ -21,7 +21,6 @@ public class Doctor {
     private String certification;
     private int year_experience;
     private String specialty;
-    private String field;
     private String university;
     private Date dateOfEntry;
     private Date dateOfGraduation;

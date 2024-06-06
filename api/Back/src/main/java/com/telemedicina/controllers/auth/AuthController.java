@@ -23,22 +23,21 @@ public class AuthController {
     AuthService authService;
 
     @PostMapping("/register/doctor")
-    public ResponseEntity<Doctor> registerDoctor (@RequestBody Doctor doctor, @RequestParam Integer id_user){
-        if (doctor != null){
-            Doctor newDoctor = authService.registerDoctor (doctor, id_user);
-            if (newDoctor!= null)
+    public ResponseEntity<Doctor> registerDoctor(@RequestBody Doctor doctor) {
+        if (doctor != null) {
+            Doctor newDoctor = authService.registerDoctor(doctor, doctor.getId_user());
+            if (newDoctor != null)
                 return ResponseEntity.ok(newDoctor);
             else
                 return ResponseEntity.notFound().build();
-
         }
         return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/register/patient")
-    public ResponseEntity<Patient> registerPatient (@RequestBody Patient patient, @RequestParam Integer id_user){
+    public ResponseEntity<Patient> registerPatient (@RequestBody Patient patient){
         if (patient != null) {
-            Patient newPatient = authService.registerPatient(patient, id_user);
+            Patient newPatient = authService.registerPatient(patient, patient.getId_user());
             if (newPatient != null)
                 return ResponseEntity.ok(newPatient);
             else
