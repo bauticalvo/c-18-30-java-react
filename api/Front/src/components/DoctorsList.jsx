@@ -7,7 +7,7 @@ const DoctorsList = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const specialtyFilter = queryParams.get('specialty') || '';
-    const cityFilter = queryParams.get('city') || '';
+    const cityFilter = queryParams.get('officeProvince') || '';
 
     useEffect(() => {
         fetch('/doctors.json')
@@ -19,7 +19,7 @@ const DoctorsList = () => {
     const filteredDoctors = doctors.filter(doctor => {
         return (
             (specialtyFilter === '' || doctor.specialty.toLowerCase().includes(specialtyFilter.toLowerCase())) &&
-            (cityFilter === '' || doctor.city.toLowerCase().includes(cityFilter.toLowerCase()))
+            (cityFilter === '' || doctor.officeProvince.toLowerCase().includes(cityFilter.toLowerCase()))
         );
     });
 

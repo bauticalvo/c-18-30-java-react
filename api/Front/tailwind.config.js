@@ -27,6 +27,7 @@ export default {
         'custom-shadow-strong': '8px 8px 13.9px 0px #00000014',
         'register-field': '0px 2px 3.8px 0px #0000001C',
         'login-div': '15px 15px 20px 0px #407BFF99',
+        'doctor-photo': '8px 8px 13.9px 0px rgba(0, 0, 0, 0.08)'
       }
     },
   },
