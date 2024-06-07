@@ -29,10 +29,12 @@ public class DoctorController {
 
     @GetMapping("/mode")
     public ResponseEntity<List<DoctorWithUserDetails>> getDoctorsByMode (@RequestParam boolean mode){
+        System.out.println("Valor de mode recibido: " + mode);
         List<DoctorWithUserDetails> doctors = doctorService.getDoctorsByMode(mode);
+        System.out.println("Doctorcontroller: " + doctors);
         if (doctors.isEmpty())
             return ResponseEntity.noContent().build();
-        return null;
+        return ResponseEntity.ok(doctors);
     }
 
     @GetMapping("/cost")
