@@ -10,6 +10,7 @@ import com.telemedicina.repositorys.DoctorRepository;
 import com.telemedicina.repositorys.PatientRepository;
 import com.telemedicina.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,12 +36,17 @@ public class AuthService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
     public AuthResponse registerUser (User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return AuthResponse.builder()
-                .token(jwtService.getToken(user))
-                .build();
+        try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return AuthResponse.builder()
+                    .token(jwtService.getToken(user))
+                    .build();
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("Username already exists");
+        }
     }
 
     public Patient registerPatient (Patient patient, Integer id_user){
@@ -61,5 +67,4 @@ public class AuthService {
                 .token(token)
                 .build();
     }
-
 }

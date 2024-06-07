@@ -2,11 +2,8 @@ package com.telemedicina.entitys;
 
 import java.util.Collection;
 import java.util.Date;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,14 +32,15 @@ public class User implements UserDetails {
     private Date birthdate;
     private String gender;
 
+    @Column(unique = true)
     private String username;
     private String password;
 
     private String phone;
     private String area_code;
 
-    private String countryName;
-    private String provinceName;
+    private String country_name;
+    private String province_name;
     private String location;
 
     @Override

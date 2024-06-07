@@ -24,12 +24,12 @@ public class Doctor {
     private int year_experience;
     private String specialty;
     private String university;
-    private Date dateOfGraduation;
-    private String officeAddress;
-    private String officeProvince;
+    private Date date_of_graduation;
+    private String office_address;
+    private String office_province;
     @Lob
     @Column (columnDefinition = "BLOB")
-    private byte[] profilePicture; //picture
+    private byte[] profile_picture; //picture
 
     @JoinColumn
     private int id_user;
