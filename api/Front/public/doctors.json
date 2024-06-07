@@ -1,402 +1,775 @@
 [
     {
-        "name": "Dr. Cardio 1",
+        "id": 1,
+        "name": "Dr. Juan Pérez",
         "specialty": "Cardiólogo",
         "city": "Buenos Aires",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/1.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 123, Buenos Aires",
-        "consultationCost": "ARS 2500"
+        "reviews": 124,
+        "address": "Av. Siempre Viva 742, Buenos Aires",
+        "consultationCost": "ARS 2500",
+        "specialties": [
+            "Ecocardiografía",
+            "Cardiología Intervencionista",
+            "Electrofisiología"
+        ],
+        "licenseNumber": "1234567 8901234"
     },
     {
-        "name": "Dr. Cardio 2",
+        "id": 2,
+        "name": "Dra. María García",
         "specialty": "Cardiólogo",
         "city": "Córdoba",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/2.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 456, Córdoba",
-        "consultationCost": "ARS 3000"
+        "reviews": 89,
+        "address": "Calle Mayor 123, Córdoba",
+        "consultationCost": "ARS 3000",
+        "specialties": [
+            "Ecocardiografía",
+            "Rehabilitación Cardíaca",
+            "Cardiología Clínica"
+        ],
+        "licenseNumber": "2234567 9901234"
     },
     {
-        "name": "Dr. Cardio 3",
+        "id": 3,
+        "name": "Dr. Pedro López",
         "specialty": "Cardiólogo",
         "city": "Rosario",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/3.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 789, Rosario",
-        "consultationCost": "ARS 2700"
+        "reviews": 134,
+        "address": "Plaza Central 456, Rosario",
+        "consultationCost": "ARS 2700",
+        "specialties": [
+            "Cardiología Pediátrica",
+            "Cardiología Intervencionista",
+            "Arritmias"
+        ],
+        "licenseNumber": "3234567 1901234"
     },
     {
-        "name": "Dr. Cardio 4",
+        "id": 4,
+        "name": "Dra. Ana Martínez",
         "specialty": "Cardiólogo",
         "city": "Mendoza",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/4.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 101, Mendoza",
-        "consultationCost": "ARS 2200"
+        "reviews": 76,
+        "address": "Paseo del Prado 789, Mendoza",
+        "consultationCost": "ARS 2200",
+        "specialties": [
+            "Cardiopatías Congénitas",
+            "Ecocardiografía",
+            "Cardiología Clínica"
+        ],
+        "licenseNumber": "4234567 2901234"
     },
     {
-        "name": "Dr. Cardio 5",
+        "id": 5,
+        "name": "Dr. José González",
         "specialty": "Cardiólogo",
         "city": "La Plata",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/5.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 102, La Plata",
-        "consultationCost": "ARS 2600"
+        "reviews": 91,
+        "address": "Calle de la Libertad 101, La Plata",
+        "consultationCost": "ARS 2600",
+        "specialties": [
+            "Cardiología Nuclear",
+            "Cardiología Preventiva",
+            "Arritmias"
+        ],
+        "licenseNumber": "5234567 3901234"
     },
     {
-        "name": "Dr. Neumo 1",
+        "id": 6,
+        "name": "Dra. Laura Rodríguez",
         "specialty": "Neumólogo",
         "city": "Salta",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/6.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 103, Salta",
-        "consultationCost": "ARS 2000"
+        "reviews": 83,
+        "address": "Av. del Sol 102, Salta",
+        "consultationCost": "ARS 2000",
+        "specialties": [
+            "Neumología Pediátrica",
+            "Alergología",
+            "Neumología Intervencionista"
+        ],
+        "licenseNumber": "6234567 4901234"
     },
     {
-        "name": "Dr. Neumo 2",
+        "id": 7,
+        "name": "Dr. Carlos Hernández",
         "specialty": "Neumólogo",
         "city": "Santa Fe",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/7.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 104, Santa Fe",
-        "consultationCost": "ARS 2800"
+        "reviews": 97,
+        "address": "Camino Real 103, Santa Fe",
+        "consultationCost": "ARS 2800",
+        "specialties": [
+            "Enfermedades Pulmonares",
+            "Cuidado Crítico Respiratorio",
+            "Neumología Clínica"
+        ],
+        "licenseNumber": "7234567 5901234"
     },
     {
-        "name": "Dr. Neumo 3",
+        "id": 8,
+        "name": "Dra. Isabel Fernández",
         "specialty": "Neumólogo",
         "city": "Tucumán",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/8.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 105, Tucumán",
-        "consultationCost": "ARS 2300"
+        "reviews": 65,
+        "address": "Calle del Parque 104, Tucumán",
+        "consultationCost": "ARS 2300",
+        "specialties": [
+            "Neumología Pediátrica",
+            "Enfermedades Pulmonares",
+            "Neumología Intervencionista"
+        ],
+        "licenseNumber": "8234567 6901234"
     },
     {
-        "name": "Dr. Neumo 4",
+        "id": 9,
+        "name": "Dr. David Ruiz",
         "specialty": "Neumólogo",
         "city": "Mar del Plata",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/9.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 106, Mar del Plata",
-        "consultationCost": "ARS 2700"
+        "reviews": 104,
+        "address": "Av. de la Paz 105, Mar del Plata",
+        "consultationCost": "ARS 2700",
+        "specialties": [
+            "Alergología",
+            "Cuidado Crítico Respiratorio",
+            "Neumología Clínica"
+        ],
+        "licenseNumber": "9234567 7901234"
     },
     {
-        "name": "Dr. Neumo 5",
+        "id": 10,
+        "name": "Dra. Carmen Díaz",
         "specialty": "Neumólogo",
         "city": "Bahía Blanca",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/10.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 107, Bahía Blanca",
-        "consultationCost": "ARS 2200"
+        "reviews": 73,
+        "address": "Calle del Mar 106, Bahía Blanca",
+        "consultationCost": "ARS 2200",
+        "specialties": [
+            "Neumología Intervencionista",
+            "Enfermedades Pulmonares",
+            "Neumología Clínica"
+        ],
+        "licenseNumber": "10234567 8901234"
     },
     {
-        "name": "Dr. Psico 1",
+        "id": 11,
+        "name": "Dr. Juan Pérez",
         "specialty": "Psicólogo",
         "city": "Buenos Aires",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/11.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 108, Buenos Aires",
-        "consultationCost": "ARS 2400"
+        "reviews": 111,
+        "address": "Av. Siempre Viva 742, Buenos Aires",
+        "consultationCost": "ARS 2400",
+        "specialties": [
+            "Terapia Cognitivo-Conductual",
+            "Psicología Infantil",
+            "Psicoterapia"
+        ],
+        "licenseNumber": "11234567 9901234"
     },
     {
-        "name": "Dr. Psico 2",
+        "id": 12,
+        "name": "Dra. María García",
         "specialty": "Psicólogo",
         "city": "Córdoba",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/12.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 109, Córdoba",
-        "consultationCost": "ARS 2300"
+        "reviews": 89,
+        "address": "Calle Mayor 123, Córdoba",
+        "consultationCost": "ARS 2300",
+        "specialties": [
+            "Psicología Clínica",
+            "Psicología de la Salud",
+            "Terapia de Pareja"
+        ],
+        "licenseNumber": "12234567 0901234"
     },
     {
-        "name": "Dr. Psico 3",
+        "id": 13,
+        "name": "Dr. Pedro López",
         "specialty": "Psicólogo",
         "city": "Rosario",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/13.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 110, Rosario",
-        "consultationCost": "ARS 2500"
+        "reviews": 117,
+        "address": "Plaza Central 456, Rosario",
+        "consultationCost": "ARS 2500",
+        "specialties": [
+            "Psicoterapia",
+            "Psicología de la Salud",
+            "Psicología Infantil"
+        ],
+        "licenseNumber": "13234567 1901234"
     },
     {
-        "name": "Dr. Psico 4",
+        "id": 14,
+        "name": "Dra. Ana Martínez",
         "specialty": "Psicólogo",
         "city": "Mendoza",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/14.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 111, Mendoza",
-        "consultationCost": "ARS 2200"
+        "reviews": 64,
+        "address": "Paseo del Prado 789, Mendoza",
+        "consultationCost": "ARS 2200",
+        "specialties": [
+            "Psicología Clínica",
+            "Terapia Cognitivo-Conductual",
+            "Psicoterapia"
+        ],
+        "licenseNumber": "14234567 2901234"
     },
     {
-        "name": "Dr. Psico 5",
+        "id": 15,
+        "name": "Dr. José González",
         "specialty": "Psicólogo",
         "city": "La Plata",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/15.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 112, La Plata",
-        "consultationCost": "ARS 2600"
+        "reviews": 89,
+        "address": "Calle de la Libertad 101, La Plata",
+        "consultationCost": "ARS 2600",
+        "specialties": [
+            "Psicología Infantil",
+            "Terapia de Pareja",
+            "Psicología de la Salud"
+        ],
+        "licenseNumber": "15234567 3901234"
     },
     {
-        "name": "Dr. Oftal 1",
-        "specialty": "Oftalmólogo",
+        "id": 16,
+        "name": "Dra. Laura Rodríguez",
+        "specialty": "Psiquiatra",
         "city": "Salta",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/16.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 113, Salta",
-        "consultationCost": "ARS 2000"
+        "reviews": 78,
+        "address": "Av. del Sol 102, Salta",
+        "consultationCost": "ARS 2300",
+        "specialties": [
+            "Psiquiatría Infantil",
+            "Trastornos de Ansiedad",
+            "Depresión"
+        ],
+        "licenseNumber": "16234567 4901234"
     },
     {
-        "name": "Dr. Oftal 2",
-        "specialty": "Oftalmólogo",
+        "id": 17,
+        "name": "Dr. Carlos Hernández",
+        "specialty": "Psiquiatra",
         "city": "Santa Fe",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/17.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 114, Santa Fe",
-        "consultationCost": "ARS 2800"
+        "reviews": 95,
+        "address": "Camino Real 103, Santa Fe",
+        "consultationCost": "ARS 2700",
+        "specialties": [
+            "Psiquiatría Forense",
+            "Trastorno Obsesivo-Compulsivo",
+            "Esquizofrenia"
+        ],
+        "licenseNumber": "17234567 5901234"
     },
     {
-        "name": "Dr. Oftal 3",
-        "specialty": "Oftalmólogo",
+        "id": 18,
+        "name": "Dra. Isabel Fernández",
+        "specialty": "Psiquiatra",
         "city": "Tucumán",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/18.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 115, Tucumán",
-        "consultationCost": "ARS 2300"
+        "reviews": 67,
+        "address": "Calle del Parque 104, Tucumán",
+        "consultationCost": "ARS 2500",
+        "specialties": [
+            "Psicofarmacología",
+            "Psiquiatría de Enlace",
+            "Trastornos del Sueño"
+        ],
+        "licenseNumber": "18234567 6901234"
     },
     {
-        "name": "Dr. Oftal 4",
-        "specialty": "Oftalmólogo",
+        "id": 19,
+        "name": "Dr. David Ruiz",
+        "specialty": "Psiquiatra",
         "city": "Mar del Plata",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/19.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 116, Mar del Plata",
-        "consultationCost": "ARS 2700"
+        "reviews": 103,
+        "address": "Av. de la Paz 105, Mar del Plata",
+        "consultationCost": "ARS 2800",
+        "specialties": [
+            "Psiquiatría Geriátrica",
+            "Trastornos del Estado de Ánimo",
+            "Adicciones"
+        ],
+        "licenseNumber": "19234567 7901234"
     },
     {
-        "name": "Dr. Oftal 5",
-        "specialty": "Oftalmólogo",
+        "id": 20,
+        "name": "Dra. Carmen Díaz",
+        "specialty": "Psiquiatra",
         "city": "Bahía Blanca",
         "destacado": false,
         "image": "https://randomuser.me/api/portraits/men/20.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 117, Bahía Blanca",
-        "consultationCost": "ARS 2200"
+        "reviews": 72,
+        "address": "Calle del Mar 106, Bahía Blanca",
+        "consultationCost": "ARS 2600",
+        "specialties": [
+            "Psicoterapia Psicodinámica",
+            "Trastornos de la Personalidad",
+            "Psicofarmacología"
+        ],
+        "licenseNumber": "20234567 8901234"
     },
     {
-        "name": "Dr. Endo 1",
-        "specialty": "Endocrinólogo",
+        "id": 21,
+        "name": "Dra. Ana Gómez",
+        "specialty": "Ginecólogo",
         "city": "Buenos Aires",
         "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/21.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 118, Buenos Aires",
-        "consultationCost": "ARS 2400"
+        "image": "https://randomuser.me/api/portraits/women/10.jpg",
+        "reviews": 128,
+        "address": "Av. Las Heras 234, Buenos Aires",
+        "consultationCost": "ARS 2700",
+        "specialties": [
+            "Obstetricia",
+            "Ginecología Oncológica",
+            "Salud Reproductiva"
+        ],
+        "licenseNumber": "21234567 4901234"
     },
     {
-        "name": "Dr. Endo 2",
-        "specialty": "Endocrinólogo",
-        "city": "Córdoba",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/22.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 119, Córdoba",
-        "consultationCost": "ARS 2300"
-    },
-    {
-        "name": "Dr. Endo 3",
-        "specialty": "Endocrinólogo",
+        "id": 22,
+        "name": "Dr. Juan Gutiérrez",
+        "specialty": "Ginecólogo",
         "city": "Rosario",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/23.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 120, Rosario",
-        "consultationCost": "ARS 2500"
+        "destacado": false,
+        "image": "https://randomuser.me/api/portraits/men/27.jpg",
+        "reviews": 78,
+        "address": "Calle Mitre 456, Rosario",
+        "consultationCost": "ARS 2300",
+        "specialties": [
+            "Endocrinología Ginecológica",
+            "Medicina Materno-Fetal",
+            "Ginecología Pediátrica"
+        ],
+        "licenseNumber": "22234567 5901234"
     },
     {
-        "name": "Dr. Endo 4",
-        "specialty": "Endocrinólogo",
+        "id": 23,
+        "name": "Dra. Carolina Martínez",
+        "specialty": "Ginecólogo",
+        "city": "Córdoba",
+        "destacado": true,
+        "image": "https://randomuser.me/api/portraits/women/11.jpg",
+        "reviews": 98,
+        "address": "Av. Olmos 789, Córdoba",
+        "consultationCost": "ARS 2500",
+        "specialties": [
+            "Oncología Ginecológica",
+            "Salud Reproductiva",
+            "Medicina Materno-Fetal"
+        ],
+        "licenseNumber": "23234567 6901234"
+    },
+    {
+        "id": 24,
+        "name": "Dra. Julieta Díaz",
+        "specialty": "Ginecólogo",
         "city": "Mendoza",
         "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/24.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 121, Mendoza",
-        "consultationCost": "ARS 2200"
+        "image": "https://randomuser.me/api/portraits/women/12.jpg",
+        "reviews": 66,
+        "address": "Calle San Martín 101, Mendoza",
+        "consultationCost": "ARS 2200",
+        "specialties": [
+            "Obstetricia",
+            "Ginecología Pediátrica",
+            "Endocrinología Ginecológica"
+        ],
+        "licenseNumber": "24234567 7901234"
     },
     {
-        "name": "Dr. Endo 5",
-        "specialty": "Endocrinólogo",
+        "id": 25,
+        "name": "Dra. Paula Rojas",
+        "specialty": "Ginecólogo",
         "city": "La Plata",
         "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/25.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 122, La Plata",
-        "consultationCost": "ARS 2600"
+        "image": "https://randomuser.me/api/portraits/women/13.jpg",
+        "reviews": 102,
+        "address": "Calle 12 102, La Plata",
+        "consultationCost": "ARS 2400",
+        "specialties": [
+            "Salud Reproductiva",
+            "Medicina Materno-Fetal",
+            "Oncología Ginecológica"
+        ],
+        "licenseNumber": "25234567 8901234"
     },
     {
-        "name": "Dr. Gastro 1",
-        "specialty": "Gastroenterólogo",
-        "city": "Salta",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/26.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 123, Salta",
-        "consultationCost": "ARS 2000"
-    },
-    {
-        "name": "Dr. Gastro 2",
-        "specialty": "Gastroenterólogo",
-        "city": "Santa Fe",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/27.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 124, Santa Fe",
-        "consultationCost": "ARS 2800"
-    },
-    {
-        "name": "Dr. Gastro 3",
-        "specialty": "Gastroenterólogo",
-        "city": "Tucumán",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/28.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 125, Tucumán",
-        "consultationCost": "ARS 2300"
-    },
-    {
-        "name": "Dr. Gastro 4",
-        "specialty": "Gastroenterólogo",
-        "city": "Mar del Plata",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/29.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 126, Mar del Plata",
-        "consultationCost": "ARS 2700"
-    },
-    {
-        "name": "Dr. Gastro 5",
-        "specialty": "Gastroenterólogo",
-        "city": "Bahía Blanca",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/30.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 127, Bahía Blanca",
-        "consultationCost": "ARS 2200"
-    },
-    {
-        "name": "Dr. Trauma 1",
+        "id": 26,
+        "name": "Dr. Roberto Sánchez",
         "specialty": "Traumatólogo",
         "city": "Buenos Aires",
         "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/31.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 128, Buenos Aires",
-        "consultationCost": "ARS 2400"
+        "image": "https://randomuser.me/api/portraits/men/28.jpg",
+        "reviews": 145,
+        "address": "Calle Corrientes 456, Buenos Aires",
+        "consultationCost": "ARS 3000",
+        "specialties": [
+            "Cirugía Ortopédica",
+            "Traumatología Deportiva",
+            "Rehabilitación"
+        ],
+        "licenseNumber": "26234567 9901234"
     },
     {
-        "name": "Dr. Trauma 2",
-        "specialty": "Traumatólogo",
-        "city": "Córdoba",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/32.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 129, Córdoba",
-        "consultationCost": "ARS 2300"
-    },
-    {
-        "name": "Dr. Trauma 3",
+        "id": 27,
+        "name": "Dr. Marcos López",
         "specialty": "Traumatólogo",
         "city": "Rosario",
+        "destacado": false,
+        "image": "https://randomuser.me/api/portraits/men/29.jpg",
+        "reviews": 88,
+        "address": "Calle Sarmiento 789, Rosario",
+        "consultationCost": "ARS 2500",
+        "specialties": [
+            "Cirugía de Columna",
+            "Traumatología Pediátrica",
+            "Rehabilitación"
+        ],
+        "licenseNumber": "27234567 0901234"
+    },
+    {
+        "id": 28,
+        "name": "Dr. Javier Martínez",
+        "specialty": "Traumatólogo",
+        "city": "Córdoba",
+        "destacado": true,
+        "image": "https://randomuser.me/api/portraits/men/30.jpg",
+        "reviews": 121,
+        "address": "Av. Belgrano 101, Córdoba",
+        "consultationCost": "ARS 2800",
+        "specialties": [
+            "Traumatología Deportiva",
+            "Cirugía Ortopédica",
+            "Rehabilitación"
+        ],
+        "licenseNumber": "28234567 1901234"
+    },
+    {
+        "id": 29,
+        "name": "Dr. Ignacio Romero",
+        "specialty": "Traumatólogo",
+        "city": "Mendoza",
+        "destacado": false,
+        "image": "https://randomuser.me/api/portraits/men/31.jpg",
+        "reviews": 79,
+        "address": "Calle Colón 102, Mendoza",
+        "consultationCost": "ARS 2400",
+        "specialties": [
+            "Cirugía de Columna",
+            "Traumatología Pediátrica",
+            "Rehabilitación"
+        ],
+        "licenseNumber": "29234567 2901234"
+    },
+    {
+        "id": 30,
+        "name": "Dr. Nicolás Fernández",
+        "specialty": "Traumatólogo",
+        "city": "La Plata",
+        "destacado": true,
+        "image": "https://randomuser.me/api/portraits/men/32.jpg",
+        "reviews": 94,
+        "address": "Calle 8 103, La Plata",
+        "consultationCost": "ARS 2700",
+        "specialties": [
+            "Traumatología Deportiva",
+            "Cirugía Ortopédica",
+            "Rehabilitación"
+        ],
+        "licenseNumber": "30234567 3901234"
+    },
+    {
+        "id": 31,
+        "name": "Dr. Sergio Martínez",
+        "specialty": "Gastroenterólogo",
+        "city": "Buenos Aires",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/33.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 130, Rosario",
-        "consultationCost": "ARS 2500"
+        "reviews": 112,
+        "address": "Av. Rivadavia 234, Buenos Aires",
+        "consultationCost": "ARS 3200",
+        "specialties": ["Endoscopia Digestiva", "Hepatología", "Gastroenterología Pediátrica"],
+        "licenseNumber": "31234567 4901234"
     },
     {
-        "name": "Dr. Trauma 4",
-        "specialty": "Traumatólogo",
+        "id": 32,
+        "name": "Dra. Silvia López",
+        "specialty": "Gastroenterólogo",
+        "city": "Rosario",
+        "destacado": false,
+        "image": "https://randomuser.me/api/portraits/women/14.jpg",
+        "reviews": 83,
+        "address": "Calle Córdoba 789, Rosario",
+        "consultationCost": "ARS 2800",
+        "specialties": ["Hepatología", "Gastroenterología Clínica", "Endoscopia Digestiva"],
+        "licenseNumber": "32234567 5901234"
+    },
+    {
+        "id": 33,
+        "name": "Dr. Gabriel García",
+        "specialty": "Gastroenterólogo",
+        "city": "Córdoba",
+        "destacado": true,
+        "image": "https://randomuser.me/api/portraits/men/34.jpg",
+        "reviews": 105,
+        "address": "Av. Vélez Sársfield 101, Córdoba",
+        "consultationCost": "ARS 3000",
+        "specialties": ["Gastroenterología Pediátrica", "Endoscopia Digestiva", "Hepatología"],
+        "licenseNumber": "33234567 6901234"
+    },
+    {
+        "id": 34,
+        "name": "Dr. Federico Ruiz",
+        "specialty": "Gastroenterólogo",
         "city": "Mendoza",
         "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/34.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 131, Mendoza",
-        "consultationCost": "ARS 2200"
+        "image": "https://randomuser.me/api/portraits/men/35.jpg",
+        "reviews": 72,
+        "address": "Calle Arístides 102, Mendoza",
+        "consultationCost": "ARS 2700",
+        "specialties": ["Endoscopia Digestiva", "Gastroenterología Clínica", "Hepatología"],
+        "licenseNumber": "34234567 7901234"
     },
     {
-        "name": "Dr. Trauma 5",
-        "specialty": "Traumatólogo",
+        "id": 35,
+        "name": "Dra. Natalia Herrera",
+        "specialty": "Gastroenterólogo",
         "city": "La Plata",
         "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/35.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 132, La Plata",
-        "consultationCost": "ARS 2600"
+        "image": "https://randomuser.me/api/portraits/women/15.jpg",
+        "reviews": 94,
+        "address": "Calle 7 103, La Plata",
+        "consultationCost": "ARS 3100",
+        "specialties": ["Gastroenterología Pediátrica", "Hepatología", "Endoscopia Digestiva"],
+        "licenseNumber": "35234567 8901234"
     },
     {
-        "name": "Dr. Denti 1",
-        "specialty": "Dentista",
-        "city": "Salta",
-        "destacado": false,
+        "id": 36,
+        "name": "Dr. Martín Giménez",
+        "specialty": "Oftalmólogo",
+        "city": "Buenos Aires",
+        "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/36.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 133, Salta",
-        "consultationCost": "ARS 2000"
+        "reviews": 118,
+        "address": "Av. Callao 234, Buenos Aires",
+        "consultationCost": "ARS 2500",
+        "specialties": ["Cirugía Refractiva", "Retina y Vítreo", "Oftalmología Pediátrica"],
+        "licenseNumber": "36234567 9901234"
     },
     {
-        "name": "Dr. Denti 2",
-        "specialty": "Dentista",
-        "city": "Santa Fe",
+        "id": 37,
+        "name": "Dra. Andrea Pérez",
+        "specialty": "Oftalmólogo",
+        "city": "Rosario",
+        "destacado": false,
+        "image": "https://randomuser.me/api/portraits/women/16.jpg",
+        "reviews": 78,
+        "address": "Calle Santa Fe 789, Rosario",
+        "consultationCost": "ARS 2200",
+        "specialties": ["Córnea y Superficie Ocular", "Retina y Vítreo", "Oftalmología Pediátrica"],
+        "licenseNumber": "37234567 0901234"
+    },
+    {
+        "id": 38,
+        "name": "Dr. Hugo Sánchez",
+        "specialty": "Oftalmólogo",
+        "city": "Córdoba",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/37.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 134, Santa Fe",
-        "consultationCost": "ARS 2800"
+        "reviews": 104,
+        "address": "Av. Colón 101, Córdoba",
+        "consultationCost": "ARS 2400",
+        "specialties": ["Cirugía Refractiva", "Glaucoma", "Oftalmología Pediátrica"],
+        "licenseNumber": "38234567 1901234"
     },
     {
-        "name": "Dr. Denti 3",
-        "specialty": "Dentista",
-        "city": "Tucumán",
+        "id": 39,
+        "name": "Dra. Elena Rodríguez",
+        "specialty": "Oftalmólogo",
+        "city": "Mendoza",
         "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/38.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 135, Tucumán",
-        "consultationCost": "ARS 2300"
+        "image": "https://randomuser.me/api/portraits/women/17.jpg",
+        "reviews": 72,
+        "address": "Calle San Juan 102, Mendoza",
+        "consultationCost": "ARS 2100",
+        "specialties": ["Córnea y Superficie Ocular", "Retina y Vítreo", "Glaucoma"],
+        "licenseNumber": "39234567 2901234"
     },
     {
-        "name": "Dr. Denti 4",
-        "specialty": "Dentista",
-        "city": "Mar del Plata",
+        "id": 40,
+        "name": "Dr. Diego Gómez",
+        "specialty": "Oftalmólogo",
+        "city": "La Plata",
+        "destacado": true,
+        "image": "https://randomuser.me/api/portraits/men/38.jpg",
+        "reviews": 96,
+        "address": "Calle 6 103, La Plata",
+        "consultationCost": "ARS 2600",
+        "specialties": ["Cirugía Refractiva", "Oftalmología Pediátrica", "Retina y Vítreo"],
+        "licenseNumber": "40234567 3901234"
+    },
+    {
+        "id": 41,
+        "name": "Dr. Juan Torres",
+        "specialty": "Dermatólogo",
+        "city": "Buenos Aires",
         "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/39.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 136, Mar del Plata",
-        "consultationCost": "ARS 2700"
+        "reviews": 128,
+        "address": "Av. Corrientes 234, Buenos Aires",
+        "consultationCost": "ARS 2800",
+        "specialties": ["Dermatología Pediátrica", "Dermatología Cosmética", "Dermatología Oncológica"],
+        "licenseNumber": "41234567 4901234"
     },
     {
-        "name": "Dr. Denti 5",
-        "specialty": "Dentista",
-        "city": "Bahía Blanca",
+        "id": 42,
+        "name": "Dra. Laura Medina",
+        "specialty": "Dermatólogo",
+        "city": "Rosario",
         "destacado": false,
+        "image": "https://randomuser.me/api/portraits/women/18.jpg",
+        "reviews": 78,
+        "address": "Calle Entre Ríos 789, Rosario",
+        "consultationCost": "ARS 2500",
+        "specialties": ["Dermatología Clínica", "Dermatología Estética", "Dermatopatología"],
+        "licenseNumber": "42234567 5901234"
+    },
+    {
+        "id": 43,
+        "name": "Dr. Pablo Herrera",
+        "specialty": "Dermatólogo",
+        "city": "Córdoba",
+        "destacado": true,
         "image": "https://randomuser.me/api/portraits/men/40.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 137, Bahía Blanca",
-        "consultationCost": "ARS 2200"
+        "reviews": 98,
+        "address": "Av. Pueyrredón 101, Córdoba",
+        "consultationCost": "ARS 2600",
+        "specialties": ["Dermatología Oncológica", "Dermatología Clínica", "Dermatopatología"],
+        "licenseNumber": "43234567 6901234"
+    },
+    {
+        "id": 44,
+        "name": "Dra. María López",
+        "specialty": "Dermatólogo",
+        "city": "Mendoza",
+        "destacado": false,
+        "image": "https://randomuser.me/api/portraits/women/19.jpg",
+        "reviews": 66,
+        "address": "Calle San Martín 102, Mendoza",
+        "consultationCost": "ARS 2400",
+        "specialties": ["Dermatología Cosmética", "Dermatología Pediátrica", "Dermatología Clínica"],
+        "licenseNumber": "44234567 7901234"
+    },
+    {
+        "id": 45,
+        "name": "Dra. Ana Rodríguez",
+        "specialty": "Dermatólogo",
+        "city": "La Plata",
+        "destacado": true,
+        "image": "https://randomuser.me/api/portraits/women/20.jpg",
+        "reviews": 102,
+        "address": "Calle 5 103, La Plata",
+        "consultationCost": "ARS 2700",
+        "specialties": ["Dermatología Pediátrica", "Dermatología Estética", "Dermatología Oncológica"],
+        "licenseNumber": "45234567 8901234"
+    },
+    {
+        "id": 46,
+        "name": "Dr. Alejandro Martínez",
+        "specialty": "Pediatra",
+        "city": "Buenos Aires",
+        "destacado": true,
+        "image": "https://randomuser.me/api/portraits/men/41.jpg",
+        "reviews": 145,
+        "address": "Av. San Martín 234, Buenos Aires",
+        "consultationCost": "ARS 2500",
+        "specialties": ["Neonatología", "Pediatría General", "Endocrinología Pediátrica"],
+        "licenseNumber": "46234567 9901234"
+    },
+    {
+        "id": 47,
+        "name": "Dra. Carolina Gómez",
+        "specialty": "Pediatra",
+        "city": "Rosario",
+        "destacado": false,
+        "image": "https://randomuser.me/api/portraits/women/21.jpg",
+        "reviews": 88,
+        "address": "Calle San Luis 789, Rosario",
+        "consultationCost": "ARS 2200",
+        "specialties": ["Neonatología", "Pediatría General", "Gastroenterología Pediátrica"],
+        "licenseNumber": "47234567 0901234"
+    },
+    {
+        "id": 48,
+        "name": "Dr. Martín Pérez",
+        "specialty": "Pediatra",
+        "city": "Córdoba",
+        "destacado": true,
+        "image": "https://randomuser.me/api/portraits/men/42.jpg",
+        "reviews": 121,
+        "address": "Av. Colón 102, Córdoba",
+        "consultationCost": "ARS 2800",
+        "specialties": ["Neonatología", "Pediatría General", "Endocrinología Pediátrica"],
+        "licenseNumber": "48234567 1901234"
+    },
+    {
+        "id": 49,
+        "name": "Dra. Lucía Sánchez",
+        "specialty": "Pediatra",
+        "city": "Mendoza",
+        "destacado": false,
+        "image": "https://randomuser.me/api/portraits/women/22.jpg",
+        "reviews": 79,
+        "address": "Calle Sarmiento 102, Mendoza",
+        "consultationCost": "ARS 2400",
+        "specialties": ["Neonatología", "Pediatría General", "Gastroenterología Pediátrica"],
+        "licenseNumber": "49234567 2901234"
+    },
+    {
+        "id": 50,
+        "name": "Dr. Pablo Fernández",
+        "specialty": "Pediatra",
+        "city": "La Plata",
+        "destacado": true,
+        "image": "https://randomuser.me/api/portraits/men/43.jpg",
+        "reviews": 94,
+        "address": "Calle 4 103, La Plata",
+        "consultationCost": "ARS 2700",
+        "specialties": ["Neonatología", "Pediatría General", "Endocrinología Pediátrica"],
+        "licenseNumber": "50234567 3901234"
     }
 ]
+
+
+        
