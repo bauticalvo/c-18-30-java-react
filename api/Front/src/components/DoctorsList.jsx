@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const DoctorsList = () => {
     const [doctors, setDoctors] = useState([]);
@@ -44,7 +44,9 @@ const DoctorsList = () => {
                                         DESTACADO
                                     </span>
                                 )}
-                                <h2 className="text-xl font-semibold">{doctor.name}</h2>
+                                <Link to={`/doctor/${doctor.id}`}>
+                                    <h2 className="text-xl font-semibold">{doctor.name}</h2>
+                                </Link>
                                 <p className="text-gray-600">{doctor.specialty}</p>
                                 <div>
                                     <h3 className="font-semibold">Opiniones</h3>
