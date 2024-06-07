@@ -1,4 +1,4 @@
-package com.telemedicina.controllers;
+package com.telemedicina.controllers.api;
 
 import com.telemedicina.entitys.Patient;
 import com.telemedicina.entitys.User;
@@ -16,12 +16,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping ("/")
-    public ResponseEntity<User> registerUser (@RequestBody User user){
-        if (user != null) {
-            return ResponseEntity.ok(userService.registerUser(user));
-        }
-        return ResponseEntity.badRequest().build();
-    }
+
 }
 

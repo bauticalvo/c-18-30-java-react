@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
     return !email.includes(value);
   }),
   dni: Yup.string().required('Ingrese el DNI'),
-  fechaNacimiento: Yup.date().required('Ingrese una fecha de nacimiento'),
+  nacimiento: Yup.date().required('Ingrese una fecha de nacimiento'),
   sexo: Yup.string().required('Seleccione un sexo'),
   domicilio: Yup.string().required('Ingrese el domicilio'),
   codigoPostal: Yup.string().required('Ingrese el código postal'),
@@ -40,7 +40,6 @@ const validationSchema = Yup.object({
   confirmarPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
     .required('Confirme la contraseña'),
-  consentimiento: Yup.boolean().oneOf([true], 'Debe aceptar los términos y condiciones'),
   enfermedadesCronicas: Yup.array().of(Yup.string()),
   otrasEnfermedades: Yup.string(),
   cirugiasAnteriores: Yup.string().test('cirugiasAnteriores-required', 'Indique la cirugía realizada', function(value) {
@@ -52,11 +51,11 @@ const validationSchema = Yup.object({
   }),
   historiaFamiliar: Yup.array().of(Yup.string()),
   otrasEnfermedadesFamilia: Yup.string(),
-  alergias: Yup.array().of(Yup.string()),
-  alergiasMedicamentos: Yup.string(),
-  alergiasAlimentos: Yup.string(),
-  alergiasAmbientales: Yup.string(),
-  otrasAlergias: Yup.string(),
+  alergias: Yup.array().of(Yup.string()).nullable(),
+  alergiasMedicamentos: Yup.string().nullable(),
+  alergiasAlimentos: Yup.string().nullable(),
+  alergiasAmbientales: Yup.string().nullable(),
+  otrasAlergias: Yup.string().nullable(),
   alergiasMedicamentosDescripcion:  Yup.string().test('medicamento-description-required', 'Indique el medicamento', function(value) {
     const { alergiasMedicamentos } = this.parent;
     if (alergiasMedicamentos === 'si') {
@@ -143,7 +142,7 @@ const UserRegister = () => {
           numeroCelular: '',
           email: '',
           dni: '',
-          fechaNacimiento: '',
+          nacimiento: '',
           sexo: '',
           domicilio: '',
           codigoPostal: '',
@@ -213,29 +212,30 @@ const UserRegister = () => {
             <div className={`flex ${step === 1 ? 'justify-end' : 'justify-between'}`}>
               {step > 1 && (
                 <button
-                  type="button"
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded"
-                  onClick={handlePrevious}
-                >
-                  Anterior
-                </button>
+                type="button"
+                className="px-10 py-2 bg-white text-blue-40 rounded"
+                onClick={handlePrevious}
+              >
+                Anterior
+              </button>
               )}
               {step < 2 ? (
                 <button
-                  type="button"
-                  className="px-4 py-2 bg-[#407BFF] rounded-[4px] text-white "
-                  onClick={handleNext}
-                >
-                  Continuar
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-purple-600 text-white rounded"
-                  onClick={handleSubmit}
-                >
-                  Enviar
-                </button>
+                    type="button"
+                    className="px-4 py-2 bg-[#407BFF] rounded-[4px] text-white"
+                    onClick={handleNext}
+                  >
+                    Continuar
+                  </button>
+                ) : (
+                  <>
+                  <button
+                    type="submit"
+                    className="px-10 py-2 bg-[#407BFF] rounded-[4px] text-white "
+                    onClick={handleSubmit}
+                  >
+                    Enviar
+              </button></>
               )}
             </div>
           </Form>

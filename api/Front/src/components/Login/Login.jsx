@@ -23,8 +23,8 @@ const Login = () => {
     const handleSubmit = () => setSubmit(true);
 
     return (
-        <div className="h-full w-full flex p-32 justify-center items-center ">
-            <div className=" w-2/3 h-2/3 p-32 border  border-[#407BFF33] border-opacity-20 shadow-login-div rounded-[40px]  ">
+        <div className="h-90vh w-full flex p-16 justify-center items-center ">
+            <div className=" w-2/3 h-2/3 p-20 border  border-[#407BFF33] border-opacity-20 shadow-login-div rounded-[40px]  ">
                 <div className="text-center mb-14 font-sans">
                     <h2 className=" text-4xl font-semibold">Iniciar sesión</h2>
                 </div>

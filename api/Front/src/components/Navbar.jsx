@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className="bg-[#FDFDFD] h-[100px] md:px-10 lg:px-20 flex justify-between items-center shadow-md">
+    <nav className="bg-[#FDFDFD] h-10hv md:px-10 lg:px-20 flex justify-between items-center shadow-md">
       <div className="flex items-center">
         <Link to='/'>
           <img src="/logo.saludonline.png" className='h-[50px] md:h-[60px] lg:h-[100px] w-auto' alt="Logo" />
         </Link>
       </div>
-      <div className="flex items-center">
-        <a href="/profesionalLogin" className="text-[#989595] text-sm md:text-base lg:text-lg mr-4">Soy especialista</a>
-        <a href="/login" className="bg-blue-500 text-white px-4 py-2 rounded-[57px] text-sm md:text-base lg:text-lg">Soy paciente</a>
+      <div className="flex items-center h-1/2">
+        <a href="/profesionalLogin" className="text-[#989595] h-1/2 text-sm md:text-base lg:text-lg mr-4">Soy especialista</a>
+        <a href="/login" className="bg-blue-500 text-white h-1/2 px-4 py-2 rounded-[57px] text-sm md:text-base lg:text-lg">Soy paciente</a>
       </div>
     </nav>
   );
