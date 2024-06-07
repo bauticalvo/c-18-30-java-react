@@ -24,18 +24,24 @@ const DoctorsList = () => {
     });
 
     return (
-        <div className="p-4">
+        <div className="p-4 mx-32 ">
             {(specialtyFilter || cityFilter) && (
                 <div className="flex flex-row mb-4">
                     {specialtyFilter && <h1 className="text-lg"><span className="font-bold">{specialtyFilter}, &nbsp;</span></h1>}
                     {cityFilter && <h1 className="text-lg"><span className="font-bold">{cityFilter}</span></h1>}
                 </div>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className='w-full flex space-x-20'>
+            <div className="w-1/2 space-y-4">
                 {filteredDoctors.map((doctor, index) => (
                     <DoctorCard  doctor={doctor} key={index}   />
                 ))}
             </div>
+            <div className='w-1/2 bg-slate-600'>
+                <p>sdvfasdf</p>
+            </div>                
+            </div>
+
         </div>
     );
 };

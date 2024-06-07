@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const SearchBar = () => {
   
   const [specialty, setSpecialty] = useState('');
-  const [city, setCity] = useState('');
+  const [officeProvince, setOfficeProvince] = useState('');
   const [specialties, setSpecialties] = useState([]);
   const [cities, setCities] = useState([]);
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const SearchBar = () => {
           .then(response => response.json())
           .then(data => {
               const uniqueSpecialties = [...new Set(data.map(doctor => doctor.specialty))];
-              const uniqueCities = [...new Set(data.map(doctor => doctor.city))];
+              const uniqueCities = [...new Set(data.map(doctor => doctor.officeProvince))];
               setSpecialties(uniqueSpecialties);
               setCities(uniqueCities);
           })
@@ -24,7 +24,7 @@ const SearchBar = () => {
   }, []);
 
   const handleSearch = () => {
-      navigate(`/doctors?specialty=${specialty}&city=${city}`);
+      navigate(`/doctors?specialty=${specialty}&officeProvince=${officeProvince}`);
   };
 
   return (
@@ -49,13 +49,13 @@ const SearchBar = () => {
             ))}
         </select>
         <select
-            value={city}
-            onChange={e => setCity(e.target.value)}
+            value={officeProvince}
+            onChange={e => setOfficeProvince(e.target.value)}
             className=" p-2 rounded-r-[40px]  focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
             <option value="">Selecciona una ciudad</option>
-            {cities.map((city, index) => (
-                <option key={index} value={city}>{city}</option>
+            {cities.map((officeProvince, index) => (
+                <option key={index} value={officeProvince}>{officeProvince}</option>
             ))}
         </select>
         <button
@@ -94,13 +94,13 @@ export default SearchBar;
                         ))}
                     </select>
                     <select
-                        value={city}
-                        onChange={e => setCity(e.target.value)}
+                        value={officeProvince}
+                        onChange={e => setOfficeProvince(e.target.value)}
                         className="border p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                         <option value="">Selecciona una ciudad</option>
-                        {cities.map((city, index) => (
-                            <option key={index} value={city}>{city}</option>
+                        {cities.map((officeProvince, index) => (
+                            <option key={index} value={officeProvince}>{officeProvince}</option>
                         ))}
                     </select>
                     <button
