@@ -1,5 +1,6 @@
 package com.telemedicina.entitys;
 
+import com.telemedicina.repositorys.DoctorRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,10 +30,11 @@ public class DoctorConsultationData {
     private String pay_method;
     private String specialty;
     private String social_work;
-    private String cash;
     private String account_number;
     private String account_name;
     private String CVU;
-    @JoinColumn
-    private int id_doctor;
+
+    @OneToOne
+    @JoinColumn (name = "id_doctor", referencedColumnName = "id_doctor")
+    private Doctor doctor;
 }

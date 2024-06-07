@@ -55,7 +55,8 @@ public class AuthService {
     }
 
     public Doctor registerDoctor(Doctor doctor, Integer id_user) {
-        doctor.setId_user(id_user);
+        User user_db = userRepository.findById(id_user).orElseThrow();
+        doctor.setUser(user_db);
         return doctorRepository.save(doctor);
     }
 

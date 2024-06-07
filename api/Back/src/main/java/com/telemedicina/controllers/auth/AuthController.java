@@ -3,9 +3,11 @@ package com.telemedicina.controllers.auth;
 import com.telemedicina.controllers.auth.model.AuthResponse;
 import com.telemedicina.controllers.auth.model.LoginRequest;
 import com.telemedicina.entitys.Doctor;
+import com.telemedicina.entitys.DoctorConsultationData;
 import com.telemedicina.entitys.Patient;
 import com.telemedicina.entitys.User;
 import com.telemedicina.services.AuthService;
+import com.telemedicina.services.DoctorConsultationDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,6 +26,9 @@ import java.util.Date;
 public class AuthController {
     @Autowired
     AuthService authService;
+
+    @Autowired
+    DoctorConsultationDataService doctorConsultationDataService;
 
     @PostMapping("/register/doctor")
     public ResponseEntity<Doctor> registerDoctor( @RequestParam("certification") MultipartFile certificationFile,
@@ -45,7 +50,6 @@ public class AuthController {
             doctor.setDate_of_graduation(dateOfGraduation);
             doctor.setOffice_address(officeAddress);
             doctor.setOffice_province(officeProvince);
-            doctor.setId_user(idUser);
 
             byte[] certificationBytes = certificationFile.getBytes();
             byte[] profilePictureBytes = profilePictureFile.getBytes();
@@ -53,7 +57,7 @@ public class AuthController {
             doctor.setCertification(certificationBytes);
             doctor.setProfile_picture(profilePictureBytes);
 
-            Doctor newDoctor = authService.registerDoctor(doctor, doctor.getId_user());
+            Doctor newDoctor = authService.registerDoctor(doctor, idUser);
             if (newDoctor != null)
                 return ResponseEntity.ok(newDoctor);
             else
@@ -61,6 +65,14 @@ public class AuthController {
         }catch (IOException e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @PostMapping ("/register/consultation_data")
+    public ResponseEntity <DoctorConsultationData> addConsultationData (@RequestBody DoctorConsultationData doctorConsultationData){
+        if (doctorConsultationData != null){
+            return ResponseEntity.ok(doctorConsultationDataService.addConsultationData (doctorConsultationData));
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/register/patient")

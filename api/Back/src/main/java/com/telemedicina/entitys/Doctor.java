@@ -31,6 +31,7 @@ public class Doctor {
     @Column (columnDefinition = "BLOB")
     private byte[] profile_picture; //picture
 
-    @JoinColumn
-    private int id_user;
+    @OneToOne
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
+    private User user;
 }
