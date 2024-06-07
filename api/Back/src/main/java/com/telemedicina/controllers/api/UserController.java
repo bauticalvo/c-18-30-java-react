@@ -16,6 +16,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
+    @GetMapping ("/welcome")
+    public String welcome (){
+        return "Welcome";
+    }
 }
 
