@@ -4,8 +4,7 @@
  */
 package com.telemedicina.controllers.api;
 
-import com.telemedicina.controllers.api.model.DoctorWithUserDetailsDTO;
-import com.telemedicina.entitys.Doctor;
+import com.telemedicina.controllers.api.model.DoctorWithUserDetails;
 import com.telemedicina.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,24 +20,24 @@ public class DoctorController {
     DoctorService doctorService;
 
     @GetMapping("/specialty")
-    public ResponseEntity<List<DoctorWithUserDetailsDTO>> getDoctorsBySpecialty (@RequestParam String specialty){
-        List<DoctorWithUserDetailsDTO> doctors = doctorService.getDoctorsBySpecialty(specialty);
+    public ResponseEntity<List<DoctorWithUserDetails>> getDoctorsBySpecialty (@RequestParam String specialty){
+        List<DoctorWithUserDetails> doctors = doctorService.getDoctorsBySpecialty(specialty);
         if (doctors.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok(doctors);
     }
 
     @GetMapping("/mode")
-    public ResponseEntity<List<DoctorWithUserDetailsDTO>> getDoctorsByMode (@RequestParam boolean mode){
-        List<DoctorWithUserDetailsDTO> doctors = doctorService.getDoctorsByMode(mode);
+    public ResponseEntity<List<DoctorWithUserDetails>> getDoctorsByMode (@RequestParam boolean mode){
+        List<DoctorWithUserDetails> doctors = doctorService.getDoctorsByMode(mode);
         if (doctors.isEmpty())
             return ResponseEntity.noContent().build();
         return null;
     }
 
     @GetMapping("/cost")
-    public ResponseEntity<List<DoctorWithUserDetailsDTO>> getDoctorsByConsultationCost (@RequestParam double cost){
-        List<DoctorWithUserDetailsDTO> doctors = doctorService.getDoctorsByConsultationCost(cost);
+    public ResponseEntity<List<DoctorWithUserDetails>> getDoctorsByConsultationCost (@RequestParam double cost){
+        List<DoctorWithUserDetails> doctors = doctorService.getDoctorsByConsultationCost(cost);
         if (doctors.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok(doctors);
