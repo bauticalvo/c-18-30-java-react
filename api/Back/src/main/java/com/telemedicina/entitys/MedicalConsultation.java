@@ -20,7 +20,7 @@ public class MedicalConsultation {
     private boolean mode;
     private int time;
     private ZonedDateTime hour;
-    private String officeAdress;
+    private String office_address;
 
     @JoinColumn
     private int id_patient;

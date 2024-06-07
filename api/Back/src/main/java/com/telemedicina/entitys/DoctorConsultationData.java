@@ -27,11 +27,11 @@ public class DoctorConsultationData {
     private ZonedDateTime since;
     private ZonedDateTime until;
     private String pay_method;
-    private String especiality;
-    private String socialWork;
+    private String specialty;
+    private String social_work;
     private String cash;
-    private String accountNumber;
-    private String accountName;
+    private String account_number;
+    private String account_name;
     private String CVU;
     @JoinColumn
     private int id_doctor;
