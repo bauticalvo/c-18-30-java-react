@@ -2,12 +2,10 @@ package com.telemedicina.controllers.auth;
 
 import com.telemedicina.controllers.auth.model.AuthResponse;
 import com.telemedicina.controllers.auth.model.LoginRequest;
-import com.telemedicina.entitys.Doctor;
-import com.telemedicina.entitys.DoctorConsultationData;
-import com.telemedicina.entitys.Patient;
-import com.telemedicina.entitys.User;
+import com.telemedicina.entitys.*;
 import com.telemedicina.services.AuthService;
 import com.telemedicina.services.DoctorConsultationDataService;
+import com.telemedicina.services.WorkExperienceByDoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,6 +27,9 @@ public class AuthController {
 
     @Autowired
     DoctorConsultationDataService doctorConsultationDataService;
+
+    @Autowired
+    WorkExperienceByDoctorService workExperienceByDoctorService;
 
     @PostMapping("/register/doctor")
     public ResponseEntity<Doctor> registerDoctor( @RequestParam("certification") MultipartFile certificationFile,
@@ -71,6 +72,14 @@ public class AuthController {
     public ResponseEntity <DoctorConsultationData> addConsultationData (@RequestBody DoctorConsultationData doctorConsultationData){
         if (doctorConsultationData != null){
             return ResponseEntity.ok(doctorConsultationDataService.addConsultationData (doctorConsultationData));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping ("/register/work_experience")
+    public ResponseEntity<WorkExperienceByDoctor> addOneDoctorWorkExperience (@RequestBody WorkExperienceByDoctor workExperienceByDoctor){
+        if (workExperienceByDoctor != null){
+            return ResponseEntity.ok(workExperienceByDoctorService.addOneDoctorWorkExperience(workExperienceByDoctor));
         }
         return ResponseEntity.badRequest().build();
     }
