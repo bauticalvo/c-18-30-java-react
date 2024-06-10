@@ -1,14 +1,39 @@
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\entitys\ConsultatingRoom.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\entitys\Country.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\entitys\Deparment.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\entitys\Doctor.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\entitys\MedicalConsultation.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\entitys\Patient.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\entitys\Province.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\entitys\SocialWork.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\entitys\User.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\repositorys\CountryRepository.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\repositorys\DeparmentRepository.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\repositorys\ProvinceRepository.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\repositorys\UserRepository.java
-C:\Users\Omar\Downloads\Cosas de Programas\Country\c-18-30-java-react\api\Back\src\main\java\com\telemedicina\TelemedicinaApplication.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/Jwt/JwtAuthFilter.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/Jwt/JwtService.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/TelemedicinaApplication.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/config/ApplicationConfig.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/config/CorsConfig.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/config/SecurityConfig.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/api/ConsultatingRoomController.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/api/CountryController.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/api/DeparmentController.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/api/DoctorController.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/api/MedicalConsultationController.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/api/PatientController.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/api/UserController.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/auth/AuthController.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/auth/model/AuthResponse.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/controllers/auth/model/LoginRequest.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/ConsultatingRoom.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/Country.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/Deparment.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/Doctor.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/DoctorConsultationData.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/MedicalConsultation.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/Patient.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/Province.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/SocialWork.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/entitys/User.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/repositorys/ConsultatingRoomRepository.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/repositorys/CountryRepository.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/repositorys/DeparmentRepository.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/repositorys/DoctorRepository.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/repositorys/MedicalConsultationRepository.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/repositorys/PatientRepository.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/repositorys/ProvinceRepository.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/repositorys/SocialWorkRepository.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/repositorys/UserRepository.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/services/AuthService.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/services/DoctorService.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/services/PatientService.java
+/home/nicolas/c18 java/c-18-30-java-react/api/Back/src/main/java/com/telemedicina/services/UserService.java

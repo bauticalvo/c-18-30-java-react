@@ -20,12 +20,10 @@ public class MedicalConsultation {
     private boolean mode;
     private int time;
     private ZonedDateTime hour;
+    private String office_address;
 
     @JoinColumn
     private int id_patient;
-
-    @JoinColumn
-    private int id_consultating_room;
 
     @JoinColumn
     private int id_doctor;

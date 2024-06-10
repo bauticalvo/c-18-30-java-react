@@ -10,6 +10,7 @@ import com.telemedicina.repositorys.DoctorRepository;
 import com.telemedicina.repositorys.PatientRepository;
 import com.telemedicina.repositorys.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,42 +20,44 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
     @Autowired
-    DoctorRepository doctorRepository;
+    private DoctorRepository doctorRepository;
 
     @Autowired
-    PatientRepository patientRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    private JwtService jwtService;
+    @Autowired
+    private JwtService jwtService; // Asegúrate de que JwtService esté correctamente inyectado aquí
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     public AuthResponse registerUser (User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return AuthResponse.builder()
-                .token(jwtService.getToken(user))
-                .build();
+        try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return AuthResponse.builder()
+                    .token(jwtService.getToken(user))
+                    .build();
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("Username already exists");
+        }
     }
 
     public Patient registerPatient (Patient patient, Integer id_user){
-        Patient patient_db = patientRepository.findByIdPatient(id_user);
-        if(patient_db != null) {
-            patient.setId_user(id_user);
-            return patientRepository.save(patient);
-        }
-        return null;
+        patient.setId_user(id_user);
+        return patientRepository.save(patient);
     }
 
-    public Doctor registerDoctor (Doctor doctor, Integer id_user){
-        Doctor doctor_db = doctorRepository.findByIdDoctor(id_user);
-        if (doctor_db != null){
-            doctor_db.setId_user(id_user);
-            return doctorRepository.save(doctor);
-        }
-        return null;
+    public Doctor registerDoctor(Doctor doctor, Integer id_user) {
+        User user_db = userRepository.findById(id_user).orElseThrow();
+        doctor.setUser(user_db);
+        return doctorRepository.save(doctor);
     }
 
     public AuthResponse loginUser (LoginRequest loginRequest){
@@ -65,5 +68,4 @@ public class AuthService {
                 .token(token)
                 .build();
     }
-
 }
