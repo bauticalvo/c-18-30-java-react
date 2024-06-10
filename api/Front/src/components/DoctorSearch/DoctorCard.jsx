@@ -41,7 +41,6 @@ const DoctorCard = ({ doctor, setDetail }) => {
     filterConsultations();
     filterUser()
   }, [doctor]);
-  console.log(user);
 
   return (
     <div className='w-full shadow-doctor-list rounded-[21px]' onClick={() => setDetail(doctor)}>

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { consultations } from '../Utils/doctorConsultation'; 
-import { IoMdStar, IoMdStarOutline } from "react-icons/io";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import { MdPeople } from "react-icons/md";
-import { HiVideoCamera } from "react-icons/hi2";
+import { experiencies } from '../Utils/experience';
 import { users } from '../Utils/User';
-import { HiIdentification } from "react-icons/hi2";
+import { IoMdStar, IoIosSearch } from "react-icons/io";
+import { RiMoneyDollarCircleFill,RiGraduationCapFill } from "react-icons/ri";
+import { HiVideoCamera, HiIdentification } from "react-icons/hi2";
+import { FaMapMarkerAlt, FaClock  } from "react-icons/fa";
+import { MdPeople } from "react-icons/md";
 import { LuStethoscope } from "react-icons/lu";
-import { RiGraduationCapFill } from "react-icons/ri";
-import { IoIosSearch } from "react-icons/io";
-
-
+import { PiHospitalFill } from "react-icons/pi";
+import { TbNurse } from "react-icons/tb";
+import { Form, Formik  } from 'formik';
 
 const DetailList = ({detail, isSticky, setCertification,certification }) => {
   const [promedioReviews, setPromedioReviews] = useState(null);
@@ -19,7 +18,10 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
   const [consultation, setConsultation] =useState({})
   const [prices, setPrices] = useState({ virtual: [], presencial: [] });
   const [user, setUser] = useState({})
-
+  const [experiencie, setExperiencie] = useState([])
+  const [virtualDays, setVirtualDays] = useState([])
+  const [presencialDays, setPresencialDays] = useState([])
+  
 
 
     useEffect(() => {
@@ -48,9 +50,25 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
           setUser(filterUser[0]);
         };
     
+        const filterExperiencies = () => {
+          const filterExp = experiencies.filter(
+            exp => exp.id_work_experience_by_doctor == detail.id_doctor
+          );
+          setExperiencie(filterExp);
+        };
+
+        const handleDays = ()=>{
+          doctorConsultations.map( cons => {
+            cons.mode === 'Virtual' ? setVirtualDays(cons.days)  : setPresencialDays(cons.days)
+          })
+        }
+
+    
         calculateReview();
         filterConsultations();
         filterUser()
+        filterExperiencies()
+        handleDays()
       }, [  detail]);
 
 
@@ -89,12 +107,41 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
         }
         return star;
       };
-      console.log(consultation);
 
       const handleCertification = ()=>{
         setCertification(!certification)
       }
-
+      function getDatesForDays(days) {
+        const daysOfWeek = {
+          "Lunes": 1,
+          "Martes": 2,
+          "Miércoles": 3,
+          "Jueves": 4,
+          "Viernes": 5,
+          "Sábado": 6,
+          "Domingo": 0
+        };
+      
+        const today = new Date();
+        const currentDay = today.getDay();
+        const currentDate = today.getDate();
+        const currentMonth = today.getMonth();
+        const currentYear = today.getFullYear();
+      
+        return days.map(day => {
+          const targetDay = daysOfWeek[day];
+          const diff = (targetDay + 7 - currentDay) % 7;
+          const targetDate = new Date(today);
+          targetDate.setDate(currentDate + diff);
+      
+          const formattedDate = `${String(targetDate.getDate()).padStart(2, '0')}/${String(targetDate.getMonth() + 1).padStart(2, '0')}/${targetDate.getFullYear()}`;
+      
+          return {
+            day,
+            date: formattedDate
+          };
+        });
+      }
 
 
       
@@ -110,7 +157,7 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
         }
         {
             detail && (
-                <div className={`bg-white font-sans2 p-16 space-y-4 ${isSticky ? 'sticky top-0  h-[850px]' : 'h-[650px]'}  shadow-doctor-list`}>
+                <div className={`bg-white font-sans2 p-16 space-y-4 ${isSticky ? 'sticky top-0  h-[850px]' : 'h-[850px]'}  shadow-doctor-list`}>
                     <h1 className='font-bold text-3xl'> Dr. {user.name} {user.lastname}</h1>
                     <div className='flex space-x-2 mt-2 items-center'>
                         <h1 className='text-[rgba(102,102,102,1)] text-base mr-6'> {detail.specialty} </h1>
@@ -154,7 +201,7 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
                       </div>
                       </div>
                     </div>
-                    <div className='bg-[#F1F5FF] flex rounded-[10px] '>
+                    <div className='bg-[#F1F5FF] flex rounded-[10px] h-1/6'>
                       <div className='w-1/2 flex flex-col space-y-2 p-4'>
                         <p className='flex text-sm'><HiIdentification className='mr-2 text-lg' /> M.N {detail.tuition}</p>
                         <p className='flex text-sm'><LuStethoscope className='mr-2 text-lg'/>{detail.year_experience} años de experiencia</p>
@@ -167,9 +214,80 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
                           </button>
                       </div>
                     </div>
-                    <div>
+                      {
+                        experiencie?.length >0 && (
+                          <div className='bg-[rgba(243,255,194,0.24)] p-2 rounded-[10px] space-y-2 overflow-y-scroll h-1/6'>
+                            <p className='text-[rgba(152,149,149,1)]'>Experiencia</p>
+                            {
+                              experiencie.map((exp, index) => (
+                                <div className='flex items-center space-x-4 bg-[rgba(255,255,255,1)] rounded-[10px] w-full' key={index}>
+                                  <p className='flex p-2 w-3/6  items-center' ><PiHospitalFill className='mr-2' />{exp.company}</p>
+                                  <p className='flex p-2 w-3/12 items-center ' ><TbNurse className='mr-2' />{exp.charge}</p>
+                                  <p className='flex p-2 w-3/12 items-center  ' ><FaClock className='mr-2' />{exp.since.slice(6)}-{exp.current_job === "No" ? exp.until.slice(6)   : "2024"  }</p>
+                                </div>
+                              )
+                            )}
+
+                          </div>
+                        )
+                      }
+                      <div className='p-2 m-2'>
+                        <h1 className='font-medium text-xl'>Solicitar Turno</h1>
+                        <Formik
+                        initialValues={{
+                          mode: "",
+                          day: "",
+                          time: "",
+                          speciality: ""
+                        }}
+                        >
+                          {({ setFieldValue, values }) => (
+                            <Form>
+                              <div className='flex space-x-2 mt-4 flex-col'>
+                                <div className='w-4/6 space-x-4 flex'>
+                                {consultation?.mode?.includes("Virtual") && (
+                                  <button
+                                  type='button'
+                                  className={`p-2 w-1/2 rounded ${values.mode === 'Presencial' ? 'bg-[rgba(241,245,255,1)] text-[rgba(147,147,147,1)]' : 'bg-[rgba(154,184,251,1)] text-black'}`}
+                                  onClick={() => setFieldValue('mode', 'Virtual')}
+                                  >
+                                    Virtual
+                                  </button>
+
+                                )}
+                                {consultation?.mode?.includes("Presencial") && (
+                                  <button
+                                  type='button'
+                                  className={`p-2 w-1/2 rounded ${values.mode === 'Virtual' || values.mode === '' ? 'bg-[rgba(241,245,255,1)] text-[rgba(147,147,147,1)]' : 'bg-[rgba(154,184,251,1)] text-black'}`}
+                                  onClick={() => setFieldValue('mode', 'Presencial')}
+                                  >
+                                    Presencial
+                                  </button>
+                                )}
+                              </div>
+                              <div className='flex space-x-4 m-4'>
+                                <div className='flex overflow-x-scroll w-1/2 flex-col'>
+                                  <h1 className='text-[rgba(102,102,102,1)]'>Día del turno</h1>
+                                  <div className='flex space-x-4'>
+                                  {
+                                    virtualDays &&  virtualDays.map((day,index)=> (
+                                      <p key={index}> {day}</p>
+                                      
+                                      ))
+                                      }
+                                  </div>
+                                </div>
+                                <div className='flex overflow-x-scroll w-1/2'>
+                                  <h1 className='text-[rgba(102,102,102,1)]'>Hora del turno</h1>
+
+                                </div>
+                                </div>
+                              </div>
+                            </Form>
+                          )}
+                        </Formik>
                       
-                    </div>
+                      </div>
 
                 </div>  
             )
@@ -181,3 +299,4 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
 }
 
 export default DetailList
+

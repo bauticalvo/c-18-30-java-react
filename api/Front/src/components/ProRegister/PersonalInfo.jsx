@@ -30,10 +30,10 @@ const PersonalInfo = ({ setFieldValue }) => {
   };
 
   useEffect(() => {
-    if (postCode.length >= 4 && country) {
+    if (postCode.length >= 4 ) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`https://api.zippopotam.us/${country}/${postCode}`);
+          const response = await axios.get(`https://api.zippopotam.us/AR/${postCode}`);
           setPlaces(response.data.places);
           setState(response.data.places[0].state);
           setStatus(false);
@@ -49,7 +49,7 @@ const PersonalInfo = ({ setFieldValue }) => {
 
       return () => clearTimeout(debounceFetch);
     }
-  }, [postCode, country]);
+  }, [postCode]);
 
   const toLowerFunction = (name) => {
     const aux = name.slice(1).toLowerCase();
