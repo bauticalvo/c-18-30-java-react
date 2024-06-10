@@ -57,18 +57,13 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
           setExperiencie(filterExp);
         };
 
-        const handleDays = ()=>{
-          doctorConsultations.map( cons => {
-            cons.mode === 'Virtual' ? setVirtualDays(cons.days)  : setPresencialDays(cons.days)
-          })
-        }
+
 
     
         calculateReview();
         filterConsultations();
         filterUser()
         filterExperiencies()
-        handleDays()
       }, [  detail]);
 
 
@@ -87,6 +82,13 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
           const PresencialPrices = doctorConsultations.filter(c => c.mode === 'Presencial').map(c => c.cost);
           setPrices({ virtual: virtualPrices, presencial: PresencialPrices });
         }
+        const handleDays = ()=>{
+          doctorConsultations.map( cons => {
+            cons.mode === 'Virtual' ? setVirtualDays(getDatesForDays(cons.days))  : setPresencialDays(cons.days)
+          })
+        }
+        handleDays()
+
       }, [doctorConsultations]);
 
 
@@ -142,8 +144,7 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
           };
         });
       }
-
-
+      console.log(virtualDays);
       
   return (
     <div key={detail.id_doctor}>
@@ -270,11 +271,16 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
                                   <h1 className='text-[rgba(102,102,102,1)]'>Día del turno</h1>
                                   <div className='flex space-x-4'>
                                   {
-                                    virtualDays &&  virtualDays.map((day,index)=> (
-                                      <p key={index}> {day}</p>
-                                      
+                                     values?.mode?.includes("Virtual") && virtualDays?.map((virtual,index)=> (
+                                      <p key={index}> {virtual.day}</p>
                                       ))
-                                      }
+                                  }
+                                  {
+                                    values?.mode?.includes("Presencial") && presencialDays.map((day,index) => (
+                                      <p key={index}> {day}</p>
+
+                                      ))
+                                  }
                                   </div>
                                 </div>
                                 <div className='flex overflow-x-scroll w-1/2'>
