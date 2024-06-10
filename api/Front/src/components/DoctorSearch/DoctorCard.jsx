@@ -5,11 +5,12 @@ import { consultations } from '../Utils/doctorConsultation';
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { GoArrowRight } from "react-icons/go";
 import { Link } from 'react-router-dom';
-
+import { users } from '../Utils/User';
 
 const DoctorCard = ({ doctor, setDetail }) => {
   const [promedioReviews, setPromedioReviews] = useState(null);
   const [doctorConsultations, setDoctorConsultations] = useState([]);
+  const [user, setUser] = useState({})
 
   useEffect(() => {
     const calculateReview = () => {
@@ -29,20 +30,28 @@ const DoctorCard = ({ doctor, setDetail }) => {
       );
       setDoctorConsultations(filteredConsultations);
     };
+    const filterUser = () => {
+      const filterUser = users.filter(
+        user => user.id_user == doctor.id_user
+      );
+      setUser(filterUser[0]);
+    };
 
     calculateReview();
     filterConsultations();
-  }, [doctor.reviews, doctor.id_doctor]);
+    filterUser()
+  }, [doctor]);
+  console.log(user);
 
   return (
-    <div className='w-full shadow-doctor-list rounded-[21px]'>
+    <div className='w-full shadow-doctor-list rounded-[21px]' onClick={() => setDetail(doctor)}>
       <div className="bg-[rgba(255,255,255,1)] font-sans2 shadow-md rounded-[21px] overflow-hidden p-6 items-center flex space-x-4">
         <div className='w-[150px] h-[150px] flex items-center'>
           <img src={doctor.profilePicture} alt={doctor.name} className="object-cover rounded-[24px] shadow-doctor-photo" style={{ width: '6rem', height: '6rem' }} />
         </div>
         <div className='flex justify-normal flex-col w-full'>
           <div className='w-full flex justify-between'>
-            <h2 className="text-2xl font-bold">Dr. {doctor.name}{' '}{doctor.lastname}</h2>
+            <h2 className="text-2xl font-bold">Dr. {user.name}{' '}{user.lastname}</h2>
             <div className='flex justify-end'>
               {doctor.reviews.length > 0 ? (
                 <div className='bg-[#F1F3F9] flex items-center justify-center rounded-[3px] py-3 px-2 space-x-1 h-4'>

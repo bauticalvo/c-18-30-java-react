@@ -1,132 +1,135 @@
  [
     {
-        "name": "Ricardo",
-        "lastname": "Calvo",
         "specialty": "Cardiólogo",
+        "tuition":"23423",
+        "year_experience": "11",
+        "university": "Univesidad Nacional de Buenos Aires",
+        "" : [{
+            
+        }],
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
         "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg",
         "reviews": [4, 3, 1, 5, 2, 4, 3, 3, 2, 1],
         "officeAddress": "Calle Falsa 123",
         "officeProvince": "Buenos Aires",
-        "id_doctor": "1"
+        "id_doctor": "1",
+        "id_user": "1"
     },
     {
-        "name": "María",
-        "lastname": "González",
         "specialty": "Pediatra",
+        "tuition": "73647",
+        "year_experience": "15",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
         "profilePicture": "https://randomuser.me/api/portraits/women/2.jpg",
         "reviews": [5, 5, 4, 4, 3, 5, 5, 4, 4, 5],
         "officeAddress": "Avenida Siempre Viva 456",
         "officeProvince": "Córdoba",
-        "id_doctor": "2"
+        "id_doctor": "2",
+        "id_user": "2"
     },
     {
-        "name": "Juan",
-        "lastname": "Martínez",
         "specialty": "Dermatólogo",
+        "tuition": "62342",
+        "year_experience": "8",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
         "profilePicture": "https://randomuser.me/api/portraits/men/3.jpg",
         "reviews": [3, 4, 4, 5, 2, 4, 5, 4, 3, 4],
         "officeAddress": "Boulevard Oroño 789",
         "officeProvince": "Santa Fe",
-        "id_doctor": "3"
+        "id_doctor": "3",
+        "id_user": "3"
     },
     {
-        "name": "Ana",
-        "lastname": "Pérez",
         "specialty": "Neuróloga",
+        "tuition": "81574",
+        "year_experience": "12",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
         "profilePicture": "https://randomuser.me/api/portraits/women/4.jpg",
         "reviews": [4, 4, 4, 5, 5, 5, 4, 4, 5, 5],
         "officeAddress": "Calle Independencia 321",
         "officeProvince": "Mendoza",
-        "id_doctor": "4"
+        "id_doctor": "4",
+        "id_user": "4"
     },
     {
-        "name": "Carlos",
-        "lastname": "López",
         "specialty": "Ginecólogo",
+        "tuition": "90753",
+        "year_experience": "18",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
         "profilePicture": "https://randomuser.me/api/portraits/men/5.jpg",
         "reviews": [5, 4, 4, 3, 5, 5, 4, 4, 3, 4],
         "officeAddress": "Calle 7 654",
         "officeProvince": "Buenos Aires",
-        "id_doctor": "5"
+        "id_doctor": "5",
+        "id_user": "5"
     },
     {
-        "name": "Lucía",
-        "lastname": "Ramírez",
         "specialty": "Oftalmóloga",
+        "tuition": "12456",
+        "year_experience": "9",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
         "profilePicture": "https://randomuser.me/api/portraits/women/6.jpg",
         "reviews": [5, 5, 5, 5, 4, 5, 5, 5, 4, 5],
         "officeAddress": "Avenida Belgrano 987",
         "officeProvince": "Salta",
-        "id_doctor": "6"
+        "id_doctor": "6",
+        "id_user": "6"
     },
     {
-        "name": "Pedro",
-        "lastname": "Fernández",
         "specialty": "Traumatólogo",
+        "tuition": "34895",
+        "year_experience": "10",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
         "profilePicture": "https://randomuser.me/api/portraits/men/7.jpg",
         "reviews": [3, 4, 3, 4, 5, 3, 4, 4, 5, 4],
         "officeAddress": "Calle Güemes 1234",
         "officeProvince": "Buenos Aires",
-        "id_doctor": "7"
+        "id_doctor": "7",
+        "id_user": "7"
     },
     {
-        "name": "Laura",
-        "lastname": "Torres",
         "specialty": "Psicóloga",
+        "tuition": "78654",
+        "year_experience": "14",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
         "profilePicture": "https://randomuser.me/api/portraits/women/8.jpg",
         "reviews": [5, 5, 4, 4, 5, 5, 4, 4, 5, 5],
         "officeAddress": "Calle Mendoza 4321",
         "officeProvince": "San Juan",
-        "id_doctor": "8"
+        "id_doctor": "8",
+        "id_user": "8"
     },
     {
-        "name": "Miguel",
-        "lastname": "Sánchez",
         "specialty": "Urólogo",
+        "tuition": "94573",
+        "year_experience": "20",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
         "profilePicture": "https://randomuser.me/api/portraits/men/9.jpg",
         "reviews": [4, 4, 3, 3, 5, 4, 3, 3, 5, 4],
         "officeAddress": "Avenida Sarmiento 5678",
         "officeProvince": "Tucumán",
-        "id_doctor": "9"
+        "id_doctor": "9",
+        "id_user": "9"
     },
     {
-        "name": "Patricia",
-        "lastname": "Moreno",
         "specialty": "Endocrinóloga",
+        "tuition": "13579",
+        "year_experience": "17",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
         "profilePicture": "https://randomuser.me/api/portraits/women/10.jpg",
         "reviews": [5, 5, 5, 5, 4, 5, 4, 4, 5, 5],
         "officeAddress": "Calle Roca 876",
         "officeProvince": "Neuquén",
-        "id_doctor": "10"
-    },
-    {
-        "name": "Ricardo2",
-        "lastname": "Calvo",
-        "specialty": "Cardiólogo",
-        "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg",
-        "reviews": [4, 3, 1, 5, 2, 4, 3, 3, 2, 1],
-        "officeAddress": "Calle Falsa 123",
-        "officeProvince": "Buenos Aires",
-        "id_doctor": "11"
-    },
-    {
-        "name": "Ricardo3",
-        "lastname": "Calvo",
-        "specialty": "Cardiólogo",
-        "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg",
-        "reviews": [4, 3, 1, 5, 2, 4, 3, 3, 2, 1],
-        "officeAddress": "Calle Falsa 123",
-        "officeProvince": "Buenos Aires",
-        "id_doctor": "12"
-    },
-    {
-        "name": "Ricardo4",
-        "lastname": "Calvo",
-        "specialty": "Cardiólogo",
-        "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg",
-        "reviews": [4],
-        "officeAddress": "Calle Falsa 123",
-        "officeProvince": "Buenos Aires",
-        "id_doctor": "14"
+        "id_doctor": "10",
+        "id_user": "10"
     }
 ]

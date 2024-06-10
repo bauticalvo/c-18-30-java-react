@@ -5,12 +5,23 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdPeople } from "react-icons/md";
 import { HiVideoCamera } from "react-icons/hi2";
+import { users } from '../Utils/User';
+import { HiIdentification } from "react-icons/hi2";
+import { LuStethoscope } from "react-icons/lu";
+import { RiGraduationCapFill } from "react-icons/ri";
+import { IoIosSearch } from "react-icons/io";
 
-const DetailList = ({detail, isSticky}) => {
+
+
+const DetailList = ({detail, isSticky, setCertification,certification }) => {
   const [promedioReviews, setPromedioReviews] = useState(null);
   const [doctorConsultations, setDoctorConsultations] = useState([]);
   const [consultation, setConsultation] =useState({})
   const [prices, setPrices] = useState({ virtual: [], presencial: [] });
+  const [user, setUser] = useState({})
+
+
+
     useEffect(() => {
         const calculateReview = () => {
           const reviews = detail.reviews;
@@ -30,8 +41,16 @@ const DetailList = ({detail, isSticky}) => {
           setDoctorConsultations(filteredConsultations);
         };
     
+        const filterUser = () => {
+          const filterUser = users.filter(
+            user => user.id_user == detail.id_user
+          );
+          setUser(filterUser[0]);
+        };
+    
         calculateReview();
         filterConsultations();
+        filterUser()
       }, [  detail]);
 
 
@@ -53,9 +72,6 @@ const DetailList = ({detail, isSticky}) => {
       }, [doctorConsultations]);
 
 
-
-
-
       const fullStars = () => {
         const star = [];
         for (let i = 1; i <= 5; i++) {
@@ -74,6 +90,14 @@ const DetailList = ({detail, isSticky}) => {
         return star;
       };
       console.log(consultation);
+
+      const handleCertification = ()=>{
+        setCertification(!certification)
+      }
+
+
+
+      
   return (
     <div key={detail.id_doctor}>
 
@@ -86,43 +110,43 @@ const DetailList = ({detail, isSticky}) => {
         }
         {
             detail && (
-                <div className={`bg-white font-sans2 p-16 ${isSticky ? 'sticky top-0  h-[850px]' : 'h-[650px]'}  shadow-doctor-list`}>
-                    <h1 className='font-bold text-3xl'> Dr. {detail.name} {detail.lastname}</h1>
+                <div className={`bg-white font-sans2 p-16 space-y-4 ${isSticky ? 'sticky top-0  h-[850px]' : 'h-[650px]'}  shadow-doctor-list`}>
+                    <h1 className='font-bold text-3xl'> Dr. {user.name} {user.lastname}</h1>
                     <div className='flex space-x-2 mt-2 items-center'>
                         <h1 className='text-[rgba(102,102,102,1)] text-base mr-6'> {detail.specialty} </h1>
                                <p className='flex'> {fullStars()}</p>
                         {
                           detail.reviews.length > 0 && detail.reviews.length !=  1  && (
-                            <p className='text-base  bg-[#D9D9D9] rounded-[3px] text-black px-1'>{detail.reviews.length} opiniones</p>
+                            <p className='text-sm  bg-[#D9D9D9] rounded-[3px] text-black px-1'>{detail.reviews.length} opiniones</p>
                           )
                         }
                         {
                           detail.reviews.length === 1 && (
-                            <p className='text-base  bg-[#D9D9D9] rounded-[3px] text-black px-1'>{detail.reviews.length} opinion</p>
+                            <p className='text-sm  bg-[#D9D9D9] rounded-[3px] text-black px-1'>{detail.reviews.length} opinion</p>
                           )
                         }
                     </div>
                     <div className='w-full flex mt-8'>
-                      <div className='flex flex-col  w-1/2 justify-start text-lg space-y-2'   >
+                      <div className='flex flex-col  w-1/2 justify-start text-xs space-y-2'   >
                         <p className="text-[rgba(147,147,147,1)] flex items-center"><FaMapMarkerAlt className='mr-2 text-[rgba(35,38,47,1)]' />{detail.officeAddress}, {detail.officeProvince}</p>
                         <p className="text-[rgba(147,147,147,1)] flex items-center"><MdPeople className='mr-2 text-[rgba(35,38,47,1)] ' /> {consultation.speciality?.join(', ')}</p>
                         <p className="text-[rgba(147,147,147,1)] flex items-center"><RiMoneyDollarCircleFill className='mr-2 text-[rgba(35,38,47,1)]' />{consultation.pay_method?.join(', ')}</p>
                       </div>
                       <div className='w-1/2 flex  justify-end  '>
-                      <div className='flex-col'>
+                      <div className='flex-col space-y-2'>
                         {
                           consultation?.mode?.includes("Virtual") && (
-                            <div className='flex h-1/2 items-center justify-center space-x-2'>
-                              <p className='text-[#666666]'> ${prices?.virtual}</p>
-                              <p className='flex space-x-2 bg-[#CCDCFF] rounded-[6px] ' ><HiVideoCamera className='text-3xl '  /> </p>
+                            <div className='flex h-1/2 items-center justify-center space-x-2 '>
+                              <p className='text-[#666666] text-xs'> ${prices?.virtual}</p>
+                              <p className='flex space-x-2 bg-[#CCDCFF] rounded-[6px] p-1' ><HiVideoCamera className='text-xl '  /> </p>
                             </div>
                           )
                         }
                         {
                           consultation?.mode?.includes("Presencial") && (
-                            <div className='flex h-1/2 items-center justify-center space-x-2'>
-                              <p className='text-[#666666]'> ${prices?.presencial}</p>
-                              <p className='flex space-x-2 bg-[#F3FFC2] rounded-[6px]' ><MdPeople  className='text-3xl ' /> </p>
+                            <div className='flex h-1/2 items-center justify-center space-x-2 '>
+                              <p className='text-[#666666] text-xs'> ${prices?.presencial}</p>
+                              <p className='flex space-x-2 bg-[#F3FFC2] rounded-[6px] p-1' ><MdPeople  className='text-xl ' /> </p>
                             </div>
                           )
                         }
@@ -130,9 +154,24 @@ const DetailList = ({detail, isSticky}) => {
                       </div>
                       </div>
                     </div>
-                    
+                    <div className='bg-[#F1F5FF] flex rounded-[10px] '>
+                      <div className='w-1/2 flex flex-col space-y-2 p-4'>
+                        <p className='flex text-sm'><HiIdentification className='mr-2 text-lg' /> M.N {detail.tuition}</p>
+                        <p className='flex text-sm'><LuStethoscope className='mr-2 text-lg'/>{detail.year_experience} años de experiencia</p>
+                        <p className='flex text-sm'><RiGraduationCapFill className='mr-2 text-lg'/>{detail.university}</p>
+                      </div>
+                      <div className='flex justify-end items-center w-1/2'>
+                          <button type='button' onClick={() => handleCertification()} className='relative  items-center'>
+                              <img src={detail.certification} className='h-[50px] m-6 opacity-[0.8] border rounded-[5px ] border-[#23262F2B] border-opacity-15' alt="certification" />
+                              <IoIosSearch className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400' />
+                          </button>
+                      </div>
+                    </div>
+                    <div>
+                      
+                    </div>
 
-                </div>
+                </div>  
             )
         }
 
