@@ -10,7 +10,7 @@ const DetailList = ({detail, isSticky}) => {
   const [promedioReviews, setPromedioReviews] = useState(null);
   const [doctorConsultations, setDoctorConsultations] = useState([]);
   const [consultation, setConsultation] =useState({})
-  const [prices, setPrices] = useState({ virtual: [], Presencial: [] });
+  const [prices, setPrices] = useState({ virtual: [], presencial: [] });
     useEffect(() => {
         const calculateReview = () => {
           const reviews = detail.reviews;
@@ -47,8 +47,8 @@ const DetailList = ({detail, isSticky}) => {
           setConsultation(combinedConsultation);
     
           const virtualPrices = doctorConsultations.filter(c => c.mode === 'Virtual').map(c => c.cost);
-          const PresencialPrices = doctorConsultations.filter(c => c.mode === 'In-person').map(c => c.cost);
-          setPrices({ virtual: virtualPrices, Presencial: PresencialPrices });
+          const PresencialPrices = doctorConsultations.filter(c => c.mode === 'Presencial').map(c => c.cost);
+          setPrices({ virtual: virtualPrices, presencial: PresencialPrices });
         }
       }, [doctorConsultations]);
 
@@ -108,15 +108,26 @@ const DetailList = ({detail, isSticky}) => {
                         <p className="text-[rgba(147,147,147,1)] flex items-center"><MdPeople className='mr-2 text-[rgba(35,38,47,1)] ' /> {consultation.speciality?.join(', ')}</p>
                         <p className="text-[rgba(147,147,147,1)] flex items-center"><RiMoneyDollarCircleFill className='mr-2 text-[rgba(35,38,47,1)]' />{consultation.pay_method?.join(', ')}</p>
                       </div>
-                      <div className='w-1/2 flex justify-end '>
+                      <div className='w-1/2 flex  justify-end  '>
+                      <div className='flex-col'>
                         {
                           consultation?.mode?.includes("Virtual") && (
-                            <div>
-                              <p> {prices.virtual.join(', ')}</p>
-                              <p className='flex space-x-2 bg-[#CCDCFF] ' ><HiVideoCamera  /> </p>
+                            <div className='flex h-1/2 items-center justify-center space-x-2'>
+                              <p className='text-[#666666]'> ${prices?.virtual}</p>
+                              <p className='flex space-x-2 bg-[#CCDCFF] rounded-[6px] ' ><HiVideoCamera className='text-3xl '  /> </p>
                             </div>
                           )
                         }
+                        {
+                          consultation?.mode?.includes("Presencial") && (
+                            <div className='flex h-1/2 items-center justify-center space-x-2'>
+                              <p className='text-[#666666]'> ${prices?.presencial}</p>
+                              <p className='flex space-x-2 bg-[#F3FFC2] rounded-[6px]' ><MdPeople  className='text-3xl ' /> </p>
+                            </div>
+                          )
+                        }
+
+                      </div>
                       </div>
                     </div>
                     
