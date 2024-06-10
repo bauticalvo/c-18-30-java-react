@@ -28,4 +28,9 @@ public class Patient {
 
     @JoinColumn
     private int id_social_work;
+
+    @JoinColumn
+    private int id_user;
+
+
 }

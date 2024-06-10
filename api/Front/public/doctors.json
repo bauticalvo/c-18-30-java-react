@@ -98,5 +98,35 @@
         "officeAddress": "Calle Roca 876",
         "officeProvince": "Neuquén",
         "id_doctor": "10"
+    },
+    {
+        "name": "Ricardo2",
+        "lastname": "Calvo",
+        "specialty": "Cardiólogo",
+        "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg",
+        "reviews": [4, 3, 1, 5, 2, 4, 3, 3, 2, 1],
+        "officeAddress": "Calle Falsa 123",
+        "officeProvince": "Buenos Aires",
+        "id_doctor": "11"
+    },
+    {
+        "name": "Ricardo3",
+        "lastname": "Calvo",
+        "specialty": "Cardiólogo",
+        "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg",
+        "reviews": [4, 3, 1, 5, 2, 4, 3, 3, 2, 1],
+        "officeAddress": "Calle Falsa 123",
+        "officeProvince": "Buenos Aires",
+        "id_doctor": "12"
+    },
+    {
+        "name": "Ricardo4",
+        "lastname": "Calvo",
+        "specialty": "Cardiólogo",
+        "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg",
+        "reviews": [4],
+        "officeAddress": "Calle Falsa 123",
+        "officeProvince": "Buenos Aires",
+        "id_doctor": "14"
     }
 ]
