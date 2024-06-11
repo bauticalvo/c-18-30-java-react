@@ -57,37 +57,37 @@ const ProfesionalInfo =({ setFieldValue }) => {
       <div className='w-full flex space-x-4'>
 
         <div className="w-1/2">
-            <Field as="select" className="w-full p-2 border border-[#D9D9D9]   rounded-[34px] shadow-register-field text-gray-400" name="especialidad">
+            <Field as="select" className="w-full p-2 border border-[#D9D9D9]   rounded-[34px] shadow-register-field text-gray-400" name="specialty">
             <option  className='text-black'  value="">Especializacion</option>
             <option  className='text-black' value="Medico Clinico">Medico Clinico</option>
             <option  className='text-black' value="Psicologo">Psicologo</option>
             <option  className='text-black' value="Nutricionista">Nutricionista</option>
 
             </Field>
-            <ErrorMessage className="text-red-500 text-sm" name="especialidad" component="div" />
+            <ErrorMessage className="text-red-500 text-sm" name="specialty" component="div" />
         </div>
         <div className="w-1/2">
-        <Field className="w-full p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field" name="numeroMatricula" placeholder='Número de Matricula' />
-        <ErrorMessage className="text-red-500 text-sm" name="numeroMatricula" component="div" />
+        <Field className="w-full p-2 border border-[#D9D9D9]  rounded-[34px] shadow-register-field" name="tuition" placeholder='Número de Matricula' />
+        <ErrorMessage className="text-red-500 text-sm" name="tuition" component="div" />
         </div>
       </div>
 
     
         <div className="mb-4 w-1/2 space-x-4">
-            <Field name="certificado" component={FileInputField} />
-            <ErrorMessage name="certificado" component="div" className="text-red-600 text-sm" />
+            <Field name="certification" component={FileInputField} />
+            <ErrorMessage name="certification" component="div" className="text-red-600 text-sm" />
       </div>
     </div> 
     <div className='flex w-full space-x-4 m-4'>
       <div className='w-1/2 '>
-      <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="experiencia">
+      <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="year_experience">
         <option  className='text-black' value="">Años de experiencia</option>
         <option  className='text-black' value="1-2">1 a 2 años</option>
         <option  className='text-black' value="3-5">3 a 5 años</option>
         <option  className='text-black' value="6-10">6 a 10 años</option>
         <option  className='text-black' value="mas">Mas</option>
       </Field>
-      <ErrorMessage className="text-red-500 text-sm" name="experiencia" component="div" />
+      <ErrorMessage className="text-red-500 text-sm" name="year_experience" component="div" />
       </div>
       <div className='w-1/2 '>
           <Field className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="especialidadType" placeholder='Habilidades especiales o intereses' />
@@ -98,17 +98,17 @@ const ProfesionalInfo =({ setFieldValue }) => {
     <h1 className="text-xl font-sans2 my-4  border-b-2 border-b-[rgba(64,123,255,0.4)] text-black">Estudios</h1>
     <div className='flex w-full space-x-4'> 
     <div className='w-1/2 '>
-            <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center shadow-register-field text-gray-400' name="universidad">
+            <Field as="select" className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center shadow-register-field text-gray-400' name="university">
                 <option className='text-black' value="">Universidad</option>
                 {universidades.map((universidad, index) => (
                     <option key={index} className='text-black' value={universidad.nombre}>{universidad.nombre}</option>
                 ))}
             </Field>
-            <ErrorMessage className="text-red-500 text-sm" name="universidad" component="div" />
+            <ErrorMessage className="text-red-500 text-sm" name="university" component="div" />
         </div>
       <div className='w-1/2 '>
-      <Field className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="egreso" placeholder='Año de egreso' />
-        <ErrorMessage className="text-red-500 text-sm" name="egreso" component="div" />
+      <Field className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400' name="date_of_graduation" placeholder='Año de egreso' />
+        <ErrorMessage className="text-red-500 text-sm" name="date_of_graduation" component="div" />
       </div>
     </div>
 

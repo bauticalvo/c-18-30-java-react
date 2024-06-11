@@ -20,7 +20,7 @@ export const FileInputField = ({ field, form }) => {
     return (
       <div className="flex items-center">
         {
-            field.name === 'fotoPerfil' &&(
+            field.name === 'profile_picture' &&(
                 <button
                 type="button"
                 onClick={handleClick}
@@ -32,7 +32,7 @@ export const FileInputField = ({ field, form }) => {
             )
           }
           {
-             field.name === 'certificado' &&  (<button
+             field.name === 'certification' &&  (<button
                 type="button"
                 onClick={handleClick}
                 className='w-full p-2 border border-[#D9D9D9] rounded-[34px] space-x-4 flex items-center justify-center  shadow-register-field text-gray-400'  

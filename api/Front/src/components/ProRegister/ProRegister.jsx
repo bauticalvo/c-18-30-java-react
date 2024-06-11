@@ -9,28 +9,29 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import { obrasArray } from './MedicConsult';
 import { email } from '../Utils/emails';
+import axios from 'axios';
 
 const SignupSchema = Yup.object().shape({
   //Personal Info
-  nombre: Yup.string().required('Ingrese un nombre'),
-  apellido: Yup.string().required('Ingrese un apellido'),
-  email: Yup.string().email('Email inválido').required('Ingrese un email')
-  .test('email-exists', 'Este email ya está en uso', function (value) {
+  name: Yup.string().required('Ingrese un name'),
+  lastname: Yup.string().required('Ingrese un lastname'),
+  mail: Yup.string().email('Email inválido').required('Ingrese un mail')
+  .test('mail-exists', 'Este mail ya está en uso', function (value) {
     return !email.includes(value);
   }),
   codigoPais: Yup.string().required('Ingrese un Codigo de pais'),
-  numeroCelular: Yup.string().required('Ingrese un Numero de celular ')
+  phone: Yup.string().required('Ingrese un Numero de celular ')
   .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
-  sexo: Yup.string().required('Elija una opcion'),
-  localidad: Yup.string().required('Seleccione una localidad'),
-  pais: Yup.string().required('Ingrese un pais '),
-  provincia: Yup.string().required('Ingrese un Estado/Provincia/Región '),
-  codigoPostal: Yup.string().required('Ingrese el codigo postal '),
-  domicilio: Yup.string().required('Ingrese el domicilio '),
-  dni: Yup.string().required('Ingrese el DNI')
+  gender: Yup.string().required('Elija una opcion'),
+  location: Yup.string().required('Seleccione una location'),
+  country_name: Yup.string().required('Ingrese un country_name '),
+  province_name: Yup.string().required('Ingrese un Estado/Provincia/Región '),
+  area_code: Yup.string().required('Ingrese el codigo postal '),
+  office_address: Yup.string().required('Ingrese el domicilio '),
+  DNI: Yup.string().required('Ingrese el DNI')
   .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
-  nacimiento: Yup.date(),
-  fotoPerfil: Yup.mixed().required('Ingrese una foto de perfil'),
+  birthdate: Yup.date(),
+   profile_picture: Yup.mixed().required('Ingrese una foto de perfil'),
   password: Yup.string()
     .min(8, 'La contraseña debe tener al menos 8 caracteres')
     .matches(/[a-zA-Z]/, 'La contraseña debe contener al menos una letra')
@@ -38,16 +39,16 @@ const SignupSchema = Yup.object().shape({
     .matches(/[!@#$%^&*(),.?":{}|<>]/, 'La contraseña debe contener al menos un carácter especial')
     .required('La contraseña es obligatoria'),
   confirmarPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
-    .required('Ingrese la contraseña '),
-//ProfesionalInfo
-    especialidad: Yup.string().required('La especialización es obligatoria'),
-    numeroMatricula: Yup.string().required('El número de matrícula es obligatorio')
-    .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
-    certificado: Yup.mixed().required('El certificado profesional es obligatorio'),
-  experiencia: Yup.string().required('Los años de experiencia son obligatorios'),
-    universidad: Yup.string().required('La universidad es obligatoria'),
-    egreso: Yup.number()
+  .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
+  .required('Ingrese la contraseña '),
+  //ProfesionalInfo
+  specialty: Yup.string().required('La especialización es obligatoria'),
+  tuition: Yup.string().required('El número de matrícula es obligatorio')
+  .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
+  certification: Yup.mixed().required('El certificado profesional es obligatorio'),
+  year_experience: Yup.string().required('Los años de year_experience son obligatorios'),
+    university: Yup.string().required('La universidad es obligatoria'),
+    date_of_graduation: Yup.number()
     .typeError('Debe ser un número')
     .required('El año de egreso es obligatorio')
     .min(1960, 'Debe ser un año válido')
@@ -128,7 +129,7 @@ const SignupSchema = Yup.object().shape({
           return true; 
         })
         .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
-      nombreTitular: Yup.string().test('nombre-titular-required', 'Ingresa el nombre del titular de la cuenta', function(value) {
+      nameTitular: Yup.string().test('name-titular-required', 'Ingresa el name del titular de la cuenta', function(value) {
           const metodoCobro = this.parent.metodoCobro;
           if (metodoCobro && metodoCobro.includes('transferencia')) {
             return !!value;
@@ -154,22 +155,21 @@ const SignupSchema = Yup.object().shape({
           return containsValidOption;
         }
         return true; // No es necesario validar si no está seleccionada la obra social
-      }),
-      })
-    ).max(10),
-  
-  consentimiento: Yup.boolean().oneOf([true], 'Debe aceptar los términos y condiciones'),
-});
+        }),
+        })
+        ).max(10),
+        
+        consentimiento: Yup.boolean().oneOf([true], 'Debe aceptar los términos y condiciones'),
+        });
+        
+        const ProRegister = () => {
+            const navigate = useNavigate()
+            const handleNext = () => setStep(step + 1);
+            const handlePrevious = () => setStep(step - 1);
+            const handleSubmit = () => setSubmit(true)
+            const [step, setStep] = useState(1);
+            const [submit, setSubmit] = useState(false);
 
-const ProRegister = () => {
-  const [step, setStep] = useState(1);
-  const [submit, setSubmit] = useState(false);
-
-  const navigate = useNavigate()
-  const handleNext = () => setStep(step + 1);
-  const handlePrevious = () => setStep(step - 1);
-  const handleSubmit = () => setSubmit(true)
-  
 
   return (
     <div > 
@@ -183,40 +183,79 @@ const ProRegister = () => {
     <div className=" mx-32 p-6 bg-white">
       <Formik
         initialValues={{
-          nombre: '',
-          apellido: '',
-          email: '',
+          //user
+          name: '',
+          lastname: '',
+          mail: '',
           codigoPais: '',
-          numeroCelular: '',
-          sexo: '',
-          localidad: '',
-          pais: '',
-          provincia: '', 
-          codigoPostal: '',
-          domicilio: '',
-          dni: '',
-          nacimiento: '',
-          fotoPerfil: null,
+          phone: '',
+          gender: '',
+          location: '',
+          country_name: '',
+          province_name: '', 
+          area_code: '',
           password: '',
           confirmarPassword: '',
-          especialidad: '',
-          numeroMatricula: '',
-          certificado: null,
-          experiencia: '',
-          universidad: '',
-          egreso: '',
+          DNI: '',
+          birthdate: '',
+          // doctor
+          office_address: '',
+           profile_picture: null,
+          specialty: '',
+          tuition: '',
+          certification: null,
+          year_experience: '',
+          university: '',
+          date_of_graduation: '',
           especialidadType: '',
+          consentimiento: false,
+          //otros entitys
           experiencias: [],
           consults:[],
-          consentimiento: false,
 
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
           if(submit && step===3 ){
-            console.log(values);
-            Swal.fire('Registrado correctamente', '', 'success')
-           // navigate('/')
+            const user ={
+              name: values.name,
+              lastname: values.lastname,
+              mail: values.mail,
+              phone: values.phone,
+              gender: values.gender,
+              location: values.location,
+              country_name: values.country_name,
+              province_name: values.province_name,
+              area_code: values.area_code,
+              password: values.password,
+              confirmarPassword: values.confirmarPassword,
+              DNI: values.DNI,
+              birthdate: values.birthdate,
+            }
+            const doctor = {
+              profile_picture: values.profile_picture,
+             specialty: values.specialty,
+             tuition: values.tuition,
+             certification: values.certification,
+             year_experience:  values.year_experience,
+             university: values.university,
+             date_of_graduation: university.date_of_graduation,
+             office_province:values.province_name,
+             office_address: values.office_address,
+            }
+            console.log(doctor);
+            console.log(user);
+           try {
+                axios.post(`http://localhost:8080/register/doctor`, doctor)
+                axios.post(`http://localhost:8080/register/user`, user)
+                .then(() => {
+                  Swal.fire('Registrado correctamente', '', 'success');
+                  // navigate('/')
+                })
+            } catch (error) {
+              alert('Error al registrar:', error);
+            }
+           
           setSubmit(false)
         } else return
         }}

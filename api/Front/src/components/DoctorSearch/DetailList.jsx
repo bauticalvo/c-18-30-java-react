@@ -144,7 +144,7 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
           };
         });
       }
-      console.log(virtualDays);
+      console.log(consultation);
       
   return (
     <div key={detail.id_doctor}>
@@ -241,15 +241,18 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
                           time: "",
                           speciality: ""
                         }}
+                        onSubmit={(values) =>{
+                          console.log(values);
+                        }}
                         >
                           {({ setFieldValue, values }) => (
                             <Form>
                               <div className='flex space-x-2 mt-4 flex-col'>
-                                <div className='w-4/6 space-x-4 flex'>
+                                <div className='w-4/6 space-x-4 flex h-1/3'>
                                 {consultation?.mode?.includes("Virtual") && (
                                   <button
                                   type='button'
-                                  className={`p-2 w-1/2 rounded ${values.mode === 'Presencial' ? 'bg-[rgba(241,245,255,1)] text-[rgba(147,147,147,1)]' : 'bg-[rgba(154,184,251,1)] text-black'}`}
+                                  className={`p-1 w-1/2 rounded ${values.mode === 'Virtual' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-[rgba(241,245,255,1)] text-[rgba(147,147,147,1)]'}`}
                                   onClick={() => setFieldValue('mode', 'Virtual')}
                                   >
                                     Virtual
@@ -259,20 +262,23 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
                                 {consultation?.mode?.includes("Presencial") && (
                                   <button
                                   type='button'
-                                  className={`p-2 w-1/2 rounded ${values.mode === 'Virtual' || values.mode === '' ? 'bg-[rgba(241,245,255,1)] text-[rgba(147,147,147,1)]' : 'bg-[rgba(154,184,251,1)] text-black'}`}
+                                  className={`p-1 w-1/2 rounded ${values.mode === 'Presencial' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-[rgba(241,245,255,1)] text-[rgba(147,147,147,1)]'}`}
                                   onClick={() => setFieldValue('mode', 'Presencial')}
                                   >
                                     Presencial
                                   </button>
                                 )}
                               </div>
-                              <div className='flex space-x-4 m-4'>
+                              <div className='flex space-x-4 m-4 h-1/3'>
                                 <div className='flex overflow-x-scroll w-1/2 flex-col'>
                                   <h1 className='text-[rgba(102,102,102,1)]'>Día del turno</h1>
                                   <div className='flex space-x-4'>
                                   {
                                      values?.mode?.includes("Virtual") && virtualDays?.map((virtual,index)=> (
-                                      <p key={index}> {virtual.day}</p>
+                                      <div key={index} onClick={() => setFieldValue('day', virtual.date)} className='bg-blue-sec rounded-[6px] p-1 flex flex-col items-center'>
+                                        <p className='text-[10px] ' > {virtual.day}</p>
+                                        <p className='text-xs'>{virtual.date}</p>
+                                      </div>
                                       ))
                                   }
                                   {
@@ -287,6 +293,16 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
                                   <h1 className='text-[rgba(102,102,102,1)]'>Hora del turno</h1>
 
                                 </div>
+                                </div>
+                                <div className='h-1/3'>
+                                <h1 className='text-[rgba(102,102,102,1)]'>Tipo de pacientes</h1>
+                                  {
+                                    consultation.speciality.map((pacient, index) => (
+                                      <div key={index}>
+                                        {pacient}
+                                      </div>
+                                    ))
+                                  }
                                 </div>
                               </div>
                             </Form>
