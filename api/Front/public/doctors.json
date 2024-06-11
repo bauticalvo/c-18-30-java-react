@@ -1,402 +1,132 @@
-[
+ [
     {
-        "name": "Dr. Cardio 1",
         "specialty": "Cardiólogo",
-        "city": "Buenos Aires",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/1.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 123, Buenos Aires",
-        "consultationCost": "ARS 2500"
+        "tuition":"23423",
+        "year_experience": "11",
+        "university": "Univesidad Nacional de Buenos Aires",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+        "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg",
+        "reviews": [4, 3, 1, 5, 2, 4, 3, 3, 2, 1],
+        "officeAddress": "Calle Falsa 123",
+        "officeProvince": "Buenos Aires",
+        "id_doctor": "1",
+        "id_user": "1"
     },
     {
-        "name": "Dr. Cardio 2",
-        "specialty": "Cardiólogo",
-        "city": "Córdoba",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/2.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 456, Córdoba",
-        "consultationCost": "ARS 3000"
+        "specialty": "Pediatra",
+        "tuition": "73647",
+        "year_experience": "15",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
+        "profilePicture": "https://randomuser.me/api/portraits/women/2.jpg",
+        "reviews": [5, 5, 4, 4, 3, 5, 5, 4, 4, 5],
+        "officeAddress": "Avenida Siempre Viva 456",
+        "officeProvince": "Córdoba",
+        "id_doctor": "2",
+        "id_user": "2"
     },
     {
-        "name": "Dr. Cardio 3",
-        "specialty": "Cardiólogo",
-        "city": "Rosario",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/3.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 789, Rosario",
-        "consultationCost": "ARS 2700"
+        "specialty": "Dermatólogo",
+        "tuition": "62342",
+        "year_experience": "8",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
+        "profilePicture": "https://randomuser.me/api/portraits/men/3.jpg",
+        "reviews": [3, 4, 4, 5, 2, 4, 5, 4, 3, 4],
+        "officeAddress": "Boulevard Oroño 789",
+        "officeProvince": "Santa Fe",
+        "id_doctor": "3",
+        "id_user": "3"
     },
     {
-        "name": "Dr. Cardio 4",
-        "specialty": "Cardiólogo",
-        "city": "Mendoza",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/4.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 101, Mendoza",
-        "consultationCost": "ARS 2200"
+        "specialty": "Neuróloga",
+        "tuition": "81574",
+        "year_experience": "12",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
+        "profilePicture": "https://randomuser.me/api/portraits/women/4.jpg",
+        "reviews": [4, 4, 4, 5, 5, 5, 4, 4, 5, 5],
+        "officeAddress": "Calle Independencia 321",
+        "officeProvince": "Mendoza",
+        "id_doctor": "4",
+        "id_user": "4"
     },
     {
-        "name": "Dr. Cardio 5",
-        "specialty": "Cardiólogo",
-        "city": "La Plata",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/5.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 102, La Plata",
-        "consultationCost": "ARS 2600"
+        "specialty": "Ginecólogo",
+        "tuition": "90753",
+        "year_experience": "18",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
+        "profilePicture": "https://randomuser.me/api/portraits/men/5.jpg",
+        "reviews": [5, 4, 4, 3, 5, 5, 4, 4, 3, 4],
+        "officeAddress": "Calle 7 654",
+        "officeProvince": "Buenos Aires",
+        "id_doctor": "5",
+        "id_user": "5"
     },
     {
-        "name": "Dr. Neumo 1",
-        "specialty": "Neumólogo",
-        "city": "Salta",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/6.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 103, Salta",
-        "consultationCost": "ARS 2000"
+        "specialty": "Oftalmóloga",
+        "tuition": "12456",
+        "year_experience": "9",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
+        "profilePicture": "https://randomuser.me/api/portraits/women/6.jpg",
+        "reviews": [5, 5, 5, 5, 4, 5, 5, 5, 4, 5],
+        "officeAddress": "Avenida Belgrano 987",
+        "officeProvince": "Salta",
+        "id_doctor": "6",
+        "id_user": "6"
     },
     {
-        "name": "Dr. Neumo 2",
-        "specialty": "Neumólogo",
-        "city": "Santa Fe",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/7.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 104, Santa Fe",
-        "consultationCost": "ARS 2800"
-    },
-    {
-        "name": "Dr. Neumo 3",
-        "specialty": "Neumólogo",
-        "city": "Tucumán",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/8.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 105, Tucumán",
-        "consultationCost": "ARS 2300"
-    },
-    {
-        "name": "Dr. Neumo 4",
-        "specialty": "Neumólogo",
-        "city": "Mar del Plata",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/9.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 106, Mar del Plata",
-        "consultationCost": "ARS 2700"
-    },
-    {
-        "name": "Dr. Neumo 5",
-        "specialty": "Neumólogo",
-        "city": "Bahía Blanca",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/10.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 107, Bahía Blanca",
-        "consultationCost": "ARS 2200"
-    },
-    {
-        "name": "Dr. Psico 1",
-        "specialty": "Psicólogo",
-        "city": "Buenos Aires",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/11.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 108, Buenos Aires",
-        "consultationCost": "ARS 2400"
-    },
-    {
-        "name": "Dr. Psico 2",
-        "specialty": "Psicólogo",
-        "city": "Córdoba",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/12.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 109, Córdoba",
-        "consultationCost": "ARS 2300"
-    },
-    {
-        "name": "Dr. Psico 3",
-        "specialty": "Psicólogo",
-        "city": "Rosario",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/13.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 110, Rosario",
-        "consultationCost": "ARS 2500"
-    },
-    {
-        "name": "Dr. Psico 4",
-        "specialty": "Psicólogo",
-        "city": "Mendoza",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/14.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 111, Mendoza",
-        "consultationCost": "ARS 2200"
-    },
-    {
-        "name": "Dr. Psico 5",
-        "specialty": "Psicólogo",
-        "city": "La Plata",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/15.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 112, La Plata",
-        "consultationCost": "ARS 2600"
-    },
-    {
-        "name": "Dr. Oftal 1",
-        "specialty": "Oftalmólogo",
-        "city": "Salta",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/16.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 113, Salta",
-        "consultationCost": "ARS 2000"
-    },
-    {
-        "name": "Dr. Oftal 2",
-        "specialty": "Oftalmólogo",
-        "city": "Santa Fe",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/17.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 114, Santa Fe",
-        "consultationCost": "ARS 2800"
-    },
-    {
-        "name": "Dr. Oftal 3",
-        "specialty": "Oftalmólogo",
-        "city": "Tucumán",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/18.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 115, Tucumán",
-        "consultationCost": "ARS 2300"
-    },
-    {
-        "name": "Dr. Oftal 4",
-        "specialty": "Oftalmólogo",
-        "city": "Mar del Plata",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/19.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 116, Mar del Plata",
-        "consultationCost": "ARS 2700"
-    },
-    {
-        "name": "Dr. Oftal 5",
-        "specialty": "Oftalmólogo",
-        "city": "Bahía Blanca",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/20.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 117, Bahía Blanca",
-        "consultationCost": "ARS 2200"
-    },
-    {
-        "name": "Dr. Endo 1",
-        "specialty": "Endocrinólogo",
-        "city": "Buenos Aires",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/21.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 118, Buenos Aires",
-        "consultationCost": "ARS 2400"
-    },
-    {
-        "name": "Dr. Endo 2",
-        "specialty": "Endocrinólogo",
-        "city": "Córdoba",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/22.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 119, Córdoba",
-        "consultationCost": "ARS 2300"
-    },
-    {
-        "name": "Dr. Endo 3",
-        "specialty": "Endocrinólogo",
-        "city": "Rosario",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/23.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 120, Rosario",
-        "consultationCost": "ARS 2500"
-    },
-    {
-        "name": "Dr. Endo 4",
-        "specialty": "Endocrinólogo",
-        "city": "Mendoza",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/24.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 121, Mendoza",
-        "consultationCost": "ARS 2200"
-    },
-    {
-        "name": "Dr. Endo 5",
-        "specialty": "Endocrinólogo",
-        "city": "La Plata",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/25.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 122, La Plata",
-        "consultationCost": "ARS 2600"
-    },
-    {
-        "name": "Dr. Gastro 1",
-        "specialty": "Gastroenterólogo",
-        "city": "Salta",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/26.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 123, Salta",
-        "consultationCost": "ARS 2000"
-    },
-    {
-        "name": "Dr. Gastro 2",
-        "specialty": "Gastroenterólogo",
-        "city": "Santa Fe",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/27.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 124, Santa Fe",
-        "consultationCost": "ARS 2800"
-    },
-    {
-        "name": "Dr. Gastro 3",
-        "specialty": "Gastroenterólogo",
-        "city": "Tucumán",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/28.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 125, Tucumán",
-        "consultationCost": "ARS 2300"
-    },
-    {
-        "name": "Dr. Gastro 4",
-        "specialty": "Gastroenterólogo",
-        "city": "Mar del Plata",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/29.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 126, Mar del Plata",
-        "consultationCost": "ARS 2700"
-    },
-    {
-        "name": "Dr. Gastro 5",
-        "specialty": "Gastroenterólogo",
-        "city": "Bahía Blanca",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/30.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 127, Bahía Blanca",
-        "consultationCost": "ARS 2200"
-    },
-    {
-        "name": "Dr. Trauma 1",
         "specialty": "Traumatólogo",
-        "city": "Buenos Aires",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/31.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 128, Buenos Aires",
-        "consultationCost": "ARS 2400"
+        "tuition": "34895",
+        "year_experience": "10",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
+        "profilePicture": "https://randomuser.me/api/portraits/men/7.jpg",
+        "reviews": [3, 4, 3, 4, 5, 3, 4, 4, 5, 4],
+        "officeAddress": "Calle Güemes 1234",
+        "officeProvince": "Buenos Aires",
+        "id_doctor": "7",
+        "id_user": "7"
     },
     {
-        "name": "Dr. Trauma 2",
-        "specialty": "Traumatólogo",
-        "city": "Córdoba",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/32.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 129, Córdoba",
-        "consultationCost": "ARS 2300"
+        "specialty": "Psicóloga",
+        "tuition": "78654",
+        "year_experience": "14",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
+        "profilePicture": "https://randomuser.me/api/portraits/women/8.jpg",
+        "reviews": [5, 5, 4, 4, 5, 5, 4, 4, 5, 5],
+        "officeAddress": "Calle Mendoza 4321",
+        "officeProvince": "San Juan",
+        "id_doctor": "8",
+        "id_user": "8"
     },
     {
-        "name": "Dr. Trauma 3",
-        "specialty": "Traumatólogo",
-        "city": "Rosario",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/33.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 130, Rosario",
-        "consultationCost": "ARS 2500"
+        "specialty": "Urólogo",
+        "tuition": "94573",
+        "year_experience": "20",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
+        "profilePicture": "https://randomuser.me/api/portraits/men/9.jpg",
+        "reviews": [4, 4, 3, 3, 5, 4, 3, 3, 5, 4],
+        "officeAddress": "Avenida Sarmiento 5678",
+        "officeProvince": "Tucumán",
+        "id_doctor": "9",
+        "id_user": "9"
     },
     {
-        "name": "Dr. Trauma 4",
-        "specialty": "Traumatólogo",
-        "city": "Mendoza",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/34.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 131, Mendoza",
-        "consultationCost": "ARS 2200"
-    },
-    {
-        "name": "Dr. Trauma 5",
-        "specialty": "Traumatólogo",
-        "city": "La Plata",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/35.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 132, La Plata",
-        "consultationCost": "ARS 2600"
-    },
-    {
-        "name": "Dr. Denti 1",
-        "specialty": "Dentista",
-        "city": "Salta",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/36.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 133, Salta",
-        "consultationCost": "ARS 2000"
-    },
-    {
-        "name": "Dr. Denti 2",
-        "specialty": "Dentista",
-        "city": "Santa Fe",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/37.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 134, Santa Fe",
-        "consultationCost": "ARS 2800"
-    },
-    {
-        "name": "Dr. Denti 3",
-        "specialty": "Dentista",
-        "city": "Tucumán",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/38.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 135, Tucumán",
-        "consultationCost": "ARS 2300"
-    },
-    {
-        "name": "Dr. Denti 4",
-        "specialty": "Dentista",
-        "city": "Mar del Plata",
-        "destacado": true,
-        "image": "https://randomuser.me/api/portraits/men/39.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 136, Mar del Plata",
-        "consultationCost": "ARS 2700"
-    },
-    {
-        "name": "Dr. Denti 5",
-        "specialty": "Dentista",
-        "city": "Bahía Blanca",
-        "destacado": false,
-        "image": "https://randomuser.me/api/portraits/men/40.jpg",
-        "reviews": [],
-        "address": "Calle Falsa 137, Bahía Blanca",
-        "consultationCost": "ARS 2200"
+        "specialty": "Endocrinóloga",
+        "tuition": "13579",
+        "year_experience": "17",
+        "certification": "https://resizer.glanacion.com/resizer/v2/la-universidad-de-buenos-aires-confeccionara-y-F5NVVQLRBVBL7ET6NHYJ6XJ3HU.jpg?auth=56dd190c6e230c66c4ca82e531393eced0ecf65c6945170af3dbb73ae6ddb49c&width=880&height=586&quality=70&smart=true",
+
+        "profilePicture": "https://randomuser.me/api/portraits/women/10.jpg",
+        "reviews": [5, 5, 5, 5, 4, 5, 4, 4, 5, 5],
+        "officeAddress": "Calle Roca 876",
+        "officeProvince": "Neuquén",
+        "id_doctor": "10",
+        "id_user": "10"
     }
 ]

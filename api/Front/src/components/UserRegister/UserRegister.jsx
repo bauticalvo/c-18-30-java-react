@@ -51,11 +51,11 @@ const validationSchema = Yup.object({
   }),
   historiaFamiliar: Yup.array().of(Yup.string()),
   otrasEnfermedadesFamilia: Yup.string(),
-  alergias: Yup.array().of(Yup.string()),
-  alergiasMedicamentos: Yup.string(),
-  alergiasAlimentos: Yup.string(),
-  alergiasAmbientales: Yup.string(),
-  otrasAlergias: Yup.string(),
+  alergias: Yup.array().of(Yup.string()).nullable(),
+  alergiasMedicamentos: Yup.string().nullable(),
+  alergiasAlimentos: Yup.string().nullable(),
+  alergiasAmbientales: Yup.string().nullable(),
+  otrasAlergias: Yup.string().nullable(),
   alergiasMedicamentosDescripcion:  Yup.string().test('medicamento-description-required', 'Indique el medicamento', function(value) {
     const { alergiasMedicamentos } = this.parent;
     if (alergiasMedicamentos === 'si') {
@@ -228,13 +228,14 @@ const UserRegister = () => {
                     Continuar
                   </button>
                 ) : (
+                  <>
                   <button
                     type="submit"
                     className="px-10 py-2 bg-[#407BFF] rounded-[4px] text-white "
                     onClick={handleSubmit}
                   >
                     Enviar
-              </button>
+              </button></>
               )}
             </div>
           </Form>
