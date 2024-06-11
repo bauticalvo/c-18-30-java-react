@@ -21,7 +21,7 @@ public class Doctor {
     @Lob
     @Column (columnDefinition = "BLOB")
     private byte[] certification; //picture
-    private int year_experience;
+    private String year_experience;
     private String specialty;
     private String university;
     private Date date_of_graduation;
