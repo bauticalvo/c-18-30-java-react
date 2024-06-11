@@ -10,26 +10,26 @@ import { useNavigate } from "react-router-dom";
 import { email } from '../Utils/emails';
 
 const validationSchema = Yup.object({
-  nombre: Yup.string().required('Ingrese un nombre'),
-  apellido: Yup.string().required('Ingrese un apellido'),
+  name: Yup.string().required('Ingrese un nombre'),
+  lastname: Yup.string().required('Ingrese un apellido'),
   codigoPais: Yup.string().required('Ingrese un código de país'),
-  numeroCelular: Yup.string().required('Ingrese un número de celular')
+  phone: Yup.string().required('Ingrese un número de celular')
   .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
-  email: Yup.string().email('Email inválido').required('Ingrese un email')
+  mail: Yup.string().email('Email inválido').required('Ingrese un email')
   .test('email-exists', 'Este email ya está en uso', function (value) {
     return !email.includes(value);
   }),
-  dni: Yup.string().required('Ingrese el DNI'),
-  nacimiento: Yup.date().required('Ingrese una fecha de nacimiento'),
-  sexo: Yup.string().required('Seleccione un sexo'),
+  DNI: Yup.string().required('Ingrese el DNI'),
+  birthdate: Yup.date().required('Ingrese una fecha de nacimiento'),
+  gender: Yup.string().required('Seleccione un sexo'),
   domicilio: Yup.string().required('Ingrese el domicilio'),
-  codigoPostal: Yup.string().required('Ingrese el código postal'),
-  localidad: Yup.string().required('Seleccione una localidad'),
-  provincia: Yup.string().required('Seleccione una provincia'),
-  pais: Yup.string().required('Seleccione un país'),
-  altura: Yup.number().required('Ingrese la altura'),
-  peso: Yup.number().required('Ingrese el peso'),
-  grupoSanguineo: Yup.string().required('Seleccione el grupo sanguíneo'),
+  area_code: Yup.string().required('Ingrese el código postal'),
+  location: Yup.string().required('Seleccione una localidad'),
+  province_name: Yup.string().required('Seleccione una provincia'),
+  country_name: Yup.string().required('Seleccione un país'),
+  height: Yup.number().required('Ingrese la altura'),
+  weight: Yup.number().required('Ingrese el peso'),
+  blood_type: Yup.string().required('Seleccione el grupo sanguíneo'),
   factor: Yup.string().required('Seleccione el factor'),
   password: Yup.string()
     .min(8, 'La contraseña debe tener al menos 8 caracteres')
@@ -136,25 +136,31 @@ const UserRegister = () => {
     <div className=" mx-32 p-6 bg-white">
       <Formik
         initialValues={{
-          nombre: '',
-          apellido: '',
+          //user
+          name: '',
+          lastname: '',
+          mail: '',
           codigoPais: '',
-          numeroCelular: '',
-          email: '',
-          dni: '',
-          nacimiento: '',
-          sexo: '',
-          domicilio: '',
-          codigoPostal: '',
-          localidad: '',
-          provincia: '',
-          pais: '',
-          altura: '',
-          peso: '',
-          grupoSanguineo: '',
-          factor: '',
+          phone: '',
+          gender: '',
+          location: '',
+          country_name: '',
+          province_name: '', 
+          area_code: '',
           password: '',
           confirmarPassword: '',
+          DNI: '',
+          birthdate: '',
+          domicilio: '',
+
+
+//patient
+          height: '',
+          weight: '',
+          blood_type: '',
+          factor: '',
+
+
           enfermedadesCronicas: [],
           otrasEnfermedades: '',
           cirugias: '',
@@ -177,33 +183,53 @@ const UserRegister = () => {
           otrasAlergiasDescripcion: '',
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-            if(submit && step=== 2){
-              Swal.fire({
-                title: 'Quieres guardar los cambios?',
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: 'Si',
-                denyButtonText: 'No',
-                cancelButtonText: 'Cancelar',
-                customClass: {
-                  actions: 'my-actions',
-                  cancelButton: 'order-1 right-gap',
-                  confirmButton: 'order-2',
-                  denyButton: 'order-3',
-                },
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  Swal.fire('Guardados!', '', 'success')
-                  console.log(values);
-                  
-                } else if (result.isDenied) {
-                  Swal.fire('Para registrarse es necesario guardar los datos', '', 'info')
-                }
+        onSubmit={(values, { setSubmitting }) => {
+          if (submit && step === 2) {
+            const user = {
+              name: values.name,
+              lastname: values.lastname,
+              mail: values.mail,
+              phone: values.phone,
+              gender: values.gender,
+              location: values.location,
+              country_name: values.country_name,
+              province_name: values.province_name,
+              area_code: values.area_code,
+              password: values.password,
+              DNI: values.DNI,
+              birthdate: values.birthdate,
+            };
+            const patient = {
+              height: values.height,
+              weight: values.weight,
+              blood_type: values.blood_type,
+              factor: values.factor,
+    
+            }
+            console.log(user);
+            console.log(patient);
+            axios
+              .post(`http://localhost:8080/auth/register/user`, user)
+              .then((response) => {
+                formData.append('id_user', response.data.id_user)
+                axios.post(`http://localhost:8080/auth/register/patient`, patient)
+                  .then(() => {
+                    Swal.fire('Registrado correctamente', '', 'success');
+                    navigate('/')
+                  })
+                  .catch((error) => {
+                    alert('Error al registrar el usuario:', error);
+                  });
               })
-              //navigate('/')
-            } else return 
-          }}
+              .catch((error) => {
+                alert('Error al registrar el Usuario:', error);
+              })
+              .finally(() => {
+                setSubmitting(false);
+                setSubmit(false);
+              });
+          } else return;
+        }}
       >
         {({ setFieldValue, values }) => (
           <Form className="space-y-4">

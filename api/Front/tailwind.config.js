@@ -21,7 +21,8 @@ export default {
         'black-60': 'rgba(0, 0, 0, 0.6)',
         'blue-40': '#407BFF',
         'green-sec': 'rgba(221, 252, 92, 1)',
-        'blue-sec': 'rgba(154,184,251,1)'
+        'blue-sec': 'rgba(154,184,251,1)',
+        'gray-sec': 'rgba(241,245,255,1)'
       },
       boxShadow: {
         'custom-shadow': '4px 5px 5.2px 0px #00000014',

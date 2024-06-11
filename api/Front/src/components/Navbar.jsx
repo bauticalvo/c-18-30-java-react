@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <nav className="bg-[#FDFDFD] h-10hv md:px-10 lg:px-20 flex justify-between items-center shadow-md">
-      <div className="flex items-center">
+      <div className="flex items-center h-[80px]  w-[100px]">
         <Link to='/'>
-          <img src="/logo.saludonline.png" className='h-[50px] md:h-[60px] lg:h-[100px] w-auto' alt="Logo" />
+          <img src="/saludonline.png" className='' alt="Logo" />
         </Link>
       </div>
       <div className="flex items-center h-1/2">

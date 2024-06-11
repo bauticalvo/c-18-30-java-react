@@ -11,6 +11,8 @@ import { LuStethoscope } from "react-icons/lu";
 import { PiHospitalFill } from "react-icons/pi";
 import { TbNurse } from "react-icons/tb";
 import { Form, Formik  } from 'formik';
+import { GoArrowRight } from "react-icons/go";
+import Swal from 'sweetalert2'  
 
 const DetailList = ({detail, isSticky, setCertification,certification }) => {
   const [promedioReviews, setPromedioReviews] = useState(null);
@@ -21,8 +23,9 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
   const [experiencie, setExperiencie] = useState([])
   const [virtualDays, setVirtualDays] = useState([])
   const [presencialDays, setPresencialDays] = useState([])
-  
-
+  const [submit, setSubmit] = useState(false)
+  const [virtualHours, setVirtualHours] = useState([])
+  const [presencialHours, setPresencialHours] = useState([])
 
     useEffect(() => {
         const calculateReview = () => {
@@ -84,13 +87,23 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
         }
         const handleDays = ()=>{
           doctorConsultations.map( cons => {
-            cons.mode === 'Virtual' ? setVirtualDays(getDatesForDays(cons.days))  : setPresencialDays(cons.days)
+            cons.mode === 'Virtual' ? setVirtualDays(getDatesForDays(cons.days))  : setPresencialDays(getDatesForDays(cons.days))
           })
         }
         handleDays()
+        
+        const handleHours = ()=>{
+          doctorConsultations.map( cons => {
+            cons.mode === 'Virtual' ? setVirtualHours(generateIntermediateHours(cons.since, cons.until))  : setPresencialHours(generateIntermediateHours(cons.since, cons.until))
+          })
+        }
+
+        handleHours()
 
       }, [doctorConsultations]);
 
+
+      
 
       const fullStars = () => {
         const star = [];
@@ -113,6 +126,24 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
       const handleCertification = ()=>{
         setCertification(!certification)
       }
+
+      function generateIntermediateHours(start, end) {
+        let startTime = new Date(`1970-01-01T${start}:00`);
+        let endTime = new Date(`1970-01-01T${end}:00`);
+      
+        let hours = [];
+      
+        while (startTime < endTime) {
+          let hoursString = startTime.toTimeString().slice(0, 5);
+          hours.push(hoursString);
+      
+          startTime.setHours(startTime.getHours() + 1);
+        }
+      
+      
+        return hours;
+      }
+
       function getDatesForDays(days) {
         const daysOfWeek = {
           "Lunes": 1,
@@ -136,7 +167,7 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
           const targetDate = new Date(today);
           targetDate.setDate(currentDate + diff);
       
-          const formattedDate = `${String(targetDate.getDate()).padStart(2, '0')}/${String(targetDate.getMonth() + 1).padStart(2, '0')}/${targetDate.getFullYear()}`;
+          const formattedDate = `${String(targetDate.getDate()).padStart(2, '0')}-${String(targetDate.getMonth() + 1).padStart(2, '0')}`;
       
           return {
             day,
@@ -144,7 +175,43 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
           };
         });
       }
-      console.log(consultation);
+      const handleSubmit = () => setSubmit(true)
+
+
+
+const showErrorAlert = () => {
+  Swal.fire({
+    position: 'top-end',
+    icon: 'info',
+    title: 'Por favor, completa todos los campos.',
+    background: '#DDFC5C',
+    toast: true,
+    timer: 5000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    customClass: {
+      popup: 'swal2-smaller-popup', 
+      timerProgressBar: 'swal2-timer-bar',
+    }
+  });
+};
+
+const styles = `
+  .swal2-smaller-popup {
+    width: 250px !important;
+    padding: 1rem !important;
+    font-size: 0.875rem !important;
+  }
+  .swal2-timer-bar {
+    background-color: #9AB8FB !important;
+  }
+`;
+
+const styleSheet = document.createElement("style");
+styleSheet.type = "text/css";
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
+
       
   return (
     <div key={detail.id_doctor}>
@@ -238,12 +305,50 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
                         initialValues={{
                           mode: "",
                           day: "",
-                          time: "",
+                          hour: "",
                           speciality: ""
                         }}
-                        onSubmit={(values) =>{
-                          console.log(values);
+                        onSubmit={(values) => {
+                          if (submit) {
+                            const hasEmptyFields = (obj) => {
+                              for (let key in obj) {
+                                if (obj[key].trim() === '') {
+                                  return true;
+                                }
+                              }
+                              return false;
+                            };
+                        
+                            if (hasEmptyFields(values)) {
+                              showErrorAlert();
+                              return; 
+                            }
+                            Swal.fire({
+                              title: '¿Estás seguro de guardar los cambios realizados?',
+                              showDenyButton: false,
+                              showCancelButton: true,
+                              confirmButtonText: 'Yes',
+                              denyButtonText: 'No',
+                              width:   '900px' ,
+                              
+                              customClass: {
+                                actions: 'my-actions',
+                                cancelButton: 'order-1 right-gap',
+                                confirmButton: 'order-2',
+                                denyButton: 'order-3',
+                              },
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                Swal.fire('Turno Solicitado!', '', 'success')
+                              } else if (result.isDenied) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                              }
+                            })
+                            console.log(values);
+                            setSubmit(false);
+                          }
                         }}
+                        
                         >
                           {({ setFieldValue, values }) => (
                             <Form>
@@ -252,7 +357,7 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
                                 {consultation?.mode?.includes("Virtual") && (
                                   <button
                                   type='button'
-                                  className={`p-1 w-1/2 rounded ${values.mode === 'Virtual' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-[rgba(241,245,255,1)] text-[rgba(147,147,147,1)]'}`}
+                                  className={`p-1 w-1/2 rounded ${values.mode === 'Virtual' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
                                   onClick={() => setFieldValue('mode', 'Virtual')}
                                   >
                                     Virtual
@@ -262,47 +367,83 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
                                 {consultation?.mode?.includes("Presencial") && (
                                   <button
                                   type='button'
-                                  className={`p-1 w-1/2 rounded ${values.mode === 'Presencial' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-[rgba(241,245,255,1)] text-[rgba(147,147,147,1)]'}`}
+                                  className={`p-1 w-1/2 rounded ${values.mode === 'Presencial' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
                                   onClick={() => setFieldValue('mode', 'Presencial')}
                                   >
                                     Presencial
                                   </button>
                                 )}
                               </div>
-                              <div className='flex space-x-4 m-4 h-1/3'>
+                              <div className='flex space-x-4 m-4 h-1/3 text-black font-medium'>
                                 <div className='flex overflow-x-scroll w-1/2 flex-col'>
                                   <h1 className='text-[rgba(102,102,102,1)]'>Día del turno</h1>
                                   <div className='flex space-x-4'>
                                   {
                                      values?.mode?.includes("Virtual") && virtualDays?.map((virtual,index)=> (
-                                      <div key={index} onClick={() => setFieldValue('day', virtual.date)} className='bg-blue-sec rounded-[6px] p-1 flex flex-col items-center'>
+                                      <button type='button'  key={index} onClick={() => setFieldValue('day', virtual.date)}
+                                      className={` ${values.day === virtual.date ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
                                         <p className='text-[10px] ' > {virtual.day}</p>
                                         <p className='text-xs'>{virtual.date}</p>
-                                      </div>
+                                      </button>
                                       ))
                                   }
                                   {
-                                    values?.mode?.includes("Presencial") && presencialDays.map((day,index) => (
-                                      <p key={index}> {day}</p>
-
+                                    values?.mode?.includes("Presencial") && presencialDays.map((presencial,index) => (
+                                      <button type='button'  key={index} onClick={() => setFieldValue('day', presencial.date)}
+                                      className={` ${values.day === presencial.date ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
+                                        <p className='text-[10px] ' > {presencial.day}</p>
+                                        <p className='text-xs'>{presencial.date}</p>
+                                      </button>
                                       ))
                                   }
                                   </div>
                                 </div>
-                                <div className='flex overflow-x-scroll w-1/2'>
+                                <div className='flex flex-col overflow-x-scroll w-1/2'>
                                   <h1 className='text-[rgba(102,102,102,1)]'>Hora del turno</h1>
-
+                                  <div className='flex'>
+                                  {
+                                    values?.mode?.includes("Virtual") && virtualHours.map((hour, index) => (
+                                      <div>
+                                       <button type='button'  key={index} onClick={() => setFieldValue('hour', hour )}
+                                          className={` ${values.hour === hour ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
+                                        {hour}
+                                          </button>
+                                      </div>
+                                    ))
+                                  }
+                                  {
+                                   values?.mode?.includes("Presencial") && presencialHours.map((hour, index) => (
+                                      <div>
+                                       <button type='button'  key={index} onClick={() => setFieldValue('hour', hour )}
+                                          className={` ${values.hour === hour ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
+                                        {hour}
+                                          </button>
+                                      </div>
+                                    ))
+                                  }
+                                  </div>
                                 </div>
                                 </div>
                                 <div className='h-1/3'>
                                 <h1 className='text-[rgba(102,102,102,1)]'>Tipo de pacientes</h1>
+                                <div className='flex space-x-2'> 
                                   {
-                                    consultation.speciality.map((pacient, index) => (
-                                      <div key={index}>
+                                    consultation?.speciality?.map((pacient, index) => (
+                                      <button type='button'  key={index} onClick={() => setFieldValue('speciality', pacient)}
+                                        className={` ${values.speciality === pacient ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}
+                                      >
                                         {pacient}
-                                      </div>
+                                      </button >
                                     ))
-                                  }
+                                    }
+                                </div>
+                                </div>
+                                <div className='w-full flex items-center justify-end '>
+                                  <button type='submit' onClick={() => handleSubmit()}
+                                    className='flex items-center space-x-2 bg-green-sec rounded-[38px] px-4 py-2'
+                                    >
+                                    <p>Solicitar</p> < GoArrowRight />
+                                  </button>
                                 </div>
                               </div>
                             </Form>
