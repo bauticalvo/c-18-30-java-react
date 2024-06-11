@@ -29,5 +29,6 @@ public class Patient {
     private String family_history_of_diseases;
 
     @JoinColumn
-    private int id_user;
+    private int id_user;    
+    
 }
