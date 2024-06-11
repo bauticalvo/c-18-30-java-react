@@ -215,9 +215,10 @@ const SignupSchema = Yup.object().shape({
 
         }}
         validationSchema={SignupSchema}
-        onSubmit={(values) => {
-          if(submit && step===3 ){
-            const user ={
+        onSubmit={(values, { setSubmitting }) => {
+          if (submit && step === 3) {
+            const formData = new FormData();
+            const user = {
               name: values.name,
               lastname: values.lastname,
               mail: values.mail,
@@ -228,40 +229,44 @@ const SignupSchema = Yup.object().shape({
               province_name: values.province_name,
               area_code: values.area_code,
               password: values.password,
-              confirmarPassword: values.confirmarPassword,
               DNI: values.DNI,
               birthdate: values.birthdate,
-            }
-            const doctor = {
-              profile_picture: values.profile_picture,
-             specialty: values.specialty,
-             tuition: values.tuition,
-             certification: values.certification,
-             year_experience:  values.year_experience,
-             university: values.university,
-             date_of_graduation: values.date_of_graduation,
-             office_province:values.province_name,
-             office_address: values.office_address,
-            }
-            console.log(doctor);
-            console.log(user);
-           try {
-                axios.post(`http://localhost:8080/auth/register/doctor`, doctor)
-                axios.post(`http://localhost:8080/auth/register/user`, user)
-                .then(() => {
-                  Swal.fire('Registrado correctamente', '', 'success');
-                  // navigate('/')
-                })
-            } catch (error) {
-              alert('Error al registrar:', error);
-            }
-           
-          setSubmit(false)
-        } else return
+            };
+            formData.append('office_address', values.office_address);
+            formData.append('profile_picture', values.profile_picture);
+            formData.append('specialty', values.specialty);
+            formData.append('tuition', values.tuition);
+            formData.append('certification', values.certification);
+            formData.append('year_experience', values.year_experience);
+            formData.append('university', values.university);
+            formData.append('date_of_graduation', values.date_of_graduation);
+            formData.append('office_province', values.province_name);
+        
+            axios
+              .post(`http://localhost:8080/auth/register/user`, user)
+              .then((response) => {
+                formData.append('id_user', response.data.id_user)
+                axios.post(`http://localhost:8080/auth/register/doctor`, formData)
+                  .then(() => {
+                    Swal.fire('Registrado correctamente', '', 'success');
+                    // navigate('/')
+                  })
+                  .catch((error) => {
+                    alert('Error al registrar el usuario:', error);
+                  });
+              })
+              .catch((error) => {
+                alert('Error al registrar el doctor:', error);
+              })
+              .finally(() => {
+                setSubmitting(false);
+                setSubmit(false);
+              });
+          } else return;
         }}
       >
         {({ setFieldValue }) => (
-          <Form className="space-y-4">
+          <Form className="space-y-4" encType='multipart/form-data'>
             {step === 1 && <PersonalInfo  setFieldValue={setFieldValue} />}
             {step === 2 && <ProfesionalInfo  setFieldValue={setFieldValue} />}
             {step === 3 && <MedicConsultInfo  setFieldValue={setFieldValue} />}

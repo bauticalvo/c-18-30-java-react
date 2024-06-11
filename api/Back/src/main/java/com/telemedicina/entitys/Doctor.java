@@ -24,7 +24,7 @@ public class Doctor {
     private String year_experience;
     private String specialty;
     private String university;
-    private Date date_of_graduation;
+    private String date_of_graduation;
     private String office_address;
     private String office_province;
     @Lob

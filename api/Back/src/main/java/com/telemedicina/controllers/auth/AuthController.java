@@ -35,10 +35,10 @@ public class AuthController {
     public ResponseEntity<Doctor> registerDoctor( @RequestParam("certification") MultipartFile certificationFile,
                                                   @RequestParam("profile_picture") MultipartFile profilePictureFile,
                                                   @RequestParam("tuition") int tuition,
-                                                  @RequestParam("year_experience") int yearExperience,
+                                                  @RequestParam("year_experience") String yearExperience,
                                                   @RequestParam("specialty") String specialty,
                                                   @RequestParam("university") String university,
-                                                  @RequestParam("date_of_graduation") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateOfGraduation,
+                                                  @RequestParam("date_of_graduation") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) String dateOfGraduation,
                                                   @RequestParam("office_address") String officeAddress,
                                                   @RequestParam("office_province") String officeProvince,
                                                   @RequestParam("id_user") int idUser) {
@@ -97,7 +97,7 @@ public class AuthController {
     }
 
     @PostMapping ("/register/user")
-    public ResponseEntity<AuthResponse> registerUser (@RequestBody User user){
+    public ResponseEntity<User> registerUser (@RequestBody User user){
         try {
             if (user != null) {
                 return ResponseEntity.ok(authService.registerUser(user));

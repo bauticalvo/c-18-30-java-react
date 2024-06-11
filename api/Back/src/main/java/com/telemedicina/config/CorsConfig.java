@@ -12,9 +12,9 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin(""); // Permite solicitudes desde cualquier origen. Puedes ajustarlo según tus necesidades.
-        config.addAllowedMethod(""); // Permite todos los métodos HTTP (GET, POST, PUT, DELETE, etc.).
-        config.addAllowedHeader("*"); // Permite todos los encabezados en las solicitudes.
+        config.addAllowedOrigin("http://localhost:5173"); // Permitir solicitudes desde el origen de tu aplicación React
+        config.addAllowedMethod("*"); // Permitir todos los métodos HTTP (GET, POST, PUT, DELETE, etc.)
+        config.addAllowedHeader("*"); // Permitir todos los encabezados en las solicitudes
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

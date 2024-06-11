@@ -37,13 +37,12 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public AuthResponse registerUser (User user){
+    public User registerUser (User user){
         try {
+            user.setUsername(user.getMail());
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
-            return AuthResponse.builder()
-                    .token(jwtService.getToken(user))
-                    .build();
+            return user;
         } catch (DataIntegrityViolationException e) {
             throw new IllegalArgumentException("Username already exists");
         }
