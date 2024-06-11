@@ -39,6 +39,7 @@ public class AuthService {
 
     public AuthResponse registerUser (User user){
         try {
+            user.setUsername(user.getMail());
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
             return AuthResponse.builder()

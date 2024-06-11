@@ -11,5 +11,4 @@ public interface MedicalConsultationDTO {
     String getDoctorName();
     String getDoctorLastName();
     String getDoctorSpecialty();
-    
 }

@@ -28,6 +28,7 @@ public class User implements UserDetails {
     private String lastname;
     @NotNull
     private int DNI;
+    @Column(unique = true)
     private String mail;
     private Date birthdate;
     private String gender;

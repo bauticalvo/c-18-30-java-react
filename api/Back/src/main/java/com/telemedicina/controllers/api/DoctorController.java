@@ -27,11 +27,17 @@ public class DoctorController {
         return ResponseEntity.ok(doctors);
     }
 
+    @GetMapping("/specialty_and_city")
+    public ResponseEntity<List<DoctorWithUserDetails>> getDoctorsBySpecialtyAndCity (@RequestParam String specialty, @RequestParam String city){
+        List<DoctorWithUserDetails> doctors = doctorService.getDoctorsBySpecialtyAndCity(specialty, city);
+        if (doctors.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(doctors);
+    }
+
     @GetMapping("/mode")
     public ResponseEntity<List<DoctorWithUserDetails>> getDoctorsByMode (@RequestParam boolean mode){
-        System.out.println("Valor de mode recibido: " + mode);
         List<DoctorWithUserDetails> doctors = doctorService.getDoctorsByMode(mode);
-        System.out.println("Doctorcontroller: " + doctors);
         if (doctors.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok(doctors);

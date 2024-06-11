@@ -20,7 +20,6 @@ public class DoctorConsultationDataService {
     public DoctorConsultationData addConsultationData(DoctorConsultationData doctorConsultationData) {
         Doctor doctor_db = doctorRepository.findById_doctor(doctorConsultationData.getDoctor().getId_doctor());
         doctorConsultationData.setDoctor(doctor_db);
-        System.out.println(doctorConsultationData);
         return doctorConsultationDataRepository.save(doctorConsultationData);
     }
 }
