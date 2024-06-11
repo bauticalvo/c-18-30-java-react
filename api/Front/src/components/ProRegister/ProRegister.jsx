@@ -108,7 +108,7 @@ const SignupSchema = Yup.object().shape({
       .test('metodo-cobro-required', 'Selecciona al menos un método de cobro', function (value) {
         return value && value.length > 0;
       }),
-      obraSocial: Yup.array().test('obra-social-required', 'Selecciona al menos una obra social válida', function(value) {
+        obraSocial: Yup.array().test('obra-social-required', 'Selecciona al menos una obra social válida', function(value) {
         const metodoCobro = this.parent.metodoCobro;
         const isObraSocialSelected = metodoCobro && metodoCobro.includes('obraSocial');
         const obraSocialValue = this.parent.obraSocial;
@@ -144,7 +144,7 @@ const SignupSchema = Yup.object().shape({
           return true; 
         })
         .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
-      efectivo: Yup.array().test('efectivo-required', 'Selecciona al menos una forma de pago válida', function(value) {
+        efectivo: Yup.array().test('efectivo-required', 'Selecciona al menos una forma de pago válida', function(value) {
         const metodoCobro = this.parent.metodoCobro;
         const isefectivoSelected = metodoCobro && metodoCobro.includes('efectivo');
         const efectivoValue = this.parent.efectivo;
@@ -239,15 +239,15 @@ const SignupSchema = Yup.object().shape({
              certification: values.certification,
              year_experience:  values.year_experience,
              university: values.university,
-             date_of_graduation: university.date_of_graduation,
+             date_of_graduation: values.date_of_graduation,
              office_province:values.province_name,
              office_address: values.office_address,
             }
             console.log(doctor);
             console.log(user);
            try {
-                axios.post(`http://localhost:8080/register/doctor`, doctor)
-                axios.post(`http://localhost:8080/register/user`, user)
+                axios.post(`http://localhost:8080/auth/register/doctor`, doctor)
+                axios.post(`http://localhost:8080/auth/register/user`, user)
                 .then(() => {
                   Swal.fire('Registrado correctamente', '', 'success');
                   // navigate('/')
@@ -260,7 +260,7 @@ const SignupSchema = Yup.object().shape({
         } else return
         }}
       >
-        {({ setFieldValue, values }) => (
+        {({ setFieldValue }) => (
           <Form className="space-y-4">
             {step === 1 && <PersonalInfo  setFieldValue={setFieldValue} />}
             {step === 2 && <ProfesionalInfo  setFieldValue={setFieldValue} />}
