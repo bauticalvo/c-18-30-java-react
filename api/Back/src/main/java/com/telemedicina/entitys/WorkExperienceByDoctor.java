@@ -21,9 +21,8 @@ public class WorkExperienceByDoctor {
 
     private String charge;
     private String company;
-    private Date since;
-    @Nullable
-    private Date until;
+    private String since;
+    private String until;
     private boolean current_job;
 
     @ManyToOne

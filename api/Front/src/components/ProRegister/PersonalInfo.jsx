@@ -107,8 +107,8 @@ const PersonalInfo = ({ setFieldValue }) => {
           </div>
 
           <div className="w-1/3">
-            <Field name="DNI" className="w-full p-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" placeholder='Número de DNI' />
-            <ErrorMessage name="DNI" component="div" className="text-red-600 text-sm" />
+            <Field name="dni" className="w-full p-2 border border-[#D9D9D9] rounded-[34px] shadow-register-field" placeholder='Número de DNI' />
+            <ErrorMessage name="dni" component="div" className="text-red-600 text-sm" />
           </div>
           <div className="w-1/3">
       {
