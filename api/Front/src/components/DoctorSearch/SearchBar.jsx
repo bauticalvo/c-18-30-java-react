@@ -11,7 +11,7 @@ const SearchBar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/doctor`)
+    axios.get(`http://localhost:8080/doctor/`)
       .then(response => {
         const uniqueSpecialties = [...new Set(response.data.map(doctor => doctor.specialty))];
         const uniqueCities = [...new Set(response.data.map(doctor => doctor.officeProvince))];

@@ -20,10 +20,12 @@ const DoctorsList = () => {
         const fetchDoctors = async () => {
             try {
                 let response;
-                if (specialtyFilter && cityFilter) {
-                    response = await axios.get(`http://localhost:8080/api/doctor/specialty_and_city?specialty=${specialtyFilter}&city=${cityFilter}`);
-                } else if (specialtyFilter) {
-                    response = await axios.get(`http://localhost:8080/api/doctor/specialty?specialty=${specialtyFilter}`);
+                if (specialtyFilter && !cityFilter) {
+                    response = await axios.get(`http://localhost:8080/doctor/specialty?specialty=${specialtyFilter}`);
+                    console.log (response)
+                } else if (specialtyFilter && cityFilter) {
+                    response = await axios.get(`http://localhost:8080/doctor/specialty_and_city?specialty=${specialtyFilter}&city=${cityFilter}`);
+                    console.log (response)
                 } else {
                     setDoctors([]);
                     return;
