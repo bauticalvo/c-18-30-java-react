@@ -124,7 +124,7 @@ const UserRegister = () => {
     const handleSubmit = () => {
       setSubmit(true)
     } 
-    
+
 
   return (
     <div> 
@@ -199,20 +199,22 @@ const UserRegister = () => {
               DNI: values.DNI,
               birthdate: values.birthdate,
             };
-            const patient = {
-              height: values.height,
-              weight: values.weight,
-              blood_type: values.blood_type,
-              factor: values.factor,
-    
-            }
-            console.log(user);
-            console.log(patient);
             axios
               .post(`http://localhost:8080/auth/register/user`, user)
               .then((response) => {
-                formData.append('id_user', response.data.id_user)
-                axios.post(`http://localhost:8080/auth/register/patient`, patient)
+                const id_user = response.data.id_user
+                axios.post(`http://localhost:8080/auth/register/patient`, {
+                  height: values.height,
+                  weight: values.weight,
+                  blood_type: values.blood_type,
+                  factor: values.factor,
+                  patient: {
+                    id_user: id_user},  
+                  alergic: !values.alergias.includes('ninguna') ? values.alergias.join(",") : 'Ninguno',
+                  chronic_diseases: !values.enfermedadesCronicas.includes('ninguna') ?  values.enfermedadesCronicas.join(",") : 'Ninguno' ,
+                  medicines: values.medicamento === '' ? 'Ninguno' : values.medicamento ,
+                  family_history_of_diseases: !values.historiaFamiliar.includes('ninguna') ? values.historiaFamiliar.join(",") : 'Ninguno',
+                })
                   .then(() => {
                     Swal.fire('Registrado correctamente', '', 'success');
                     navigate('/')

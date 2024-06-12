@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IoSearch } from "react-icons/io5";
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 
 const SearchBar = () => {
@@ -12,19 +13,19 @@ const SearchBar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      fetch('/doctors.json')
-          .then(response => response.json())
-          .then(data => {
-              const uniqueSpecialties = [...new Set(data.map(doctor => doctor.specialty))];
-              const uniqueCities = [...new Set(data.map(doctor => doctor.officeProvince))];
-              setSpecialties(uniqueSpecialties);
-              setCities(uniqueCities);
-          })
-          .catch(error => console.error('Error fetching doctors:', error));
+    axios.get('http://localhost:8080/api/doctor/')
+      .then(response => {
+        const data = response.data;
+        const uniqueSpecialties = [...new Set(data.map(doctor => doctor.specialty))];
+        const uniqueCities = [...new Set(data.map(doctor => doctor.officeProvince))];
+        setSpecialties(uniqueSpecialties);
+        setCities(uniqueCities);
+      })
+      .catch(error => console.error('Error fetching doctors:', error));
   }, []);
 
   const handleSearch = () => {
-      navigate(`/doctors?specialty=${specialty}&officeProvince=${officeProvince}`);
+      navigate(`/doctor?specialty=${specialty}&officeProvince=${officeProvince}`);
   };
 
   return (
