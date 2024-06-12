@@ -170,7 +170,7 @@ const SignupSchema = Yup.object().shape({
             const [step, setStep] = useState(1);
             const [submit, setSubmit] = useState(false);
 
-
+console.log(localStorage.getItem('doctor'));
   return (
     <div > 
 
@@ -217,6 +217,8 @@ const SignupSchema = Yup.object().shape({
         validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
           if (submit && step === 3) {
+            localStorage.setItem('doctor', JSON.stringify(values))
+            alert('guardado en local storage')
             const formData = new FormData();
             const user = {
               name: values.name,
