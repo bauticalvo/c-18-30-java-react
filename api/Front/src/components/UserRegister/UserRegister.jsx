@@ -125,7 +125,7 @@ const UserRegister = () => {
     const handleSubmit = () => {
       setSubmit(true)
     } 
-    
+
 
   return (
     <div> 
@@ -200,22 +200,29 @@ const UserRegister = () => {
               DNI: values.DNI,
               birthdate: values.birthdate,
             };
-        
             axios
-              .post("http://localhost:8080/auth/register/user", user)
+              .post(`http://localhost:8080/auth/register/user`, user)
               .then((response) => {
-                const id_user = response.data.id_user;
-                return axios.post("http://localhost:8080/auth/register/patient", {
+                const id_user = response.data.id_user
+                axios.post(`http://localhost:8080/auth/register/patient`, {
                   height: values.height,
                   weight: values.weight,
                   blood_type: values.blood_type,
                   factor: values.factor,
-                  id_user: id_user,
+                  patient: {
+                    id_user: id_user},  
                   alergic: !values.alergias.includes('ninguna') ? values.alergias.join(",") : 'Ninguno',
                   chronic_diseases: !values.enfermedadesCronicas.includes('ninguna') ?  values.enfermedadesCronicas.join(",") : 'Ninguno' ,
                   medicines: values.medicamento === '' ? 'Ninguno' : values.medicamento ,
                   family_history_of_diseases: !values.historiaFamiliar.includes('ninguna') ? values.historiaFamiliar.join(",") : 'Ninguno',
-                });
+                })
+                  .then(() => {
+                    Swal.fire('Registrado correctamente', '', 'success');
+                    navigate('/')
+                  })
+                  .catch((error) => {
+                    alert('Error al registrar el usuario:', error);
+                  });
               })
               .then(() => {
                 Swal.fire("Registrado correctamente", "", "success");

@@ -215,6 +215,7 @@ const SignupSchema = Yup.object().shape({
 
         }}
         validationSchema={SignupSchema}
+        
         onSubmit={(values, { setSubmitting }) => {
           if (submit && step === 3) {
             const formData = new FormData();
@@ -232,6 +233,7 @@ const SignupSchema = Yup.object().shape({
               DNI: values.DNI,
               birthdate: values.birthdate,
             };
+        
             formData.append('office_address', values.office_address);
             formData.append('profile_picture', values.profile_picture);
             formData.append('specialty', values.specialty);
@@ -242,67 +244,72 @@ const SignupSchema = Yup.object().shape({
             formData.append('date_of_graduation', values.date_of_graduation);
             formData.append('office_province', values.province_name);
         
-
             axios
               .post(`http://localhost:8080/auth/register/user`, user)
               .then((response) => {
-                formData.append('id_user', response.data.id_user)
-                axios.post(`http://localhost:8080/auth/register/doctor`, formData)
-                  .then(async (response) => {
-                    const id_doctor = response.data.id_doctor;
-
-                    const workExperience = {
-                      charge: experiencias.cargo,
-                      company: experiencias.lugar,
-                      since: experiencias.Fechainicio,
-                      until: experiencias.FechaFinal,
-                      current_job: experiencias.actualmente,
-                      doctor: {
-                        id_doctor: id_doctor
-                      }
+                formData.append('id_user', response.data.id_user);
+                return axios.post(`http://localhost:8080/auth/register/doctor`, formData);
+              })
+              .then((response) => {
+                const id_doctor = response.data.id_doctor;
+        
+                const workExperiencePromises = experiencias.map((experiencia) => {
+                  const workExperience = {
+                    charge: experiencia.cargo,
+                    company: experiencia.lugar,
+                    since: experiencia.Fechainicio,
+                    until: experiencia.FechaFinal,
+                    current_job: experiencia.actualmente,
+                    doctor: {
+                      id_doctor: id_doctor
                     }
-                    const consultationData = {
-                      days: consults.days ,
-                      cost: tipoConsulta === 'Virtual' ? consults.costoConsultaVirtual :  consults.costoConsultaPresencial ,
-                      mode: consults.tipoConsulta ,
-                      duration: consults.consultaDuracion ,
-                      since: consults.startHour ,
-                      until: consults.finishHour ,
-                      pay_method: consults.metodoCobro ,
-                      specialty: consults.tipoPacientes ,
-                      social_work: consults.obraSocial ,
-                      account_number: consults.numeroCuenta ,
-                      account_name: consults.nameTitular ,
-                      CVU: consults.cvuAlias ,
-                      doctor: {
-                        id_doctor: id_doctor
-                      },
-                      cash: consults.efectivo.length > 0 ? true : false
-                  
-                    }
-                    await axios.post(`http://localhost:8080/api/work_experience`, workExperience)
-                    .then(()=>{
-                      axios.post(`http://localhost:8080/api/consultation_data`,consultationData )
-                      .then(() => {
-                          Swal.fire('Registrado correctamente', '', 'success');
-                          // navigate('/')
-                      })
-                    })
-
-                  })
-                  .catch((error) => {
-                    alert('Error al registrar el usuario:', error);
-                  });
+                  };
+                  return axios.post(`http://localhost:8080/api/work_experience`, workExperience);
+                });
+        
+                return Promise.all(workExperiencePromises).then(() => id_doctor);
+              })
+              .then((id_doctor) => {
+                const consultationDataPromises = consults.map((consult) => {
+                  const consultationData = {
+                    days: consult.days,
+                    cost: consult.tipoConsulta === 'Virtual' ? consult.costoConsultaVirtual : consult.costoConsultaPresencial,
+                    mode: consult.tipoConsulta,
+                    duration: consult.consultaDuracion,
+                    since: consult.startHour,
+                    until: consult.finishHour,
+                    pay_method: consult.metodoCobro,
+                    specialty: consult.tipoPacientes,
+                    social_work: consult.obraSocial,
+                    account_number: consult.numeroCuenta,
+                    account_name: consult.nameTitular,
+                    CVU: consult.cvuAlias,
+                    doctor: {
+                      id_doctor: id_doctor
+                    },
+                    cash: consult.efectivo.length > 0
+                  };
+                  return axios.post(`http://localhost:8080/api/consultation_data`, consultationData);
+                });
+        
+                return Promise.all(consultationDataPromises);
+              })
+              .then(() => {
+                Swal.fire('Registrado correctamente', '', 'success');
+                // navigate('/')
               })
               .catch((error) => {
-                alert('Error al registrar el doctor:', error);
+                alert('Error al registrar el usuario:', error);
               })
               .finally(() => {
                 setSubmitting(false);
                 setSubmit(false);
               });
-          } else return;
+          } else {
+            return;
+          }
         }}
+        
       >
         {({ setFieldValue }) => (
           <Form className="space-y-4" encType='multipart/form-data'>

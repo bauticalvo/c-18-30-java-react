@@ -24,7 +24,7 @@ const SearchBar = () => {
   }, []);
 
   const handleSearch = () => {
-      navigate(`/doctors?specialty=${specialty}&officeProvince=${officeProvince}`);
+      navigate(`/doctor?specialty=${specialty}&officeProvince=${officeProvince}`);
   };
 
   return (
