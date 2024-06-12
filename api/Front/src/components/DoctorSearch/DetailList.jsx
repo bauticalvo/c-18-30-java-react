@@ -27,6 +27,9 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
   const [submit, setSubmit] = useState(false)
   const [virtualHours, setVirtualHours] = useState([])
   const [presencialHours, setPresencialHours] = useState([])
+  const [patient, setPatient] =useState({
+    id_patient: 1
+  })
 
     useEffect(() => {
         const calculateReview = () => {
@@ -78,6 +81,7 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
             acc.pay_method = Array.from(new Set([...(acc.pay_method || []), ...curr.pay_method]));
             acc.days = Array.from(new Set([...(acc.days || []), ...curr.days]));
             acc.mode = Array.from(new Set([...(acc.mode || []), curr.mode]));
+            acc.duration = Array.from(new Set([...(acc.duration || []), curr.duration]));
             return acc;
           }, {});
           setConsultation(combinedConsultation);
@@ -196,7 +200,7 @@ const showErrorAlert = () => {
     }
   });
 };
-
+console.log(consultation);
 const styles = `
   .swal2-smaller-popup {
     width: 250px !important;
@@ -307,7 +311,8 @@ document.head.appendChild(styleSheet);
                           mode: "",
                           day: "",
                           hour: "",
-                          speciality: ""
+                          speciality: "",
+                        
                         }}
                         onSubmit={(values) => {
                           if (submit) {
@@ -324,7 +329,19 @@ document.head.appendChild(styleSheet);
                               showErrorAlert();
                               return; 
                             }
-
+                            const MedicalConsultation = {
+                              mode: values.mode,
+                              day: values.day,
+                              time: consultation.duration[0],
+                              hour: values.hour,
+                              speciality: values.speciality,
+                              office_address: detail.officeAddress,
+                               patient: {
+                                id_patient: patient.id_patient},
+                               doctor:{
+                                id_doctor:detail.id_doctor
+                               }
+                            }
                             Swal.fire({
                               title: '¿Estás seguro de guardar los cambios realizados?',
                               showDenyButton: false,
@@ -342,7 +359,7 @@ document.head.appendChild(styleSheet);
                             }).then((result) => {
                               if (result.isConfirmed) {
                                 try {
-                                  axios.post(`http://localhost:8080//api/medical-consultations/schedule` , values)
+                                  axios.post(`http://localhost:8080//api/medical-consultations/schedule` , MedicalConsultation)
                                   .then((response) => 
                                     Swal.fire('Turno Solicitado!', '', 'success')
                                   )

@@ -242,14 +242,53 @@ const SignupSchema = Yup.object().shape({
             formData.append('date_of_graduation', values.date_of_graduation);
             formData.append('office_province', values.province_name);
         
+
             axios
               .post(`http://localhost:8080/auth/register/user`, user)
               .then((response) => {
                 formData.append('id_user', response.data.id_user)
                 axios.post(`http://localhost:8080/auth/register/doctor`, formData)
-                  .then(() => {
-                    Swal.fire('Registrado correctamente', '', 'success');
-                    // navigate('/')
+                  .then(async (response) => {
+                    const id_doctor = response.data.id_doctor;
+
+                    const workExperience = {
+                      charge: experiencias.cargo,
+                      company: experiencias.lugar,
+                      since: experiencias.Fechainicio,
+                      until: experiencias.FechaFinal,
+                      current_job: experiencias.actualmente,
+                      doctor: {
+                        id_doctor: id_doctor
+                      }
+                    }
+                    const consultationData = {
+                      days: consults.days ,
+                      cost: consults ,
+                      mode: consults ,
+                      duration: consults ,
+                      since: consults ,
+                      until: consults ,
+                      pay_method: consults.metodoCobro ,
+                      specialty: consults.tipoPacientes ,
+                      social_work: consults.obraSocial ,
+                      account_number: consults.numeroCuenta ,
+                      account_name: consults.nameTitular ,
+                      CVU: consults.cvuAlias ,
+                      doctor: {
+                        id_doctor: id_doctor
+                      },
+                      cash: consults.efectivo.length > 0 ? true : false
+                  
+                    }
+                    await axios.post(`http://localhost:8080/api/work_experience`, workExperience)
+                    .then(()=>{
+                      axios.post(`http://localhost:8080/api/consultation_data`,consultationData )
+                      .then(() => {
+                          Swal.fire('Registrado correctamente', '', 'success');
+                          // navigate('/')
+                      })
+                    })
+
                   })
                   .catch((error) => {
                     alert('Error al registrar el usuario:', error);
