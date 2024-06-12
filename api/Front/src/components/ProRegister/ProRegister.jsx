@@ -263,11 +263,11 @@ const SignupSchema = Yup.object().shape({
                     }
                     const consultationData = {
                       days: consults.days ,
-                      cost: consults ,
-                      mode: consults ,
-                      duration: consults ,
-                      since: consults ,
-                      until: consults ,
+                      cost: tipoConsulta === 'Virtual' ? consults.costoConsultaVirtual :  consults.costoConsultaPresencial ,
+                      mode: consults.tipoConsulta ,
+                      duration: consults.consultaDuracion ,
+                      since: consults.startHour ,
+                      until: consults.finishHour ,
                       pay_method: consults.metodoCobro ,
                       specialty: consults.tipoPacientes ,
                       social_work: consults.obraSocial ,
