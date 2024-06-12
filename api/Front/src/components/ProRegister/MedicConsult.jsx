@@ -108,6 +108,7 @@ const MedicConsultInfo = ({ setFieldValue }) => {
     }
   
 
+    console.log(values);
 
   return (
     <div>

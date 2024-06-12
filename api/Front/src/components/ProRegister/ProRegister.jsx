@@ -170,7 +170,6 @@ const SignupSchema = Yup.object().shape({
             const [step, setStep] = useState(1);
             const [submit, setSubmit] = useState(false);
 
-
   return (
     <div > 
 
@@ -244,71 +243,78 @@ const SignupSchema = Yup.object().shape({
             formData.append('date_of_graduation', values.date_of_graduation);
             formData.append('office_province', values.province_name);
         
-            axios
-              .post(`http://localhost:8080/auth/register/user`, user)
-              .then((response) => {
-                formData.append('id_user', response.data.id_user);
-                return axios.post(`http://localhost:8080/auth/register/doctor`, formData);
-              })
-              .then((response) => {
-                const id_doctor = response.data.id_doctor;
+            try {
+              axios
+                .post(`http://localhost:8080/auth/register/user`, user)
+                .then((response) => {
+                  formData.append('id_user', response.data.id_user);
+                  return axios.post(`http://localhost:8080/auth/register/doctor`, formData);
+                })
+                .then((response) => {
+                  const id_doctor = response.data.id_doctor;
         
-                const workExperiencePromises = experiencias.map((experiencia) => {
-                  const workExperience = {
-                    charge: experiencia.cargo,
-                    company: experiencia.lugar,
-                    since: experiencia.Fechainicio,
-                    until: experiencia.FechaFinal,
-                    current_job: experiencia.actualmente,
-                    doctor: {
-                      id_doctor: id_doctor
-                    }
-                  };
-                  return axios.post(`http://localhost:8080/api/work_experience`, workExperience);
+                  const workExperiencePromises = values.experiencias.map((experiencia) => {
+                    const workExperience = {
+                      charge: experiencia.cargo,
+                      company: experiencia.lugar,
+                      since: experiencia.Fechainicio,
+                      until: experiencia.FechaFinal,
+                      current_job: experiencia.actualmente == 'No' ? false : true,
+                      doctor: {
+                        id_doctor: id_doctor
+                      }
+                    };
+                    return axios.post(`http://localhost:8080/auth/register/work_experience`, workExperience);
+                  });
+        
+                  return Promise.all(workExperiencePromises).then(() => id_doctor);
+                })
+                .then((id_doctor) => {
+                  const consultationDataPromises = values.consults.map((consult) => {
+                    const consultationData = {
+                      days: consult.days.length > 0 ?  consult.days.join(',') :  "Ninguna",
+                      cost: consult.tipoConsulta === 'Virtual' ? parseInt(consult.costoConsultaVirtual) : parseInt(consult.costoConsultaPresencial),
+                      mode: consult.tipoConsulta,
+                      duration: consult.consultaDuracion,
+                      since: consult.startHour,
+                      until: consult.finishHour,
+                      pay_method: consult.metodoCobro,
+                      specialty:   consult.tipoPacientes.length > 0 ? consult.tipoPacientes.join(',') : "Ninguna",
+                      social_work: consult.obraSocial,
+                      account_number: consult.numeroCuenta,
+                      account_name: consult.nameTitular,
+                      CVU: consult.cvuAlias,
+                      doctor: {
+                        id_doctor: id_doctor
+                      },
+                      cash: consult.efectivo.length > 0 ? true : false
+                    };
+                    return axios.post(`http://localhost:8080/auth/register/consultation_data`, consultationData);
+                  });
+        
+                  return Promise.all(consultationDataPromises);
+                })
+                .then(() => {
+                  Swal.fire('Registrado correctamente', '', 'success');
+                  // navigate('/')
+                })
+                .catch((error) => {
+                  alert('Error al registrar el usuario:', error);
+                })
+                .finally(() => {
+                  setSubmitting(false);
+                  setSubmit(false);
                 });
-        
-                return Promise.all(workExperiencePromises).then(() => id_doctor);
-              })
-              .then((id_doctor) => {
-                const consultationDataPromises = consults.map((consult) => {
-                  const consultationData = {
-                    days: consult.days,
-                    cost: consult.tipoConsulta === 'Virtual' ? consult.costoConsultaVirtual : consult.costoConsultaPresencial,
-                    mode: consult.tipoConsulta,
-                    duration: consult.consultaDuracion,
-                    since: consult.startHour,
-                    until: consult.finishHour,
-                    pay_method: consult.metodoCobro,
-                    specialty: consult.tipoPacientes,
-                    social_work: consult.obraSocial,
-                    account_number: consult.numeroCuenta,
-                    account_name: consult.nameTitular,
-                    CVU: consult.cvuAlias,
-                    doctor: {
-                      id_doctor: id_doctor
-                    },
-                    cash: consult.efectivo.length > 0
-                  };
-                  return axios.post(`http://localhost:8080/api/consultation_data`, consultationData);
-                });
-        
-                return Promise.all(consultationDataPromises);
-              })
-              .then(() => {
-                Swal.fire('Registrado correctamente', '', 'success');
-                // navigate('/')
-              })
-              .catch((error) => {
-                alert('Error al registrar el usuario:', error);
-              })
-              .finally(() => {
-                setSubmitting(false);
-                setSubmit(false);
-              });
+            } catch (error) {
+              alert('Error al registrar el usuario:', error);
+              setSubmitting(false);
+              setSubmit(false);
+            }
           } else {
             return;
           }
         }}
+        
         
       >
         {({ setFieldValue }) => (

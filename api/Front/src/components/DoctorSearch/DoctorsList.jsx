@@ -5,7 +5,6 @@ import SearchBar from './SearchBar';
 import DetailList from './DetailList';
 import axios from 'axios';
 
-
 const DoctorsList = () => {
     const [doctors, setDoctors] = useState([]);
     const [detail, setDetail] = useState();
@@ -16,38 +15,27 @@ const DoctorsList = () => {
     const cityFilter = queryParams.get('officeProvince') || '';
     const stickyRef = useRef(null);
     const [certification, setCertification] = useState(false);
-{/*
-    useEffect(() => {
-        if (specialtyFilter && cityFilter) {
-            axios.get(`/api/doctor/specialty_and_city?specialty=${specialtyFilter}&city=${cityFilter}`)
-                .then(response => {
-                    setDoctors(response.data);
-                })
-                .catch(error => {
-                    console.error('Error fetching doctors by specialty and city:', error);
-                });
-        } else if (specialtyFilter) {
-            axios.get(`/api/doctor/specialty?specialty=${specialtyFilter}`)
-                .then(response => {
-                    setDoctors(response.data);
-                })
-                .catch(error => {
-                    console.error('Error fetching doctors by specialty:', error);
-                });
-        } else {
-            setDoctors([]);
-        }
-    }, [specialtyFilter, cityFilter])
-    */
-}
 
-    // este useeffect se tiene que eliminar para que funcione la peticion
     useEffect(() => {
-        fetch('/doctors.json')
-            .then(response => response.json())
-            .then(data => setDoctors(data))
-            .catch(error => console.error('Error fetching doctors:', error));
-    }, []);
+        const fetchDoctors = async () => {
+            try {
+                let response;
+                if (specialtyFilter && cityFilter) {
+                    response = await axios.get(`http://localhost:8080/api/doctor/specialty_and_city?specialty=${specialtyFilter}&city=${cityFilter}`);
+                } else if (specialtyFilter) {
+                    response = await axios.get(`http://localhost:8080/api/doctor/specialty?specialty=${specialtyFilter}`);
+                } else {
+                    setDoctors([]);
+                    return;
+                }
+                setDoctors(response.data);
+            } catch (error) {
+                console.error('Error fetching doctors:', error);
+            }
+        };
+
+        fetchDoctors();
+    }, [specialtyFilter, cityFilter]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -70,7 +58,7 @@ const DoctorsList = () => {
             (cityFilter === '' || doctor.officeProvince.toLowerCase().includes(cityFilter.toLowerCase()))
         );
     }) : [];
-    
+
     return (
         <div className={`p-4 ml-36 mr-24 relative `}> 
             <div className="w-full flex items-center justify-center">
@@ -86,13 +74,11 @@ const DoctorsList = () => {
             <div className="w-full flex space-x-20">
                 {certification && (
                     <img 
-                    src={detail.certification} 
-                    className='absolute h-[500px] w-[800px] z-50 rounded-lg border border-gray-300 bg-white bg-opacity-80 backdrop-filter backdrop-blur-sm transition-opacity duration-500' 
-                    style={{ top: '50px', left: '50%', transform: 'translateX(-50%)' }} 
-                    onClick={() => setCertification(!certification)}
-                />
-                
-
+                        src={detail.certification} 
+                        className='absolute h-[500px] w-[800px] z-50 rounded-lg border border-gray-300 bg-white bg-opacity-80 backdrop-filter backdrop-blur-sm transition-opacity duration-500' 
+                        style={{ top: '50px', left: '50%', transform: 'translateX(-50%)' }} 
+                        onClick={() => setCertification(!certification)}
+                    />
                 )}
                 <div className="w-1/2 space-y-4">
                     {filteredDoctors.map((doctor, index) => (
@@ -100,13 +86,12 @@ const DoctorsList = () => {
                     ))}
                 </div>
                 {!detail ? (
-                    <div className={`w-1/2 bg-slate-50 ${isSticky ? 'sticky top-0  h-[850px]' : 'h-[650px]'} transition-all duration-300`}>
-
+                    <div className={`w-1/2 bg-slate-50 ${isSticky ? 'sticky top-0 h-[850px]' : 'h-[650px]'} transition-all duration-300`}>
                     </div>
                 ) : (
                     <div 
                         ref={stickyRef} 
-                        className={`w-1/2 bg-white ${isSticky ? 'sticky top-0  h-[850px]' : 'h-[650px]'} transition-all duration-300`}>
+                        className={`w-1/2 bg-white ${isSticky ? 'sticky top-0 h-[850px]' : 'h-[650px]'} transition-all duration-300`}>
                         <DetailList detail={detail} key={detail.id_doctor} isSticky={isSticky} 
                         setCertification={setCertification} certification={certification} />
                     </div>
