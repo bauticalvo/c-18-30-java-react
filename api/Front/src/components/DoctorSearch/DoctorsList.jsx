@@ -16,30 +16,30 @@ const DoctorsList = () => {
     const cityFilter = queryParams.get('officeProvince') || '';
     const stickyRef = useRef(null);
     const [certification, setCertification] = useState(false);
-{/*
+
+
+
     useEffect(() => {
-        if (specialtyFilter && cityFilter) {
-            axios.get(`/api/doctor/specialty_and_city?specialty=${specialtyFilter}&city=${cityFilter}`)
-                .then(response => {
-                    setDoctors(response.data);
-                })
-                .catch(error => {
-                    console.error('Error fetching doctors by specialty and city:', error);
-                });
-        } else if (specialtyFilter) {
-            axios.get(`/api/doctor/specialty?specialty=${specialtyFilter}`)
-                .then(response => {
-                    setDoctors(response.data);
-                })
-                .catch(error => {
-                    console.error('Error fetching doctors by specialty:', error);
-                });
-        } else {
-            setDoctors([]);
-        }
-    }, [specialtyFilter, cityFilter])
-    */
-}
+        const fetchDoctors = async () => {
+            try {
+                let response;
+                if (specialtyFilter && !cityFilter) {
+                    response = await axios.get(`http://localhost:8080/doctor/specialty?specialty=${specialtyFilter}`);
+                    console.log (response)
+                } else if (specialtyFilter && cityFilter) {
+                    response = await axios.get(`http://localhost:8080/doctor/specialty_and_city?specialty=${specialtyFilter}&city=${cityFilter}`);
+                    console.log (response)
+                } else {
+                    setDoctors([]);
+                    return;
+                }
+                setDoctors(response.data);
+            } catch (error) {
+                console.error('Error fetching doctors:', error);
+            }
+        };
+        fetchDoctors();
+    }, [specialtyFilter, cityFilter]);
 
     // este useeffect se tiene que eliminar para que funcione la peticion
     useEffect(() => {

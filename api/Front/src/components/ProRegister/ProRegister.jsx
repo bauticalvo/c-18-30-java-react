@@ -282,7 +282,7 @@ console.log(localStorage.getItem('doctor'));
                       since: consult.startHour,
                       until: consult.finishHour,
                       pay_method: consult.metodoCobro.join(','),
-                      specialty:   consult.tipoPacientes.join(','),
+                      type_of_patient: consult.tipoPacientes.join(','),
                       social_work: consult.obraSocial,
                       account_number: consult.numeroCuenta,
                       account_name: consult.nameTitular,
