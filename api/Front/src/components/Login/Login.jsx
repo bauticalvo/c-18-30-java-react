@@ -36,8 +36,8 @@ const Login = () => {
                     onSubmit={ async (values) => {
                         if (submit) {
                             try {
-                                const response = await axios.post('/auth/login/user', {
-                                    username: values.username, // Asegúrate de tener el campo username en tus values
+                                const response = await axios.post('http://localhost:8080/auth/login/user', {
+                                    username: values.email, // Asegúrate de tener el campo username en tus values
                                     password: values.password // Asegúrate de tener el campo password en tus values
                                 });
                                 Swal.fire({

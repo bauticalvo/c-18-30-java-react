@@ -22,7 +22,7 @@ public class Patient {
     private double height;
     private double weight;
     private String blood_type;
-    private int factor;
+    private String factor;
     private String alergic;
     private String chronic_diseases;
     private String medicines;

@@ -24,15 +24,16 @@ public class DoctorConsultationData {
     private String days;
     private double cost;
     private boolean mode;
-    private int duration;
-    private ZonedDateTime since;
-    private ZonedDateTime until;
+    private String duration;
+    private String since;
+    private String until;
     private String pay_method;
     private String specialty;
     private String social_work;
     private String account_number;
     private String account_name;
-    private String CVU;
+    private String cvu;
+    private String cash;
 
     @OneToOne
     @JoinColumn (name = "id_doctor", referencedColumnName = "id_doctor")

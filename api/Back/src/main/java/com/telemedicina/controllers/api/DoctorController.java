@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.util.List;
 
 
 @RestController
-@RequestMapping ("/api/doctor")
+@RequestMapping ("/doctor")
 public class DoctorController {
     @Autowired
     DoctorService doctorService;
@@ -19,6 +20,14 @@ public class DoctorController {
     @GetMapping("/specialty")
     public ResponseEntity<List<DoctorWithUserDetails>> getDoctorsBySpecialty (@RequestParam String specialty){
         List<DoctorWithUserDetails> doctors = doctorService.getDoctorsBySpecialty(specialty);
+        if (doctors.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(doctors);
+    }
+
+    @GetMapping ("/")
+    public ResponseEntity <List<DoctorWithUserDetails>> getAllDoctors (){
+        List<DoctorWithUserDetails> doctors = doctorService.getAllDoctors ();
         if (doctors.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok(doctors);

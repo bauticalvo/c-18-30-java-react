@@ -37,8 +37,8 @@ const Login = () => {
                     onSubmit={ async (values) => {
                         if (submit) {
                             try {
-                                const response = await axios.post('/auth/login/user', {
-                                    username: values.username, 
+                                const response = await axios.post('http://localhost:8080/auth/login/user', {
+                                    username: values.email, 
                                     password: values.password 
                                 });
                                 Swal.fire({

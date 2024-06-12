@@ -28,7 +28,7 @@ const SignupSchema = Yup.object().shape({
   province_name: Yup.string().required('Ingrese un Estado/Provincia/Región '),
   area_code: Yup.string().required('Ingrese el codigo postal '),
   office_address: Yup.string().required('Ingrese el domicilio '),
-  DNI: Yup.string().required('Ingrese el DNI')
+  dni: Yup.string().required('Ingrese el DNI')
   .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
   birthdate: Yup.date(),
    profile_picture: Yup.mixed().required('Ingrese una foto de perfil'),
@@ -196,7 +196,7 @@ console.log(localStorage.getItem('doctor'));
           area_code: '',
           password: '',
           confirmarPassword: '',
-          DNI: '',
+          dni: '',
           birthdate: '',
           // doctor
           office_address: '',
@@ -215,6 +215,7 @@ console.log(localStorage.getItem('doctor'));
 
         }}
         validationSchema={SignupSchema}
+        
         onSubmit={(values, { setSubmitting }) => {
           if (submit && step === 3) {
             localStorage.setItem('doctor', JSON.stringify(values))
@@ -231,9 +232,10 @@ console.log(localStorage.getItem('doctor'));
               province_name: values.province_name,
               area_code: values.area_code,
               password: values.password,
-              DNI: values.DNI,
+              dni: values.dni,
               birthdate: values.birthdate,
             };
+        
             formData.append('office_address', values.office_address);
             formData.append('profile_picture', values.profile_picture);
             formData.append('specialty', values.specialty);
@@ -244,67 +246,82 @@ console.log(localStorage.getItem('doctor'));
             formData.append('date_of_graduation', values.date_of_graduation);
             formData.append('office_province', values.province_name);
         
-
-            axios
-              .post(`http://localhost:8080/auth/register/user`, user)
-              .then((response) => {
-                formData.append('id_user', response.data.id_user)
-                axios.post(`http://localhost:8080/auth/register/doctor`, formData)
-                  .then(async (response) => {
-                    const id_doctor = response.data.id_doctor;
-
+            try {
+              axios
+                .post('http://localhost:8080/auth/register/user', user)
+                .then((response) => {
+                  formData.append('id_user', response.data.id_user);
+                  return axios.post('http://localhost:8080/auth/register/doctor', formData);
+                })
+                .then((response) => {
+                  const id_doctor = response.data.id_doctor;
+        
+                  const workExperiencePromises = values.experiencias.map((experiencia) => {
                     const workExperience = {
-                      charge: experiencias.cargo,
-                      company: experiencias.lugar,
-                      since: experiencias.Fechainicio,
-                      until: experiencias.FechaFinal,
-                      current_job: experiencias.actualmente,
+                      charge: experiencia.cargo,
+                      company: experiencia.lugar,
+                      since: experiencia.Fechainicio,
+                      until: experiencia.FechaFinal,
+                      current_job: experiencia.actualmente == 'No' ? false : true,
                       doctor: {
                         id_doctor: id_doctor
                       }
-                    }
+                    };
+                    return axios.post('http://localhost:8080/auth/register/work_experience', workExperience);
+                  });
+        
+                  return Promise.all(workExperiencePromises).then(() => id_doctor);
+                })
+                .then((id_doctor) => {
+                  const consultationDataPromises = values.consults.map((consult) => {
                     const consultationData = {
-                      days: consults.days ,
-                      cost: consults ,
-                      mode: consults ,
-                      duration: consults ,
-                      since: consults ,
-                      until: consults ,
-                      pay_method: consults.metodoCobro ,
-                      specialty: consults.tipoPacientes ,
-                      social_work: consults.obraSocial ,
-                      account_number: consults.numeroCuenta ,
-                      account_name: consults.nameTitular ,
-                      CVU: consults.cvuAlias ,
+                      days: consult.days.join(','),
+                      cost: consult.tipoConsulta === 'virtual' ? consult.costoConsultaVirtual : consult.costoConsultaPresencial,
+                      mode: consult.tipoConsulta === 'virtual' ? "true" : "false",
+                      duration: consult.consultaDuracion,
+                      since: consult.startHour,
+                      until: consult.finishHour,
+                      pay_method: consult.metodoCobro.join(','),
+                      specialty:   consult.tipoPacientes.join(','),
+                      social_work: consult.obraSocial,
+                      account_number: consult.numeroCuenta,
+                      account_name: consult.nameTitular,
+                      cvu: consult.cvuAlias,
                       doctor: {
                         id_doctor: id_doctor
                       },
-                      cash: consults.efectivo.length > 0 ? true : false
-                  
-                    }
-                    await axios.post(`http://localhost:8080/api/work_experience`, workExperience)
-                    .then(()=>{
-                      axios.post(`http://localhost:8080/api/consultation_data`,consultationData )
-                      .then(() => {
-                          Swal.fire('Registrado correctamente', '', 'success');
-                          // navigate('/')
-                      })
-                    })
-
-                  })
-                  .catch((error) => {
-                    alert('Error al registrar el usuario:', error);
+                      cash: consult.efectivo.lenght > 0 ? "true" : "false"
+                    };
+                   
+                    return axios.post('http://localhost:8080/auth/register/consultation_data', consultationData);
+                    
                   });
-              })
-              .catch((error) => {
-                alert('Error al registrar el doctor:', error);
-              })
-              .finally(() => {
-                setSubmitting(false);
-                setSubmit(false);
-              });
-          } else return;
+        
+                  return Promise.all(consultationDataPromises);
+                })
+                .then(() => {
+                  Swal.fire('Registrado correctamente', '', 'success');
+                  // navigate('/')
+                })
+                .catch((error) => {
+                  alert(`Error al registrar el usuario:`);
+                  console.log ('todo ok', error.response, error.message)
+                })
+                .finally(() => {
+                  setSubmitting(false);
+                  setSubmit(false);
+                });
+            } catch (error) {
+              alert('Error al registrar el usuario:', error);
+              setSubmitting(false);
+              setSubmit(false);
+            }
+          } else {
+            return;
+          }
         }}
+        
+        
       >
         {({ setFieldValue }) => (
           <Form className="space-y-4" encType='multipart/form-data'>
