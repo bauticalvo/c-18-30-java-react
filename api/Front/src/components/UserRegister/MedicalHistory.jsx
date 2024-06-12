@@ -54,9 +54,9 @@ const MedicalHistory = ({values, setFieldValue }) => {
         break;
       default:return
     }
-
-  }
-
+    }
+    
+    console.log(values);
   return (
     <div className="space-y-8 p-6 flex flex-col items-center justify-center">          
       <div className="flex items-start justify-center space-x-4  w-[70%]">

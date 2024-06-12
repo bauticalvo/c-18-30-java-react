@@ -42,4 +42,11 @@ public interface DoctorRepository extends JpaRepository <Doctor, Integer> {
             "JOIN DoctorConsultationData dc ON d.user.id_user = dc.doctor.user.id_user " +
             "WHERE d.specialty = :specialty AND u.location = :city")
     List<DoctorWithUserDetails> findDoctorsBySpecialtyAndCity(String specialty, String city);
+
+
+    @Query("SELECT u.name as name, u.lastname as lastname, d.tuition as tuition, d.specialty as specialty, d.university as university, d.office_address as officeAddress, d.office_province as officeProvince, dc.cost as cost, dc.mode as mode " +
+            "FROM Doctor d " +
+            "JOIN User u ON d.user.id_user = u.id_user " +
+            "JOIN DoctorConsultationData dc ON d.user.id_user = dc.doctor.user.id_user ")
+    List<DoctorWithUserDetails> getAllDoctors();
 }

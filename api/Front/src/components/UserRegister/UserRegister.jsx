@@ -8,6 +8,7 @@ import PaymentUser from './PaymentUser';
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import { email } from '../Utils/emails';
+import axios from 'axios';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Ingrese un nombre'),
@@ -223,14 +224,21 @@ const UserRegister = () => {
                     alert('Error al registrar el usuario:', error);
                   });
               })
+              .then(() => {
+                Swal.fire("Registrado correctamente", "", "success");
+                navigate("/");
+              })
               .catch((error) => {
-                alert('Error al registrar el Usuario:', error);
+                console.error("Error al registrar el usuario:", error);
+                alert("Error al registrar el usuario.");
               })
               .finally(() => {
                 setSubmitting(false);
                 setSubmit(false);
               });
-          } else return;
+          } else {
+            return;
+          }
         }}
       >
         {({ setFieldValue, values }) => (

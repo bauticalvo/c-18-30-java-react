@@ -16,8 +16,11 @@ public class MedicalConsultation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_medical_consultation;
+
     private int mode;
     private int time;
+    private String specialty;
+    private String day;
     private ZonedDateTime hour;
     private String office_address;
 

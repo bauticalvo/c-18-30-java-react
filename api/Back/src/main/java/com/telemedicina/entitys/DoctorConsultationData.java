@@ -32,7 +32,8 @@ public class DoctorConsultationData {
     private String social_work;
     private String account_number;
     private String account_name;
-    private String CVU;
+    private String cvu;
+    private boolean cash;
 
     @OneToOne
     @JoinColumn (name = "id_doctor", referencedColumnName = "id_doctor")
