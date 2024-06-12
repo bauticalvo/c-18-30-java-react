@@ -28,7 +28,7 @@ public class DoctorConsultationData {
     private String since;
     private String until;
     private String pay_method;
-    private String specialty;
+    private String type_of_patient;
     private String social_work;
     private String account_number;
     private String account_name;
