@@ -28,7 +28,7 @@ const SignupSchema = Yup.object().shape({
   province_name: Yup.string().required('Ingrese un Estado/Provincia/Región '),
   area_code: Yup.string().required('Ingrese el codigo postal '),
   office_address: Yup.string().required('Ingrese el domicilio '),
-  DNI: Yup.string().required('Ingrese el DNI')
+  dni: Yup.string().required('Ingrese el DNI')
   .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
   birthdate: Yup.date(),
    profile_picture: Yup.mixed().required('Ingrese una foto de perfil'),
@@ -195,7 +195,7 @@ const SignupSchema = Yup.object().shape({
           area_code: '',
           password: '',
           confirmarPassword: '',
-          DNI: '',
+          dni: '',
           birthdate: '',
           // doctor
           office_address: '',
@@ -229,7 +229,7 @@ const SignupSchema = Yup.object().shape({
               province_name: values.province_name,
               area_code: values.area_code,
               password: values.password,
-              DNI: values.DNI,
+              dni: values.dni,
               birthdate: values.birthdate,
             };
         
@@ -245,10 +245,10 @@ const SignupSchema = Yup.object().shape({
         
             try {
               axios
-                .post(`http://localhost:8080/auth/register/user`, user)
+                .post('http://localhost:8080/auth/register/user', user)
                 .then((response) => {
                   formData.append('id_user', response.data.id_user);
-                  return axios.post(`http://localhost:8080/auth/register/doctor`, formData);
+                  return axios.post('http://localhost:8080/auth/register/doctor', formData);
                 })
                 .then((response) => {
                   const id_doctor = response.data.id_doctor;
@@ -264,7 +264,7 @@ const SignupSchema = Yup.object().shape({
                         id_doctor: id_doctor
                       }
                     };
-                    return axios.post(`http://localhost:8080/auth/register/work_experience`, workExperience);
+                    return axios.post('http://localhost:8080/auth/register/work_experience', workExperience);
                   });
         
                   return Promise.all(workExperiencePromises).then(() => id_doctor);
@@ -272,24 +272,26 @@ const SignupSchema = Yup.object().shape({
                 .then((id_doctor) => {
                   const consultationDataPromises = values.consults.map((consult) => {
                     const consultationData = {
-                      days: consult.days.length > 0 ?  consult.days.join(',') :  "Ninguna",
-                      cost: consult.tipoConsulta === 'Virtual' ? parseInt(consult.costoConsultaVirtual) : parseInt(consult.costoConsultaPresencial),
-                      mode: consult.tipoConsulta,
+                      days: consult.days.join(','),
+                      cost: consult.tipoConsulta === 'virtual' ? consult.costoConsultaVirtual : consult.costoConsultaPresencial,
+                      mode: consult.tipoConsulta === 'virtual' ? "true" : "false",
                       duration: consult.consultaDuracion,
                       since: consult.startHour,
                       until: consult.finishHour,
-                      pay_method: consult.metodoCobro,
-                      specialty:   consult.tipoPacientes.length > 0 ? consult.tipoPacientes.join(',') : "Ninguna",
+                      pay_method: consult.metodoCobro.join(','),
+                      specialty:   consult.tipoPacientes.join(','),
                       social_work: consult.obraSocial,
                       account_number: consult.numeroCuenta,
                       account_name: consult.nameTitular,
-                      CVU: consult.cvuAlias,
+                      cvu: consult.cvuAlias,
                       doctor: {
                         id_doctor: id_doctor
                       },
-                      cash: consult.efectivo.length > 0 ? true : false
+                      cash: consult.efectivo.lenght > 0 ? "true" : "false"
                     };
-                    return axios.post(`http://localhost:8080/auth/register/consultation_data`, consultationData);
+                   
+                    return axios.post('http://localhost:8080/auth/register/consultation_data', consultationData);
+                    
                   });
         
                   return Promise.all(consultationDataPromises);
@@ -299,7 +301,8 @@ const SignupSchema = Yup.object().shape({
                   // navigate('/')
                 })
                 .catch((error) => {
-                  alert('Error al registrar el usuario:', error);
+                  alert(`Error al registrar el usuario:`);
+                  console.log ('todo ok', error.response, error.message)
                 })
                 .finally(() => {
                   setSubmitting(false);

@@ -1,6 +1,7 @@
 package com.telemedicina.controllers.auth;
 
 import com.telemedicina.controllers.auth.model.AuthResponse;
+import com.telemedicina.controllers.auth.model.DoctorConsultationDataDTO;
 import com.telemedicina.controllers.auth.model.LoginRequest;
 import com.telemedicina.entitys.*;
 import com.telemedicina.services.AuthService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -69,10 +71,13 @@ public class AuthController {
     }
 
     @PostMapping ("/register/consultation_data")
-    public ResponseEntity <DoctorConsultationData> addConsultationData (@RequestBody DoctorConsultationData doctorConsultationData){
-        if (doctorConsultationData != null){
-            return ResponseEntity.ok(doctorConsultationDataService.addConsultationData (doctorConsultationData));
+    public ResponseEntity <DoctorConsultationData> addConsultationData (@RequestBody DoctorConsultationData doctorConsultationData) {
+        System.out.println("HOLA ENTRE AL RECURSO");
+        if (doctorConsultationData != null) {
+            System.out.println("HOLA ENTRE AL IF");
+            return ResponseEntity.ok(doctorConsultationDataService.addConsultationData(doctorConsultationData));
         }
+        System.out.println("HOLA SALI DE IF");
         return ResponseEntity.badRequest().build();
     }
 
