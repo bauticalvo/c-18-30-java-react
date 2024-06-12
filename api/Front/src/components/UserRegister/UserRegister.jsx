@@ -210,7 +210,11 @@ const UserRegister = () => {
                   weight: values.weight,
                   blood_type: values.blood_type,
                   factor: values.factor,
-                  id_user: id_user
+                  id_user: id_user,
+                  alergic: !values.alergias.includes('ninguna') ? values.alergias.join(",") : 'Ninguno',
+                  chronic_diseases: !values.enfermedadesCronicas.includes('ninguna') ?  values.enfermedadesCronicas.join(",") : 'Ninguno' ,
+                  medicines: values.medicamento === '' ? 'Ninguno' : values.medicamento ,
+                  family_history_of_diseases: !values.historiaFamiliar.includes('ninguna') ? values.historiaFamiliar.join(",") : 'Ninguno',
                 });
               })
               .then(() => {
