@@ -13,6 +13,7 @@ import { TbNurse } from "react-icons/tb";
 import { Form, Formik  } from 'formik';
 import { GoArrowRight } from "react-icons/go";
 import Swal from 'sweetalert2'  
+import axios from 'axios'
 
 const DetailList = ({detail, isSticky, setCertification,certification }) => {
   const [promedioReviews, setPromedioReviews] = useState(null);
@@ -323,6 +324,7 @@ document.head.appendChild(styleSheet);
                               showErrorAlert();
                               return; 
                             }
+
                             Swal.fire({
                               title: '¿Estás seguro de guardar los cambios realizados?',
                               showDenyButton: false,
@@ -339,10 +341,16 @@ document.head.appendChild(styleSheet);
                               },
                             }).then((result) => {
                               if (result.isConfirmed) {
-                                Swal.fire('Turno Solicitado!', '', 'success')
-                              } else if (result.isDenied) {
-                                Swal.fire('Changes are not saved', '', 'info')
-                              }
+                                try {
+                                  axios.post(`http://localhost:8080//api/medical-consultations/schedule` , values)
+                                  .then((response) => 
+                                    Swal.fire('Turno Solicitado!', '', 'success')
+                                  )
+                                  
+                                } catch (error) {
+                                  alert('Error al agendar consulta')
+                                }
+                              } 
                             })
                             console.log(values);
                             setSubmit(false);

@@ -3,6 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import { email } from "../Utils/emails";
+import axios from 'axios'
+import Swal from 'sweetalert2'  
+
 
 const validationSchema = Yup.object({
     email: Yup.string().email('Email inválido').required('Ingrese un email')
@@ -31,8 +34,23 @@ const Login = () => {
                 <Formik
                     initialValues={{ email: '', password: '' }}
                     validationSchema={validationSchema}
-                    onSubmit={(values) => {
+                    onSubmit={ async (values) => {
                         if (submit) {
+                            try {
+                                const response = await axios.post('/auth/login/user', {
+                                    username: values.username, 
+                                    password: values.password 
+                                });
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'Inicio de sesion exitoso!',
+                                    background: '#a5dc86',
+                                })
+                                localStorage.setItem('doctor', JSON.stringify(response.data.user))
+                            } catch (error) {
+                                alert('No se logro iniciar sesion ')
+                            }
                             console.log(values);
                         }
                     }}

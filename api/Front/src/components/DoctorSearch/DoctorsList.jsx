@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom';
 import DoctorCard from './DoctorCard';
 import SearchBar from './SearchBar';
 import DetailList from './DetailList';
+import axios from 'axios';
+
 
 const DoctorsList = () => {
     const [doctors, setDoctors] = useState([]);
@@ -14,7 +16,32 @@ const DoctorsList = () => {
     const cityFilter = queryParams.get('officeProvince') || '';
     const stickyRef = useRef(null);
     const [certification, setCertification] = useState(false);
+{/*
+    useEffect(() => {
+        if (specialtyFilter && cityFilter) {
+            axios.get(`/api/doctor/specialty_and_city?specialty=${specialtyFilter}&city=${cityFilter}`)
+                .then(response => {
+                    setDoctors(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching doctors by specialty and city:', error);
+                });
+        } else if (specialtyFilter) {
+            axios.get(`/api/doctor/specialty?specialty=${specialtyFilter}`)
+                .then(response => {
+                    setDoctors(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching doctors by specialty:', error);
+                });
+        } else {
+            setDoctors([]);
+        }
+    }, [specialtyFilter, cityFilter])
+    */
+}
 
+    // este useeffect se tiene que eliminar para que funcione la peticion
     useEffect(() => {
         fetch('/doctors.json')
             .then(response => response.json())
@@ -37,13 +64,13 @@ const DoctorsList = () => {
         };
     }, []);
 
-    const filteredDoctors = doctors.filter(doctor => {
+    const filteredDoctors = Array.isArray(doctors) ? doctors.filter(doctor => {
         return (
             (specialtyFilter === '' || doctor.specialty.toLowerCase().includes(specialtyFilter.toLowerCase())) &&
             (cityFilter === '' || doctor.officeProvince.toLowerCase().includes(cityFilter.toLowerCase()))
         );
-    });
-
+    }) : [];
+    
     return (
         <div className={`p-4 ml-36 mr-24 relative `}> 
             <div className="w-full flex items-center justify-center">
