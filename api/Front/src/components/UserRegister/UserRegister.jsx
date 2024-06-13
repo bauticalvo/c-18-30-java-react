@@ -211,7 +211,7 @@ const UserRegister = () => {
                   factor: values.factor,
                   patient: {
                     id_user: id_user},  
-                  alergic: !values.alergias.includes('ninguna') ? values.alergias.join(",") : 'Ninguno',
+                  alergic: `${values.alergiasAlimentosDescripcion},${values.alergiasMedicamentosDescripcion},${values.alergiasAmbientalesDescripcion},${values.otrasAlergiasDescripcion},`  ,
                   chronic_diseases: !values.enfermedadesCronicas.includes('ninguna') ?  values.enfermedadesCronicas.join(",") : 'Ninguno' ,
                   medicines: values.medicamento === '' ? 'Ninguno' : values.medicamento ,
                   family_history_of_diseases: !values.historiaFamiliar.includes('ninguna') ? values.historiaFamiliar.join(",") : 'Ninguno',

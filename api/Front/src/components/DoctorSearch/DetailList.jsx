@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { consultations } from '../Utils/doctorConsultation'; 
-import { experiencies } from '../Utils/experience';
-import { users } from '../Utils/User';
 import { IoMdStar, IoIosSearch } from "react-icons/io";
 import { RiMoneyDollarCircleFill,RiGraduationCapFill } from "react-icons/ri";
 import { HiVideoCamera, HiIdentification } from "react-icons/hi2";
@@ -16,12 +13,7 @@ import Swal from 'sweetalert2'
 import axios from 'axios'
 
 const DetailList = ({detail, isSticky, setCertification,certification }) => {
-  const [promedioReviews, setPromedioReviews] = useState(null);
-  const [doctorConsultations, setDoctorConsultations] = useState([]);
-  const [consultation, setConsultation] =useState({})
   const [prices, setPrices] = useState({ virtual: [], presencial: [] });
-  const [user, setUser] = useState({})
-  const [experiencie, setExperiencie] = useState([])
   const [virtualDays, setVirtualDays] = useState([])
   const [presencialDays, setPresencialDays] = useState([])
   const [submit, setSubmit] = useState(false)
@@ -31,106 +23,27 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
     id_patient: 1
   })
 
+
     useEffect(() => {
-        const calculateReview = () => {
-          const reviews = detail.reviews;
-          if (reviews.length > 0) {
-            const suma = reviews.reduce((total, calificacion) => total + calificacion, 0);
-            const promedio = suma / reviews.length;
-            setPromedioReviews(promedio.toFixed(1)); 
-          } else {
-            setPromedioReviews(null); 
-          }
-        };
-    
-        const filterConsultations = () => {
-          const filteredConsultations = consultations.filter(
-            consultation => consultation.fk_id_doctor === detail.id_doctor
-          );
-          setDoctorConsultations(filteredConsultations);
-        };
-    
-        const filterUser = () => {
-          const filterUser = users.filter(
-            user => user.id_user == detail.id_user
-          );
-          setUser(filterUser[0]);
-        };
-    
-        const filterExperiencies = () => {
-          const filterExp = experiencies.filter(
-            exp => exp.id_work_experience_by_doctor == detail.id_doctor
-          );
-          setExperiencie(filterExp);
-        };
-
-
-
-    
-        calculateReview();
-        filterConsultations();
-        filterUser()
-        filterExperiencies()
-      }, [  detail]);
-
-
-      useEffect(() => {
-        if (doctorConsultations.length > 0) {
-          const combinedConsultation = doctorConsultations.reduce((acc, curr) => {
-            acc.speciality = Array.from(new Set([...(acc.speciality || []), ...curr.speciality]));
-            acc.pay_method = Array.from(new Set([...(acc.pay_method || []), ...curr.pay_method]));
-            acc.days = Array.from(new Set([...(acc.days || []), ...curr.days]));
-            acc.mode = Array.from(new Set([...(acc.mode || []), curr.mode]));
-            acc.duration = Array.from(new Set([...(acc.duration || []), curr.duration]));
-            return acc;
-          }, {});
-          setConsultation(combinedConsultation);
-    
-          const virtualPrices = doctorConsultations.filter(c => c.mode === 'Virtual').map(c => c.cost);
-          const PresencialPrices = doctorConsultations.filter(c => c.mode === 'Presencial').map(c => c.cost);
-          setPrices({ virtual: virtualPrices, presencial: PresencialPrices });
-        }
-        const handleDays = ()=>{
-          doctorConsultations.map( cons => {
-            cons.mode === 'Virtual' ? setVirtualDays(getDatesForDays(cons.days))  : setPresencialDays(getDatesForDays(cons.days))
-          })
-        }
-        handleDays()
-        
-        const handleHours = ()=>{
-          doctorConsultations.map( cons => {
-            cons.mode === 'Virtual' ? setVirtualHours(generateIntermediateHours(cons.since, cons.until))  : setPresencialHours(generateIntermediateHours(cons.since, cons.until))
-          })
-        }
-
-        handleHours()
-
-      }, [doctorConsultations]);
-
-
-      
-
-      const fullStars = () => {
-        const star = [];
-        for (let i = 1; i <= 5; i++) {
-          i <= promedioReviews
-            ? star.push(
-                <span>
-                  <IoMdStar className=" text-blue-40 " />
-                </span>
-              )
-            : star.push(
-                <span>
-                  <IoMdStar className=" text-black " />
-                </span>
-              );
-        }
-        return star;
-      };
-
-      const handleCertification = ()=>{
-        setCertification(!certification)
+      const handleDays = ()=>{
+          detail.mode === 'true' ? setVirtualDays(getDatesForDays(convertDaysStringToArray(detail.days)))  : setPresencialDays(getDatesForDays(convertDaysStringToArray(detail.days)))
       }
+      handleDays()
+      
+      const handleHours = ()=>{
+          detail.mode === 'true' ? setVirtualHours(generateIntermediateHours(detail.since.slice(11,16), detail.until.slice(11,16)))  : setPresencialHours(generateIntermediateHours(detail.since.slice(11,16), detail.until.slice(11,16)))
+      }
+
+      handleHours()
+    },[detail])
+
+
+    function convertDaysStringToArray(daysString) {
+      daysString = daysString.trim();
+      let daysArray = daysString.split(", ");
+      return daysArray;
+  }
+
 
       function generateIntermediateHours(start, end) {
         let startTime = new Date(`1970-01-01T${start}:00`);
@@ -182,6 +95,10 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
       }
       const handleSubmit = () => setSubmit(true)
 
+      const handleCertification = ()=>{
+        setCertification(!certification)
+      }
+
 
 
 const showErrorAlert = () => {
@@ -200,7 +117,7 @@ const showErrorAlert = () => {
     }
   });
 };
-console.log(consultation);
+console.log(detail);
 const styles = `
   .swal2-smaller-popup {
     width: 250px !important;
@@ -217,7 +134,7 @@ styleSheet.type = "text/css";
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
 
-      
+
   return (
     <div key={detail.id_doctor}>
 
@@ -231,41 +148,31 @@ document.head.appendChild(styleSheet);
         {
             detail && (
                 <div className={`bg-white font-sans2 p-16 space-y-4 ${isSticky ? 'sticky top-0  h-[850px]' : 'h-[850px]'}  shadow-doctor-list`}>
-                    <h1 className='font-bold text-3xl'> Dr. {user.name} {user.lastname}</h1>
+                    <h1 className='font-bold text-3xl'> Dr. {detail.name} {detail.lastname}</h1>
                     <div className='flex space-x-2 mt-2 items-center'>
                         <h1 className='text-[rgba(102,102,102,1)] text-base mr-6'> {detail.specialty} </h1>
-                               <p className='flex'> {fullStars()}</p>
-                        {
-                          detail.reviews.length > 0 && detail.reviews.length !=  1  && (
-                            <p className='text-sm  bg-[#D9D9D9] rounded-[3px] text-black px-1'>{detail.reviews.length} opiniones</p>
-                          )
-                        }
-                        {
-                          detail.reviews.length === 1 && (
-                            <p className='text-sm  bg-[#D9D9D9] rounded-[3px] text-black px-1'>{detail.reviews.length} opinion</p>
-                          )
-                        }
+                  
                     </div>
                     <div className='w-full flex mt-8'>
                       <div className='flex flex-col  w-1/2 justify-start text-xs space-y-2'   >
                         <p className="text-[rgba(147,147,147,1)] flex items-center"><FaMapMarkerAlt className='mr-2 text-[rgba(35,38,47,1)]' />{detail.officeAddress}, {detail.officeProvince}</p>
-                        <p className="text-[rgba(147,147,147,1)] flex items-center"><MdPeople className='mr-2 text-[rgba(35,38,47,1)] ' /> {consultation.speciality?.join(', ')}</p>
-                        <p className="text-[rgba(147,147,147,1)] flex items-center"><RiMoneyDollarCircleFill className='mr-2 text-[rgba(35,38,47,1)]' />{consultation.pay_method?.join(', ')}</p>
+                        <p className="text-[rgba(147,147,147,1)] flex items-center"><MdPeople className='mr-2 text-[rgba(35,38,47,1)] ' /> {detail.typeOfPatient}</p>
+                        <p className="text-[rgba(147,147,147,1)] flex items-center"><RiMoneyDollarCircleFill className='mr-2 text-[rgba(35,38,47,1)]' />{detail.payMethod}</p>
                       </div>
                       <div className='w-1/2 flex  justify-end  '>
                       <div className='flex-col space-y-2'>
                         {
-                          consultation?.mode?.includes("Virtual") && (
+                          detail?.mode?.includes("true") && (
                             <div className='flex h-1/2 items-center justify-center space-x-2 '>
-                              <p className='text-[#666666] text-xs'> ${prices?.virtual}</p>
+                              <p className='text-[#666666] text-xs'> ${detail.cost}</p>
                               <p className='flex space-x-2 bg-[#CCDCFF] rounded-[6px] p-1' ><HiVideoCamera className='text-xl '  /> </p>
                             </div>
                           )
                         }
                         {
-                          consultation?.mode?.includes("Presencial") && (
+                          detail?.mode?.includes("false") && (
                             <div className='flex h-1/2 items-center justify-center space-x-2 '>
-                              <p className='text-[#666666] text-xs'> ${prices?.presencial}</p>
+                              <p className='text-[#666666] text-xs'> ${detail.cost}</p>
                               <p className='flex space-x-2 bg-[#F3FFC2] rounded-[6px] p-1' ><MdPeople  className='text-xl ' /> </p>
                             </div>
                           )
@@ -277,17 +184,23 @@ document.head.appendChild(styleSheet);
                     <div className='bg-[#F1F5FF] flex rounded-[10px] h-1/6'>
                       <div className='w-1/2 flex flex-col space-y-2 p-4'>
                         <p className='flex text-sm'><HiIdentification className='mr-2 text-lg' /> M.N {detail.tuition}</p>
-                        <p className='flex text-sm'><LuStethoscope className='mr-2 text-lg'/>{detail.year_experience} años de experiencia</p>
+                        <p className='flex text-sm'><LuStethoscope className='mr-2 text-lg'/>{detail.yearExperience} años de experiencia</p>
                         <p className='flex text-sm'><RiGraduationCapFill className='mr-2 text-lg'/>{detail.university}</p>
                       </div>
                       <div className='flex justify-end items-center w-1/2'>
                           <button type='button' onClick={() => handleCertification()} className='relative  items-center'>
-                              <img src={detail.certification} className='h-[50px] m-6 opacity-[0.8] border rounded-[5px ] border-[#23262F2B] border-opacity-15' alt="certification" />
+                            {
+                              !detail.certification ? (
+                                <img src={'/certificado.png'} className='h-[50px] m-6 opacity-[0.8] border rounded-[5px ] border-[#23262F2B] border-opacity-15' alt="certification" />
+                              ):(
+                                <img src={detail.certification} className='h-[50px] m-6 opacity-[0.8] border rounded-[5px ] border-[#23262F2B] border-opacity-15' alt="certification" />
+                              )
+                            }
                               <IoIosSearch className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400' />
                           </button>
                       </div>
                     </div>
-                      {
+                      {/*
                         experiencie?.length >0 && (
                           <div className='bg-[rgba(243,255,194,0.24)] p-2 rounded-[10px] space-y-2 overflow-y-scroll h-1/6'>
                             <p className='text-[rgba(152,149,149,1)]'>Experiencia</p>
@@ -302,7 +215,7 @@ document.head.appendChild(styleSheet);
                             )}
 
                           </div>
-                        )
+                        )*/
                       }
                       <div className='p-2 m-2'>
                         <h1 className='font-medium text-xl'>Solicitar Turno</h1>
@@ -311,7 +224,7 @@ document.head.appendChild(styleSheet);
                           mode: "",
                           day: "",
                           hour: "",
-                          speciality: "",
+                          typeOfPatient: "",
                         
                         }}
                         onSubmit={(values) => {
@@ -332,9 +245,9 @@ document.head.appendChild(styleSheet);
                             const MedicalConsultation = {
                               mode: values.mode,
                               day: values.day,
-                              time: consultation.duration[0],
+                              time: detail.duration[0],
                               hour: values.hour,
-                              speciality: values.speciality,
+                              typeOfPatient: values.typeOfPatient,
                               office_address: detail.officeAddress,
                                patient: {
                                 id_patient: patient.id_patient},
@@ -379,21 +292,21 @@ document.head.appendChild(styleSheet);
                             <Form>
                               <div className='flex space-x-2 mt-4 flex-col'>
                                 <div className='w-4/6 space-x-4 flex h-1/3'>
-                                {consultation?.mode?.includes("Virtual") && (
+                                {detail?.mode?.includes("true") && (
                                   <button
                                   type='button'
-                                  className={`p-1 w-1/2 rounded ${values.mode === 'Virtual' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
-                                  onClick={() => setFieldValue('mode', 'Virtual')}
+                                  className={`p-1 w-1/2 rounded ${values.mode === 'true' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
+                                  onClick={() => setFieldValue('mode', 'true')}
                                   >
                                     Virtual
                                   </button>
 
                                 )}
-                                {consultation?.mode?.includes("Presencial") && (
+                                {detail?.mode?.includes("false") && (
                                   <button
                                   type='button'
-                                  className={`p-1 w-1/2 rounded ${values.mode === 'Presencial' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
-                                  onClick={() => setFieldValue('mode', 'Presencial')}
+                                  className={`p-1 w-1/2 rounded ${values.mode === 'false' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
+                                  onClick={() => setFieldValue('mode', 'false')}
                                   >
                                     Presencial
                                   </button>
@@ -404,7 +317,7 @@ document.head.appendChild(styleSheet);
                                   <h1 className='text-[rgba(102,102,102,1)]'>Día del turno</h1>
                                   <div className='flex space-x-4'>
                                   {
-                                     values?.mode?.includes("Virtual") && virtualDays?.map((virtual,index)=> (
+                                     values?.mode?.includes("true") && virtualDays?.map((virtual,index)=> (
                                       <button type='button'  key={index} onClick={() => setFieldValue('day', virtual.date)}
                                       className={` ${values.day === virtual.date ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
                                         <p className='text-[10px] ' > {virtual.day}</p>
@@ -413,7 +326,7 @@ document.head.appendChild(styleSheet);
                                       ))
                                   }
                                   {
-                                    values?.mode?.includes("Presencial") && presencialDays.map((presencial,index) => (
+                                    values?.mode?.includes("false") && presencialDays.map((presencial,index) => (
                                       <button type='button'  key={index} onClick={() => setFieldValue('day', presencial.date)}
                                       className={` ${values.day === presencial.date ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
                                         <p className='text-[10px] ' > {presencial.day}</p>
@@ -427,7 +340,7 @@ document.head.appendChild(styleSheet);
                                   <h1 className='text-[rgba(102,102,102,1)]'>Hora del turno</h1>
                                   <div className='flex'>
                                   {
-                                    values?.mode?.includes("Virtual") && virtualHours.map((hour, index) => (
+                                    values?.mode?.includes("true") && virtualHours.map((hour, index) => (
                                       <div>
                                        <button type='button'  key={index} onClick={() => setFieldValue('hour', hour )}
                                           className={` ${values.hour === hour ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
@@ -437,7 +350,7 @@ document.head.appendChild(styleSheet);
                                     ))
                                   }
                                   {
-                                   values?.mode?.includes("Presencial") && presencialHours.map((hour, index) => (
+                                   values?.mode?.includes("false") && presencialHours.map((hour, index) => (
                                       <div>
                                        <button type='button'  key={index} onClick={() => setFieldValue('hour', hour )}
                                           className={` ${values.hour === hour ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
@@ -453,14 +366,15 @@ document.head.appendChild(styleSheet);
                                 <h1 className='text-[rgba(102,102,102,1)]'>Tipo de pacientes</h1>
                                 <div className='flex space-x-2'> 
                                   {
-                                    consultation?.speciality?.map((pacient, index) => (
-                                      <button type='button'  key={index} onClick={() => setFieldValue('speciality', pacient)}
-                                        className={` ${values.speciality === pacient ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}
+                                    detail.typeOfPatient.split(", ").map((typeOfPatient, index) =>(
+                                      <button type='button' key={index} onClick={() => setFieldValue('typeOfPatient', typeOfPatient)}
+                                        className={` ${values.typeOfPatient === typeOfPatient ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}
                                       >
-                                        {pacient}
+                                        {typeOfPatient}
                                       </button >
                                     ))
-                                    }
+                                  }
+
                                 </div>
                                 </div>
                                 <div className='w-full flex items-center justify-end '>

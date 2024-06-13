@@ -60,7 +60,7 @@ const ProfesionalInfo =({ setFieldValue }) => {
             <Field as="select" className="w-full p-2 border border-[#D9D9D9]   rounded-[34px] shadow-register-field text-gray-400" name="specialty">
             <option  className='text-black'  value="">Especializacion</option>
             <option  className='text-black' value="Medico Clinico">Medico Clinico</option>
-            <option  className='text-black' value="Psicologo">Psicologo</option>
+            <option  className='text-black' value="Psicólogo">Psicólogo</option>
             <option  className='text-black' value="Nutricionista">Nutricionista</option>
 
             </Field>

@@ -18,7 +18,7 @@ const DoctorsList = () => {
     const [certification, setCertification] = useState(false);
 
 
-
+{/** 
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
@@ -40,6 +40,9 @@ const DoctorsList = () => {
         };
         fetchDoctors();
     }, [specialtyFilter, cityFilter]);
+
+*/}
+
 
     // este useeffect se tiene que eliminar para que funcione la peticion
     useEffect(() => {
@@ -86,7 +89,7 @@ const DoctorsList = () => {
             <div className="w-full flex space-x-20">
                 {certification && (
                     <img 
-                    src={detail.certification} 
+                    src={'/certificado.png'} 
                     className='absolute h-[500px] w-[800px] z-50 rounded-lg border border-gray-300 bg-white bg-opacity-80 backdrop-filter backdrop-blur-sm transition-opacity duration-500' 
                     style={{ top: '50px', left: '50%', transform: 'translateX(-50%)' }} 
                     onClick={() => setCertification(!certification)}
@@ -117,3 +120,7 @@ const DoctorsList = () => {
 };
 
 export default DoctorsList;
+
+
+//              
+//  

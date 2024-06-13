@@ -301,7 +301,7 @@ console.log(localStorage.getItem('doctor'));
                 })
                 .then(() => {
                   Swal.fire('Registrado correctamente', '', 'success');
-                  // navigate('/')
+                 navigate('/')
                 })
                 .catch((error) => {
                   alert(`Error al registrar el usuario:`);

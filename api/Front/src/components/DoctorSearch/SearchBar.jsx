@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { IoSearch } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2'  
+
 
 const SearchBar = () => {
   const [specialty, setSpecialty] = useState('');
@@ -10,6 +12,8 @@ const SearchBar = () => {
   const [cities, setCities] = useState([]);
   const navigate = useNavigate();
 
+  {/**
+    
   useEffect(() => {
     axios.get(`http://localhost:8080/doctor/`)
       .then(response => {
@@ -20,10 +24,39 @@ const SearchBar = () => {
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
+    */}
 
   const handleSearch = () => {
-    navigate(`/doctors?specialty=${specialty}&officeProvince=${officeProvince}`);
+    if( specialty != ""  ){
+      navigate(`/doctors?specialty=${specialty}&officeProvince=${officeProvince}`);
+    } else {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'info',
+        title: 'Por favor, seleccione una especialidad',
+        background: '#DDFC5C',
+        toast: true,
+        timer: 5000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        customClass: {
+          popup: 'swal2-smaller-popup', 
+          timerProgressBar: 'swal2-timer-bar',
+        }
+      });
+    }
   };
+    useEffect(() => {
+      fetch('/doctors.json')
+          .then(response => response.json())
+          .then(data => {
+              const uniqueSpecialties = [...new Set(data.map(doctor => doctor.specialty))];
+              const uniqueCities = [...new Set(data.map(doctor => doctor.officeProvince))];
+              setSpecialties(uniqueSpecialties);
+              setCities(uniqueCities);
+          })
+          .catch(error => console.error('Error fetching doctors:', error));
+  }, []);
 
   return (
     <nav className="flex items-center justify-between flex-wrap  p-6">
