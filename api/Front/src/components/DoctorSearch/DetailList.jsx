@@ -19,85 +19,86 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
   const [submit, setSubmit] = useState(false)
   const [virtualHours, setVirtualHours] = useState([])
   const [presencialHours, setPresencialHours] = useState([])
-  const [patient, setPatient] =useState({
-    id_patient: 1
-  })
+  
 
+  useEffect(() => {
+    const handleDays = ()=>{
+        detail.mode  ? setVirtualDays(convertDaysStringToArray(detail.days))  : setPresencialDays(convertDaysStringToArray(detail.days))
+    }
+    
+    handleDays()
 
-    useEffect(() => {
-      const handleDays = ()=>{
-          detail.mode === 'true' ? setVirtualDays(getDatesForDays(convertDaysStringToArray(detail.days)))  : setPresencialDays(getDatesForDays(convertDaysStringToArray(detail.days)))
-      }
-      handleDays()
-      
-      const handleHours = ()=>{
-          detail.mode === 'true' ? setVirtualHours(generateIntermediateHours(detail.since.slice(11,16), detail.until.slice(11,16)))  : setPresencialHours(generateIntermediateHours(detail.since.slice(11,16), detail.until.slice(11,16)))
-      }
+    const handleHours = ()=>{
+        detail.mode  ? setVirtualHours(generateIntermediateHours(detail.since, detail.until))  : setPresencialHours(generateIntermediateHours(detail.since, detail.until))
+    }
 
-      handleHours()
-    },[detail])
+    handleHours()
+  },[detail])
 
-
-    function convertDaysStringToArray(daysString) {
-      daysString = daysString.trim();
-      let daysArray = daysString.split(", ");
-      return daysArray;
+  function convertDaysStringToArray(daysString) {
+    let daysArray = daysString.split(","); 
+    return daysArray;
   }
 
+  function generateIntermediateHours(start, end) {
+    let startTime = new Date(`1970-01-01T${start}:00`);
+    let endTime = new Date(`1970-01-01T${end}:00`);
 
-      function generateIntermediateHours(start, end) {
-        let startTime = new Date(`1970-01-01T${start}:00`);
-        let endTime = new Date(`1970-01-01T${end}:00`);
-      
-        let hours = [];
-      
-        while (startTime < endTime) {
-          let hoursString = startTime.toTimeString().slice(0, 5);
-          hours.push(hoursString);
-      
-          startTime.setHours(startTime.getHours() + 1);
-        }
-      
-      
-        return hours;
-      }
+    let hours = [];
 
-      function getDatesForDays(days) {
-        const daysOfWeek = {
-          "Lunes": 1,
-          "Martes": 2,
-          "Miércoles": 3,
-          "Jueves": 4,
-          "Viernes": 5,
-          "Sábado": 6,
-          "Domingo": 0
-        };
-      
-        const today = new Date();
-        const currentDay = today.getDay();
-        const currentDate = today.getDate();
-        const currentMonth = today.getMonth();
-        const currentYear = today.getFullYear();
-      
-        return days.map(day => {
-          const targetDay = daysOfWeek[day];
-          const diff = (targetDay + 7 - currentDay) % 7;
-          const targetDate = new Date(today);
-          targetDate.setDate(currentDate + diff);
-      
-          const formattedDate = `${String(targetDate.getDate()).padStart(2, '0')}-${String(targetDate.getMonth() + 1).padStart(2, '0')}`;
-      
-          return {
-            day,
-            date: formattedDate
-          };
-        });
-      }
-      const handleSubmit = () => setSubmit(true)
+    while (startTime < endTime) {
+      let hoursString = startTime.toTimeString().slice(0, 5);
+      hours.push(hoursString);
 
-      const handleCertification = ()=>{
-        setCertification(!certification)
+      startTime.setHours(startTime.getHours() + 1);
+    }
+
+    return hours;
+  }
+
+  function getDatesForDays(days) {
+    const daysOfWeek = {
+      "Lunes": 1,
+      "Martes": 2,
+      "Miércoles": 3,
+      "Jueves": 4,
+      "Viernes": 5,
+      "Sábado": 6,
+      "Domingo": 0
+    };
+  
+    const today = new Date();
+    const currentDayOfWeek = today.getDay();
+    const currentDayOfMonth = today.getDate();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+  
+    const nextDates = days.map(day => {
+      const targetDayOfWeek = daysOfWeek[day];
+      let targetDate = new Date(today);
+  
+      if (currentDayOfWeek <= targetDayOfWeek) {
+        targetDate.setDate(currentDayOfMonth + (targetDayOfWeek - currentDayOfWeek));
+      } else {
+        targetDate.setDate(currentDayOfMonth + (7 - currentDayOfWeek + targetDayOfWeek));
       }
+  
+      const formattedDate = `${String(targetDate.getDate()).padStart(2, '0')}-${String(targetDate.getMonth() + 1).padStart(2, '0')}-${targetDate.getFullYear()}`;
+  
+      return {
+        day,
+        date: formattedDate
+      };
+    });
+  
+    return nextDates;
+  }
+
+  const handleSubmit = () => setSubmit(true);
+
+  const handleCertification = () => {
+    setCertification(!certification);
+  }
 
 
 
@@ -117,7 +118,7 @@ const showErrorAlert = () => {
     }
   });
 };
-console.log(detail);
+
 const styles = `
   .swal2-smaller-popup {
     width: 250px !important;
@@ -162,7 +163,7 @@ document.head.appendChild(styleSheet);
                       <div className='w-1/2 flex  justify-end  '>
                       <div className='flex-col space-y-2'>
                         {
-                          detail?.mode?.includes("true") && (
+                          detail?.mode && (
                             <div className='flex h-1/2 items-center justify-center space-x-2 '>
                               <p className='text-[#666666] text-xs'> ${detail.cost}</p>
                               <p className='flex space-x-2 bg-[#CCDCFF] rounded-[6px] p-1' ><HiVideoCamera className='text-xl '  /> </p>
@@ -170,7 +171,7 @@ document.head.appendChild(styleSheet);
                           )
                         }
                         {
-                          detail?.mode?.includes("false") && (
+                          !detail?.mode && (
                             <div className='flex h-1/2 items-center justify-center space-x-2 '>
                               <p className='text-[#666666] text-xs'> ${detail.cost}</p>
                               <p className='flex space-x-2 bg-[#F3FFC2] rounded-[6px] p-1' ><MdPeople  className='text-xl ' /> </p>
@@ -242,19 +243,24 @@ document.head.appendChild(styleSheet);
                               showErrorAlert();
                               return; 
                             }
+                            let data = JSON.parse(localStorage.getItem ('token_user'))
+                            console.log (data)
+                            console.log (data.id) 
                             const MedicalConsultation = {
                               mode: values.mode,
                               day: values.day,
                               time: detail.duration[0],
                               hour: values.hour,
-                              typeOfPatient: values.typeOfPatient,
+                              type_of_patient: values.typeOfPatient,
                               office_address: detail.officeAddress,
-                               patient: {
-                                id_patient: patient.id_patient},
-                               doctor:{
-                                id_doctor:detail.id_doctor
-                               }
+                              patient:{
+                                id_patient: data.id
+                              },
+                              doctor:{
+                                id_doctor:detail.idDoctor
+                              }
                             }
+                            console.log (MedicalConsultation)
                             Swal.fire({
                               title: '¿Estás seguro de guardar los cambios realizados?',
                               showDenyButton: false,
@@ -271,17 +277,22 @@ document.head.appendChild(styleSheet);
                               },
                             }).then((result) => {
                               if (result.isConfirmed) {
-                                try {
-                                  axios.post(`http://localhost:8080//api/medical-consultations/schedule` , MedicalConsultation)
-                                  .then((response) => 
-                                    Swal.fire('Turno Solicitado!', '', 'success')
-                                  )
-                                  
-                                } catch (error) {
-                                  alert('Error al agendar consulta')
-                                }
+                                  const token = localStorage.getItem('token_user');
+                                  if (!token) {
+                                      alert('No token found, please login');
+                                      return;
+                                  }
+                                  axios.post('http://localhost:8080/api/medical-consultations/schedule', MedicalConsultation)
+                                  .then((response) => {
+                                      console.log (response)
+                                      Swal.fire('Turno Solicitado!', '', 'success');
+                                  })
+                                  .catch((error) => {
+                                      console.error('Error scheduling consultation:', error, error.response.data.message, error.response);
+                                      Swal.fire('Error al agendar consulta', '', 'error');
+                                  });
                               } 
-                            })
+                          })
                             console.log(values);
                             setSubmit(false);
                           }
@@ -292,20 +303,20 @@ document.head.appendChild(styleSheet);
                             <Form>
                               <div className='flex space-x-2 mt-4 flex-col'>
                                 <div className='w-4/6 space-x-4 flex h-1/3'>
-                                {detail?.mode?.includes("true") && (
+                                {detail?.mode && (
                                   <button
                                   type='button'
-                                  className={`p-1 w-1/2 rounded ${values.mode === 'true' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
+                                  className={`p-1 w-1/2 rounded ${values.mode ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
                                   onClick={() => setFieldValue('mode', 'true')}
                                   >
                                     Virtual
                                   </button>
 
                                 )}
-                                {detail?.mode?.includes("false") && (
+                                {!detail?.mode && (
                                   <button
                                   type='button'
-                                  className={`p-1 w-1/2 rounded ${values.mode === 'false' && values.mode != '' ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
+                                  className={`p-1 w-1/2 rounded ${!values.mode ? 'bg-blue-sec text-black' : 'bg-gray-sec text-[rgba(147,147,147,1)]'}`}
                                   onClick={() => setFieldValue('mode', 'false')}
                                   >
                                     Presencial
@@ -317,20 +328,18 @@ document.head.appendChild(styleSheet);
                                   <h1 className='text-[rgba(102,102,102,1)]'>Día del turno</h1>
                                   <div className='flex space-x-4'>
                                   {
-                                     values?.mode?.includes("true") && virtualDays?.map((virtual,index)=> (
-                                      <button type='button'  key={index} onClick={() => setFieldValue('day', virtual.date)}
-                                      className={` ${values.day === virtual.date ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
-                                        <p className='text-[10px] ' > {virtual.day}</p>
-                                        <p className='text-xs'>{virtual.date}</p>
+                                     values?.mode && virtualDays?.map((virtual,index)=> (
+                                      <button type='button'  key={index} onClick={() => setFieldValue('day', virtual)}
+                                      className={` ${values.day === virtual ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
+                                        <p className='text-[10px] ' > Proximo {virtual}</p>
                                       </button>
                                       ))
                                   }
                                   {
-                                    values?.mode?.includes("false") && presencialDays.map((presencial,index) => (
-                                      <button type='button'  key={index} onClick={() => setFieldValue('day', presencial.date)}
-                                      className={` ${values.day === presencial.date ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
-                                        <p className='text-[10px] ' > {presencial.day}</p>
-                                        <p className='text-xs'>{presencial.date}</p>
+                                    !values?.mode && presencialDays.map((presencial,index) => (
+                                      <button type='button'  key={index} onClick={() => setFieldValue('day', presencial)}
+                                      className={` ${values.day === presencial ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
+                                        <p className='text-[10px] ' > Proximo {presencial}</p>
                                       </button>
                                       ))
                                   }
@@ -340,9 +349,9 @@ document.head.appendChild(styleSheet);
                                   <h1 className='text-[rgba(102,102,102,1)]'>Hora del turno</h1>
                                   <div className='flex'>
                                   {
-                                    values?.mode?.includes("true") && virtualHours.map((hour, index) => (
-                                      <div>
-                                       <button type='button'  key={index} onClick={() => setFieldValue('hour', hour )}
+                                    values?.mode && virtualHours.map((hour, index) => (
+                                      <div key={index}>
+                                       <button type='button' onClick={() => setFieldValue('hour', hour )}
                                           className={` ${values.hour === hour ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
                                         {hour}
                                           </button>
@@ -350,8 +359,8 @@ document.head.appendChild(styleSheet);
                                     ))
                                   }
                                   {
-                                   values?.mode?.includes("false") && presencialHours.map((hour, index) => (
-                                      <div>
+                                   !values?.mode && presencialHours.map((hour, index) => (
+                                      <div key={index}>
                                        <button type='button'  key={index} onClick={() => setFieldValue('hour', hour )}
                                           className={` ${values.hour === hour ?  'bg-blue-sec' : 'bg-gray-sec '}    rounded-[6px] px-2 py-[2px] flex flex-col items-center m-2`}>
                                         {hour}
@@ -401,4 +410,3 @@ document.head.appendChild(styleSheet);
 }
 
 export default DetailList
-

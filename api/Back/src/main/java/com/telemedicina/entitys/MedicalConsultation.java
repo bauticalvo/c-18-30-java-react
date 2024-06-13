@@ -17,11 +17,11 @@ public class MedicalConsultation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_medical_consultation;
 
-    private int mode;
-    private int time;
-    private String specialty;
+    private boolean mode;
+    private String time;
+    private String type_of_patient;
     private String day;
-    private ZonedDateTime hour;
+    private String hour;
     private String office_address;
 
     @ManyToOne

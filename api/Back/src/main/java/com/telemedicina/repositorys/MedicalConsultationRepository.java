@@ -14,12 +14,14 @@ import org.springframework.data.repository.query.Param;
 public interface MedicalConsultationRepository extends JpaRepository<MedicalConsultation, Integer> {
 
      @Query("SELECT mc.id AS idMedicalConsultation, mc.mode AS mode, mc.time AS time, mc.hour AS hour, mc.office_address AS officeAddress, " +
-           "u.name AS doctorName,u.lastname AS doctorLastName, d.specialty AS doctorSpecialty " +
+           "u.name AS doctorName,u.lastname AS doctorLastName, d.specialty AS doctorSpecialty, dc.type_of_patient as typeOfPatient " +
            "FROM MedicalConsultation mc " +
            "JOIN mc.doctor d " +
            "JOIN d.user u " +
+           "JOIN DoctorConsultationData dc " +
            "WHERE mc.patient.id = :patientId")
     List<MedicalConsultationDTO> findConsultationsByPatientId(int patientId);
+
     @Query("SELECT mc.mode as mode, mc.time as time, " +
            "mc.hour as hour, mc.office_address as officeAddress, " +
            "p.height as height, p.weight as weight, p.blood_type as bloodType, p.factor as factor, " +

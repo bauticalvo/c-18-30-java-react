@@ -47,7 +47,7 @@ const Login = () => {
                                     title: 'Inicio de sesion exitoso!',
                                     background: '#a5dc86',
                                 })
-                                localStorage.setItem('doctor', JSON.stringify(response.data.user))
+                                localStorage.setItem('token_user', JSON.stringify(response.data))
                             } catch (error) {
                                 alert('No se logro iniciar sesion ')
                             }

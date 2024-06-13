@@ -209,8 +209,7 @@ const UserRegister = () => {
                   weight: values.weight,
                   blood_type: values.blood_type,
                   factor: values.factor,
-                  patient: {
-                    id_user: id_user},  
+                  id_user: id_user,  
                   alergic: `${values.alergiasAlimentosDescripcion},${values.alergiasMedicamentosDescripcion},${values.alergiasAmbientalesDescripcion},${values.otrasAlergiasDescripcion},`  ,
                   chronic_diseases: !values.enfermedadesCronicas.includes('ninguna') ?  values.enfermedadesCronicas.join(",") : 'Ninguno' ,
                   medicines: values.medicamento === '' ? 'Ninguno' : values.medicamento ,
