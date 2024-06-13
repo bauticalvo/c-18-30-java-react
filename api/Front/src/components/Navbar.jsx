@@ -17,7 +17,7 @@ useEffect(() => {
           <div className="bg-[#FDFDFD] h-10hv md:px-10 lg:px-20 flex justify-between items-center shadow-md">
             <div className="flex items-center h-[80px]  w-[100px]">
               <Link to='/'>
-                <img src="/saludonline.png" className='' alt="Logo" />
+                <img src="/Logo_SO.png" className='' alt="Logo" />
               </Link>
             </div>
             <div className="flex items-center h-1/2">

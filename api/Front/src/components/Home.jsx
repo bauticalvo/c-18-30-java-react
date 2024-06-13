@@ -91,8 +91,8 @@ const Home = () => {
 
 
       <footer className='bg-[#1B1E27] h-[328px] flex p-20 text-white font-inter'>
-        <div className='px-20 space-y-8 w-1/3 mx-32'>
-          <img src="/home-saludonline.png" alt=""  className='h-[60px] w-[170px] text-white'/>
+        <div className='px-20 space-y-8 w-1/3 mx-32 text-white'>
+          <img src="/Logo_SO_W.png" alt=""  className='h-[60px] w-[60px] text-white'/>
           <div>
             <p>Copyright © 2020 Landify UI Kit.</p>
             <p>All rights reserved</p>
