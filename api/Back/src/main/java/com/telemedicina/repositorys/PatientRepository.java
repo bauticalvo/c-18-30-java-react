@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface PatientRepository extends JpaRepository <Patient, Integer> {
     @Query(value = "SELECT * FROM patient WHERE id_patient = ?1", nativeQuery = true)
     Patient findByIdPatient (int id_patient);
+
+
+    @Query("SELECT p.id_patient FROM Patient p WHERE p.id_user = :idUser")
+    Integer findByIdUser(int idUser);
 }

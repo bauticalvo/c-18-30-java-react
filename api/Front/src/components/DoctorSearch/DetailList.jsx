@@ -19,9 +19,7 @@ const DetailList = ({detail, isSticky, setCertification,certification }) => {
   const [submit, setSubmit] = useState(false)
   const [virtualHours, setVirtualHours] = useState([])
   const [presencialHours, setPresencialHours] = useState([])
-  const [patient, setPatient] =useState({
-    id_patient: 1
-  })
+  
 
   useEffect(() => {
     const handleDays = ()=>{
@@ -245,7 +243,9 @@ document.head.appendChild(styleSheet);
                               showErrorAlert();
                               return; 
                             }
-                            
+                            let data = JSON.parse(localStorage.getItem ('token_user'))
+                            console.log (data)
+                            console.log (data.id) 
                             const MedicalConsultation = {
                               mode: values.mode,
                               day: values.day,
@@ -253,7 +253,9 @@ document.head.appendChild(styleSheet);
                               hour: values.hour,
                               type_of_patient: values.typeOfPatient,
                               office_address: detail.officeAddress,
-                              id_patient: patient.id_patient,
+                              patient:{
+                                id_patient: data.id
+                              },
                               doctor:{
                                 id_doctor:detail.idDoctor
                               }
@@ -280,15 +282,9 @@ document.head.appendChild(styleSheet);
                                       alert('No token found, please login');
                                       return;
                                   }
-                                  console.log ('details token:')
-                                  console.log (token)
-                                  axios.post('http://localhost:8080/api/medical-consultations/schedule', MedicalConsultation, {
-                                      headers: {
-                                          'Authorization': `Bearer ${token}`,
-                                          'Content-Type': 'application/json'
-                                      }
-                                  })
+                                  axios.post('http://localhost:8080/api/medical-consultations/schedule', MedicalConsultation)
                                   .then((response) => {
+                                      console.log (response)
                                       Swal.fire('Turno Solicitado!', '', 'success');
                                   })
                                   .catch((error) => {

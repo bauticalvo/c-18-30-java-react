@@ -62,9 +62,14 @@ public class AuthService {
     public AuthResponse loginUser (LoginRequest loginRequest){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         UserDetails user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
+        User user_db  = userRepository.findByUsername(user.getUsername()).orElseThrow();
+        System.out.println("A VER QUE MOSTRAR" + user_db);
+        Integer id_patient = patientRepository.findByIdUser (user_db.getId_user());
+
         String token = jwtService.getToken(user);
         return AuthResponse.builder()
                 .token(token)
+                .id(id_patient)
                 .build();
     }
 }

@@ -40,13 +40,14 @@ const Login = () => {
                                     username: values.email, // Asegúrate de tener el campo username en tus values
                                     password: values.password // Asegúrate de tener el campo password en tus values
                                 });
+                                console.log (response)
                                 Swal.fire({
                                     position: 'center',
                                     icon: 'success',
                                     title: 'Inicio de sesion exitoso!',
                                     background: '#a5dc86',
                                 })
-                                localStorage.setItem('token_user', JSON.stringify(response.data.token))
+                                localStorage.setItem('token_user', JSON.stringify(response.data))
                                 console.log ('login')
                                 console.log (response.data)
                             } catch (error) {

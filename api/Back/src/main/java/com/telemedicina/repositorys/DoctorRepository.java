@@ -48,4 +48,5 @@ public interface DoctorRepository extends JpaRepository <Doctor, Integer> {
             "JOIN User u ON d.user.id_user = u.id_user " +
             "JOIN DoctorConsultationData dc ON d.user.id_user = dc.doctor.user.id_user ")
     List<DoctorWithUserDetails> getAllDoctors();
+
 }
