@@ -6,9 +6,7 @@ const Navbar = () => {
   const [login, setLogin] =useState(false)
 
 useEffect(() => {
-  if(localStorage.getItem('doctor').includes('name')){
-    setDoctor(localStorage.getItem('doctor'))
-  }
+
 },[])
 
   return (
