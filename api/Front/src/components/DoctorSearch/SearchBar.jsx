@@ -11,9 +11,7 @@ const SearchBar = () => {
   const [specialties, setSpecialties] = useState([]);
   const [cities, setCities] = useState([]);
   const navigate = useNavigate();
-
-  {/**
-    
+ 
   useEffect(() => {
     axios.get(`http://localhost:8080/doctor/`)
       .then(response => {
@@ -24,7 +22,7 @@ const SearchBar = () => {
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
-    */}
+    
 
   const handleSearch = () => {
     if( specialty != ""  ){
@@ -46,18 +44,7 @@ const SearchBar = () => {
       });
     }
   };
-    useEffect(() => {
-      fetch('/doctors.json')
-          .then(response => response.json())
-          .then(data => {
-              const uniqueSpecialties = [...new Set(data.map(doctor => doctor.specialty))];
-              const uniqueCities = [...new Set(data.map(doctor => doctor.officeProvince))];
-              setSpecialties(uniqueSpecialties);
-              setCities(uniqueCities);
-          })
-          .catch(error => console.error('Error fetching doctors:', error));
-  }, []);
-
+  
   return (
     <nav className="flex items-center justify-between flex-wrap  p-6">
       <div className="flex items-center flex-shrink-0 text-white mr-6"></div>

@@ -49,7 +49,7 @@ const DoctorCard = ({ doctor, setDetail }) => {
                   </div>
                   <div className='bg-[#F1F3F9] rounded-[3px]  px-4 flex flex-col items-center'>
                   <p  className='text-xs'>Disponibilidad</p>
-                  <p className='text-black text-xs font-medium'> {doctor.since.slice(11,16)} - {doctor.until.slice(11,16)}</p>
+                  <p className='text-black text-xs font-medium'> {doctor.since} - {doctor.until}</p>
                   </div>
                   <button type='button' onClick={() => setDetail(doctor)} >
                     <div className='bg-green-sec rounded-[6px]  h-[25px] text-black text-2xl p-0 flex items-center justify-center'>

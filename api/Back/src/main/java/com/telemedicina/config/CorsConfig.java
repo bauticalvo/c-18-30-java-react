@@ -15,6 +15,7 @@ public class CorsConfig {
         config.addAllowedOrigin("http://localhost:5173"); // Permitir solicitudes desde el origen de tu aplicación React
         config.addAllowedMethod("*"); // Permitir todos los métodos HTTP (GET, POST, PUT, DELETE, etc.)
         config.addAllowedHeader("*"); // Permitir todos los encabezados en las solicitudes
+        config.setAllowCredentials(true);
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
