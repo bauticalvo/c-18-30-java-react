@@ -13,6 +13,7 @@ export default {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
         sans2: ['DM Sans', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
       },
       colors: {
         'custom-blue': 'rgba(64, 123, 255, 0.06)',
