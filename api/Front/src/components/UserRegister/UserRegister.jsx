@@ -8,28 +8,29 @@ import PaymentUser from './PaymentUser';
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import { email } from '../Utils/emails';
+import axios from 'axios';
 
 const validationSchema = Yup.object({
-  nombre: Yup.string().required('Ingrese un nombre'),
-  apellido: Yup.string().required('Ingrese un apellido'),
+  name: Yup.string().required('Ingrese un nombre'),
+  lastname: Yup.string().required('Ingrese un apellido'),
   codigoPais: Yup.string().required('Ingrese un código de país'),
-  numeroCelular: Yup.string().required('Ingrese un número de celular')
+  phone: Yup.string().required('Ingrese un número de celular')
   .matches(/^[0-9]*$/, "No se permiten letras ni caracteres especiales"),
-  email: Yup.string().email('Email inválido').required('Ingrese un email')
+  mail: Yup.string().email('Email inválido').required('Ingrese un email')
   .test('email-exists', 'Este email ya está en uso', function (value) {
     return !email.includes(value);
   }),
-  dni: Yup.string().required('Ingrese el DNI'),
-  fechaNacimiento: Yup.date().required('Ingrese una fecha de nacimiento'),
-  sexo: Yup.string().required('Seleccione un sexo'),
+  DNI: Yup.string().required('Ingrese el DNI'),
+  birthdate: Yup.date().required('Ingrese una fecha de nacimiento'),
+  gender: Yup.string().required('Seleccione un sexo'),
   domicilio: Yup.string().required('Ingrese el domicilio'),
-  codigoPostal: Yup.string().required('Ingrese el código postal'),
-  localidad: Yup.string().required('Seleccione una localidad'),
-  provincia: Yup.string().required('Seleccione una provincia'),
-  pais: Yup.string().required('Seleccione un país'),
-  altura: Yup.number().required('Ingrese la altura'),
-  peso: Yup.number().required('Ingrese el peso'),
-  grupoSanguineo: Yup.string().required('Seleccione el grupo sanguíneo'),
+  area_code: Yup.string().required('Ingrese el código postal'),
+  location: Yup.string().required('Seleccione una localidad'),
+  province_name: Yup.string().required('Seleccione una provincia'),
+  country_name: Yup.string().required('Seleccione un país'),
+  height: Yup.number().required('Ingrese la altura'),
+  weight: Yup.number().required('Ingrese el peso'),
+  blood_type: Yup.string().required('Seleccione el grupo sanguíneo'),
   factor: Yup.string().required('Seleccione el factor'),
   password: Yup.string()
     .min(8, 'La contraseña debe tener al menos 8 caracteres')
@@ -40,10 +41,9 @@ const validationSchema = Yup.object({
   confirmarPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir')
     .required('Confirme la contraseña'),
-  consentimiento: Yup.boolean().oneOf([true], 'Debe aceptar los términos y condiciones'),
   enfermedadesCronicas: Yup.array().of(Yup.string()),
   otrasEnfermedades: Yup.string(),
-  cirugiasAnteriores: Yup.string().test('cirugiasAnteriores-required', 'Indique la cirugía', function(value) {
+  cirugiasAnteriores: Yup.string().test('cirugiasAnteriores-required', 'Indique la cirugía realizada', function(value) {
     const { cirugias } = this.parent;
     if (cirugias === 'si') {
       return !!value;
@@ -52,11 +52,11 @@ const validationSchema = Yup.object({
   }),
   historiaFamiliar: Yup.array().of(Yup.string()),
   otrasEnfermedadesFamilia: Yup.string(),
-  alergias: Yup.array().of(Yup.string()),
-  alergiasMedicamentos: Yup.string(),
-  alergiasAlimentos: Yup.string(),
-  alergiasAmbientales: Yup.string(),
-  otrasAlergias: Yup.string(),
+  alergias: Yup.array().of(Yup.string()).nullable(),
+  alergiasMedicamentos: Yup.string().nullable(),
+  alergiasAlimentos: Yup.string().nullable(),
+  alergiasAmbientales: Yup.string().nullable(),
+  otrasAlergias: Yup.string().nullable(),
   alergiasMedicamentosDescripcion:  Yup.string().test('medicamento-description-required', 'Indique el medicamento', function(value) {
     const { alergiasMedicamentos } = this.parent;
     if (alergiasMedicamentos === 'si') {
@@ -125,35 +125,43 @@ const UserRegister = () => {
     const handleSubmit = () => {
       setSubmit(true)
     } 
-    
+
 
   return (
-    <div>
-        <div>
+    <div> 
+      <p className='flex justify-center mt-6 font-bold text-2xl font-sans2'>Crea tu cuenta</p>
+        <div className='  flex  justify-center items-center'>
             <StepIndicator step={step} setStep={setStep} />
+
         </div>
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className=" mx-32 p-6 bg-white">
       <Formik
         initialValues={{
-          nombre: '',
-          apellido: '',
+          //user
+          name: '',
+          lastname: '',
+          mail: '',
           codigoPais: '',
-          numeroCelular: '',
-          email: '',
-          dni: '',
-          fechaNacimiento: '',
-          sexo: '',
-          domicilio: '',
-          codigoPostal: '',
-          localidad: '',
-          provincia: '',
-          pais: '',
-          altura: '',
-          peso: '',
-          grupoSanguineo: '',
-          factor: '',
+          phone: '',
+          gender: '',
+          location: '',
+          country_name: '',
+          province_name: '', 
+          area_code: '',
           password: '',
           confirmarPassword: '',
+          DNI: '',
+          birthdate: '',
+          domicilio: '',
+
+
+//patient
+          height: '',
+          weight: '',
+          blood_type: '',
+          factor: '',
+
+
           enfermedadesCronicas: [],
           otrasEnfermedades: '',
           cirugias: '',
@@ -176,64 +184,93 @@ const UserRegister = () => {
           otrasAlergiasDescripcion: '',
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-            if(submit && step=== 2){
-              Swal.fire({
-                title: 'Quieres guardar los cambios?',
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: 'Si',
-                denyButtonText: 'No',
-                cancelButtonText: 'Cancelar',
-                customClass: {
-                  actions: 'my-actions',
-                  cancelButton: 'order-1 right-gap',
-                  confirmButton: 'order-2',
-                  denyButton: 'order-3',
-                },
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  Swal.fire('Guardados!', '', 'success')
-                  console.log(values);
-                  
-                } else if (result.isDenied) {
-                  Swal.fire('Para registrarse es necesario guardar los datos', '', 'info')
-                }
+        onSubmit={(values, { setSubmitting }) => {
+          if (submit && step === 2) {
+            const user = {
+              name: values.name,
+              lastname: values.lastname,
+              mail: values.mail,
+              phone: values.phone,
+              gender: values.gender,
+              location: values.location,
+              country_name: values.country_name,
+              province_name: values.province_name,
+              area_code: values.area_code,
+              password: values.password,
+              DNI: values.DNI,
+              birthdate: values.birthdate,
+            };
+            axios
+              .post(`http://localhost:8080/auth/register/user`, user)
+              .then((response) => {
+                const id_user = response.data.id_user
+                axios.post(`http://localhost:8080/auth/register/patient`, {
+                  height: values.height,
+                  weight: values.weight,
+                  blood_type: values.blood_type,
+                  factor: values.factor,
+                  id_user: id_user,  
+                  alergic: `${values.alergiasAlimentosDescripcion},${values.alergiasMedicamentosDescripcion},${values.alergiasAmbientalesDescripcion},${values.otrasAlergiasDescripcion},`  ,
+                  chronic_diseases: !values.enfermedadesCronicas.includes('ninguna') ?  values.enfermedadesCronicas.join(",") : 'Ninguno' ,
+                  medicines: values.medicamento === '' ? 'Ninguno' : values.medicamento ,
+                  family_history_of_diseases: !values.historiaFamiliar.includes('ninguna') ? values.historiaFamiliar.join(",") : 'Ninguno',
+                })
+                  .then(() => {
+                    Swal.fire('Registrado correctamente', '', 'success');
+                    navigate('/')
+                  })
+                  .catch((error) => {
+                    alert('Error al registrar el usuario:', error);
+                  });
               })
-              //navigate('/')
-            } else return 
-          }}
+              .then(() => {
+                Swal.fire("Registrado correctamente", "", "success");
+                navigate("/");
+              })
+              .catch((error) => {
+                console.error("Error al registrar el usuario:", error);
+                alert("Error al registrar el usuario.");
+              })
+              .finally(() => {
+                setSubmitting(false);
+                setSubmit(false);
+              });
+          } else {
+            return;
+          }
+        }}
       >
         {({ setFieldValue, values }) => (
           <Form className="space-y-4">
             {step === 1 &&  <UserInfo setFieldValue={setFieldValue} />}
             {step === 2 &&  <MedicalHistory setFieldValue={setFieldValue} values={values} />}
-            <div className="flex justify-between">
+            <div className={`flex ${step === 1 ? 'justify-end' : 'justify-between'}`}>
               {step > 1 && (
                 <button
-                  type="button"
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded"
-                  onClick={handlePrevious}
-                >
-                  Anterior
-                </button>
+                type="button"
+                className="px-10 py-2 bg-white text-blue-40 rounded"
+                onClick={handlePrevious}
+              >
+                Anterior
+              </button>
               )}
               {step < 2 ? (
                 <button
-                  type="button"
-                  className="px-4 py-2 bg-purple-600 text-white rounded"
-                  onClick={handleNext}
-                >
-                  Siguiente
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-purple-600 text-white rounded"
-                  onClick={handleSubmit}
-                >
-                  Enviar
-                </button>
+                    type="button"
+                    className="px-4 py-2 bg-[#407BFF] rounded-[4px] text-white"
+                    onClick={handleNext}
+                  >
+                    Continuar
+                  </button>
+                ) : (
+                  <>
+                  <button
+                    type="submit"
+                    className="px-10 py-2 bg-[#407BFF] rounded-[4px] text-white "
+                    onClick={handleSubmit}
+                  >
+                    Enviar
+              </button></>
               )}
             </div>
           </Form>

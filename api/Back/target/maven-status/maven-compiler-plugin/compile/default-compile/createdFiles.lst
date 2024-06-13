@@ -1,0 +1,3 @@
+com/telemedicina/config/CorsConfig.class
+com/telemedicina/controllers/api/model/PatientDTO.class
+com/telemedicina/controllers/api/model/MedicalConsultationDTO.class
