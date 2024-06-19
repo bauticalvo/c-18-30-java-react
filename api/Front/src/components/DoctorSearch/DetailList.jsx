@@ -6,7 +6,7 @@ import { FaMapMarkerAlt, FaClock  } from "react-icons/fa";
 import { MdPeople } from "react-icons/md";
 import { LuStethoscope } from "react-icons/lu";
 import { PiHospitalFill } from "react-icons/pi";
-import { TbNurse } from "react-icons/tb";
+import { TbCircleLetterG, TbNurse } from "react-icons/tb";
 import { Form, Formik  } from 'formik';
 import { GoArrowRight } from "react-icons/go";
 import Swal from 'sweetalert2'  
@@ -243,9 +243,10 @@ document.head.appendChild(styleSheet);
                               showErrorAlert();
                               return; 
                             }
-                            let data = JSON.parse(localStorage.getItem ('token_user'))
-                            console.log (data)
-                            console.log (data.id) 
+                            const storedData = JSON.parse(localStorage.getItem('token_user'));
+                            const token = storedData.token; 
+                            const userId = storedData.id;
+                            
                             const MedicalConsultation = {
                               mode: values.mode,
                               day: values.day,
@@ -254,7 +255,7 @@ document.head.appendChild(styleSheet);
                               type_of_patient: values.typeOfPatient,
                               office_address: detail.officeAddress,
                               patient:{
-                                id_patient: data.id
+                                id_patient: userId
                               },
                               doctor:{
                                 id_doctor:detail.idDoctor
@@ -277,13 +278,17 @@ document.head.appendChild(styleSheet);
                               },
                             }).then((result) => {
                               if (result.isConfirmed) {
-                                  const token = localStorage.getItem('token_user');
+                                  
                                   if (!token) {
                                       alert('No token found, please login');
                                       return;
                                   }
-                                  axios.post('http://localhost:8080/api/medical-consultations/schedule', MedicalConsultation)
-                                  .then((response) => {
+                                  axios.post('http://localhost:8080/api/medical-consultations/schedule', MedicalConsultation, {
+                                    headers: {
+                                        Authorization: `Bearer ${token}`,
+                                    }
+                                })
+                                .then((response) => {
                                       console.log (response)
                                       Swal.fire('Turno Solicitado!', '', 'success');
                                   })

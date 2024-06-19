@@ -27,7 +27,7 @@ public class SecurityConfig {
                 csrf
                 .disable())
             .authorizeHttpRequests(authRequest ->
-              authRequest
+              authRequest.requestMatchers("/api/medical-consultations/**").authenticated()
                 .anyRequest().permitAll()
                 )
             .sessionManagement(sessionManager->
